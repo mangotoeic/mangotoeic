@@ -28,7 +28,9 @@ import Main from "views/examples/Main.js";
 import Login from "views/examples/Login.js";
 import Profile from "views/examples/Profile.js";
 import Register from "views/examples/Register.js";
+import Diagnosis from "views/examples/Diagnosis.js";
 import Test_start from "views/examples/Test_start.js";
+import ScorePrediction from "views/examples/ScorePrediction.js";
 import { Provider } from 'react-redux'
 import store from './store'
 ReactDOM.render(
@@ -38,7 +40,9 @@ ReactDOM.render(
       <Route exact path="/" component ={Main} />
       <Route path="/login-page" component = {Login}/>
       <Route path="/profile-page" component={Profile}/>
+      <Route path="/diagnosis-page" component={Diagnosis}/>
       <Route path="/test_start-page" component={Test_start}/>
+      <Route path="/ScorePrediction-page" component={ScorePrediction}/>
       <Route path="/register-page" component={Register}/>
       <Redirect to="/" />
     </Switch>

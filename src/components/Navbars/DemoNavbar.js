@@ -167,13 +167,13 @@ const DemoNavbar = () => {
                     <span className="nav-link-inner--text">진단테스트</span>
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem to="/landing-page" tag={Link}>
+                    <DropdownItem to="/diagnosis-page" tag={Link}>
                       사전정보 입력
                     </DropdownItem>
                     <DropdownItem to="/test_start-page" tag={Link}>
                       테스트 시작
                     </DropdownItem>
-                    <DropdownItem to="/login-page" tag={Link}>
+                    <DropdownItem to="/ScorePrediction-page" tag={Link}>
                       예측점수 확인
                     </DropdownItem>
                     {/* <DropdownItem to="/register-page" tag={Link}>
