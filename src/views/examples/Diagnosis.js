@@ -51,7 +51,7 @@ const Diagnosis = () => {
           </section>
           <section className="section">
             <Container>
-              <Card className="card-profile shadow mt--300">
+              <Card className="card-profile shadow mt--300 ml-8 mr-8" >
                 <div className="px-4">
                   <div className="text-center mt-5">
                     <h3>
@@ -71,32 +71,8 @@ const Diagnosis = () => {
                         <div className="mb-3">
             </div>
             <div className="row-grid">
-            <Row className="justify-content-around">
-            <div className="custom-control custom-radio mb-3">
-              <input
-                className="custom-control-input"
-                id="customRadio1"
-                name="custom-radio-1"
-                type="radio"
-              />
-              <label className="custom-control-label" htmlFor="customRadio1">
-                <span>suffer</span>
-              </label>
-            </div>
-            <div className="custom-control custom-radio mb-3">
-              <input
-                className="custom-control-input"
-                defaultChecked
-                id="customRadio2"
-                name="custom-radio-1"
-                type="radio"
-              />
-              <label className="custom-control-label" htmlFor="customRadio2">
-                <span>suffers</span>
-              </label>
-            </div>
-            </Row>
-            <Row className="justify-content-around">
+ 
+            <Row className="justify-content-center">
             <div className="custom-control custom-radio mb-3">
               <input
                 className="custom-control-input"
@@ -117,6 +93,9 @@ const Diagnosis = () => {
                 name="custom-radio-1"
                 type="radio"
               />
+                <label className="custom-control-label" htmlFor="customRadio3">
+                <span>suffering</span>
+              </label>
             
             </div>
             </Row>
