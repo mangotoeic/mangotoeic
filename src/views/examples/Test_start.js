@@ -69,7 +69,7 @@ const Test_start = () => {
                     <Row className="justify-content-center">
                       <Col lg="9">
                         <div className="mb-3">
-              <small className="text-uppercase font-weight-bold">정답</small>
+              <small className="text-uppercase font-weight-bold">정답22</small>
             </div>
             <div className="row-grid">
             <Row className="justify-content-around">
