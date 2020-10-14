@@ -82,7 +82,7 @@ const Diagnosis = () => {
                 type="radio"
               />
               <label className="custom-control-label" htmlFor="customRadio3">
-                <span>suffering</span>
+                <span>123456</span>
               </label>
             </div>
             <div className="custom-control custom-radio mb-3">
