@@ -72,7 +72,7 @@ class NotePage extends React.Component {
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
                           <h6 className="text-primary text-uppercase">
-                            엄선된 미니테스트를 통한 자가 진단
+                            엄선된 미니테스트를 통한 자가 진단fjdsldfls
                           </h6>
                           <p className="description mt-3">
                             가나다라마바사아자차만ㅇ러ㅣㅁㄴ알너알낭린ㅁ닝ㄹㄴ리ㅁㄴㅇㄹㄴㅇㄻㄴㄻㄴㅇㄹㄴㅁㄻㄴㄻㄴㅇㄻㄴㄹ
