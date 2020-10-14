@@ -69,37 +69,60 @@ const Diagnosis = () => {
                     <Row className="justify-content-center">
                       <Col lg="9">
                         <div className="mb-3">
-            </div>
-            <div className="row-grid">
- 
-            <Row className="justify-content-center">
-            <div className="custom-control custom-radio mb-3">
-              <input
-                className="custom-control-input"
-                defaultChecked
-                id="customRadio3"
-                name="custom-radio-1"
-                type="radio"
-              />
-              <label className="custom-control-label" htmlFor="customRadio3">
-                <span>123456</span>
-              </label>
-            </div>
-            <div className="custom-control custom-radio mb-3">
-              <input
-                className="custom-control-input"
-                defaultChecked
-                id="customRadio4"
-                name="custom-radio-1"
-                type="radio"
-              />
-                <label className="custom-control-label" htmlFor="customRadio3">
-                <span>suffering</span>
-              </label>
-            
-            </div>
-            </Row>
-            </div>
+                      </div>
+                      <div className="row-grid">
+
+                        <Row className="justify-content-center">
+                          <div className="custom-control custom-radio mb-3">
+                            <input
+                              className="custom-control-input"
+                              id="customRadio5"
+                              name="custom-radio-2"
+                              type="radio"
+                            />
+                            <label className="custom-control-label" htmlFor="customRadio5">
+                              Unchecked
+                            </label>
+                          </div>
+                          <div className="custom-control custom-radio mb-3">
+                            <input
+                              className="custom-control-input"
+                              defaultChecked
+                              id="customRadio6"
+                              name="custom-radio-2"
+                              type="radio"
+                            />
+                            <label className="custom-control-label" htmlFor="customRadio6">
+                              Checked
+                            </label>
+                          </div>
+                          <div className="custom-control custom-radio mb-3">
+                            <input
+                              className="custom-control-input"
+                              disabled
+                              id="customRadio7"
+                              name="custom-radio-2"
+                              type="radio"
+                            />
+                            <label className="custom-control-label" htmlFor="customRadio7">
+                              Disabled unchecked
+                            </label>
+                          </div>
+                          <div className="custom-control custom-radio mb-3">
+                            <input
+                              className="custom-control-input"
+                              defaultChecked
+                              disabled
+                              id="customRadio8"
+                              name="custom-radio-2"
+                              type="radio"
+                            />
+                            <label className="custom-control-label" htmlFor="customRadio8">
+                              Disabled checkbox
+                          </label>
+                          </div>
+                        </Row>
+                      </div>
                         {/* {/<a href="#pablo" onClick={(e) => e.preventDefault()}>
                           Show more
                         </a> */}
