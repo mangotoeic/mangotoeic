@@ -63,7 +63,7 @@ class NotePage extends React.Component {
             </section>
             {/* 1st Hero Variation */}
           </div>
-          <section className="section section-lg pt-lg-0 mt--200">
+          <section className="section section-lg pt-lg-0 mt--200" >
             <Container>
               <Row className="justify-content-center">
                 <Col lg="12">
