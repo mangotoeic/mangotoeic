@@ -28,7 +28,7 @@ import Download from '../IndexSections/Download.js';
 import '../../assets/css/landing.css';
 import '../../assets/css/argon-design-system-react.css';
 
-class Landing extends React.Component {
+class NotePage extends React.Component {
   state = {};
   componentDidMount() {
     document.documentElement.scrollTop = 0;
@@ -71,26 +71,12 @@ class Landing extends React.Component {
                     <Col lg="6">
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
-                          <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                            <i className="ni ni-check-bold" />
-                          </div>
                           <h6 className="text-primary text-uppercase">
                             엄선된 미니테스트를 통한 자가 진단
                           </h6>
                           <p className="description mt-3">
                             가나다라마바사아자차만ㅇ러ㅣㅁㄴ알너알낭린ㅁ닝ㄹㄴ리ㅁㄴㅇㄹㄴㅇㄻㄴㄻㄴㅇㄹㄴㅁㄻㄴㄻㄴㅇㄻㄴㄹ
                           </p>
-                          <div>
-                            <Badge color="primary" pill className="mr-1">
-                              #90%정확도
-                            </Badge>
-                            <Badge color="primary" pill className="mr-1">
-                              #뭘넣지
-                            </Badge>
-                            <Badge color="primary" pill className="mr-1">
-                              #아무거나
-                            </Badge>
-                          </div>
                           <Button
                             className="mt-4"
                             color="primary"
@@ -105,9 +91,6 @@ class Landing extends React.Component {
                     <Col lg="6">
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
-                          <div className="icon icon-shape icon-shape-success rounded-circle mb-4">
-                            <i className="ni ni-istanbul" />
-                          </div>
                           <h6 className="text-success text-uppercase">
                             동영상 강좌로 한 단계 레벨업
                           </h6>
@@ -116,17 +99,6 @@ class Landing extends React.Component {
                             4 that includes the most important components and
                             features.
                           </p>
-                          <div>
-                            <Badge color="success" pill className="mr-1">
-                              business
-                            </Badge>
-                            <Badge color="success" pill className="mr-1">
-                              vision
-                            </Badge>
-                            <Badge color="success" pill className="mr-1">
-                              success
-                            </Badge>
-                          </div>
                           <Button
                             className="mt-4"
                             color="success"
@@ -149,4 +121,4 @@ class Landing extends React.Component {
   }
 }
 
-export default Landing;
+export default NotePage;

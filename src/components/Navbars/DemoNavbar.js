@@ -181,26 +181,21 @@ const DemoNavbar = () => {
                     </DropdownItem> */}
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                <UncontrolledDropdown nav>
+                <Media href="./note-page" >
+                  <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-2" />
-                    <span className="nav-link-inner--text">공부하기</span>
+                    <span className="nav-link-inner--text">공부하기</span>  
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem to="/landing-page" tag={Link}>
+                    <DropdownItem to="/note-page" tag={Link}>
                       오답노트
                     </DropdownItem>
                     <DropdownItem to="/profile-page" tag={Link}>
                       단어공부
                     </DropdownItem>
-                    {/* <DropdownItem to="/login-page" tag={Link}>
-                      Login
-                    </DropdownItem>
-                    <DropdownItem to="/register-page" tag={Link}>
-                      Register
-                    </DropdownItem> */}
                   </DropdownMenu>
-                </UncontrolledDropdown>
+                </UncontrolledDropdown></Media>
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-1" />

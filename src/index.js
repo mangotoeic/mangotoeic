@@ -29,6 +29,7 @@ import Login from "views/examples/Login.js";
 import Profile from "views/examples/Profile.js";
 import Register from "views/examples/Register.js";
 import Test_start from "views/examples/Test_start.js";
+import NotePage from "views/examples/NotePage.js";
 import { Provider } from 'react-redux'
 import store from './store'
 ReactDOM.render(
@@ -40,6 +41,7 @@ ReactDOM.render(
       <Route path="/profile-page" component={Profile}/>
       <Route path="/test_start-page" component={Test_start}/>
       <Route path="/register-page" component={Register}/>
+      <Route path="/note-page" component={NotePage}/>
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>
