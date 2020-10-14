@@ -24,7 +24,7 @@ import { Button, Card, Container, Row, Col } from 'reactstrap';
 import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 import SimpleFooter from 'components/Footers/SimpleFooter.js';
 
-const Test_start = () => {
+const Diagnosis = () => {
     return <>
         <DemoNavbar />
         <main className="profile-page">
@@ -55,21 +55,20 @@ const Test_start = () => {
                 <div className="px-4">
                   <div className="text-center mt-5">
                     <h3>
-                      1번 문제{' '}
+                      사전 정보 입력{' '}
                     </h3>
                     <div className="h6 font-weight-300">
                       <i className="ni location_pin mr-2" />
                     </div>
                     <div className="h6 mt-4">
                       <i className="ni business_briefcase-24 mr-2" />
-                      "The assets of Marble Faun Publishing Company ___ last quarter when one of their main local distributors went out of business."
+                      토익 시험을 본 경험이 있으신가요?
                     </div>
                   </div>
                   <div className="mt-5 py-5 text-center">
                     <Row className="justify-content-center">
                       <Col lg="9">
                         <div className="mb-3">
-              <small className="text-uppercase font-weight-bold">정답22</small>
             </div>
             <div className="row-grid">
             <Row className="justify-content-around">
@@ -118,13 +117,11 @@ const Test_start = () => {
                 name="custom-radio-1"
                 type="radio"
               />
-              <label className="custom-control-label" htmlFor="customRadio4">
-                <span>suffered</span>
-              </label>
+            
             </div>
             </Row>
             </div>
-                        {/* <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                        {/* {/<a href="#pablo" onClick={(e) => e.preventDefault()}>
                           Show more
                         </a> */}
                       </Col>
@@ -139,4 +136,4 @@ const Test_start = () => {
       </>
 }
 
-export default Test_start;
+export default Diagnosis;
