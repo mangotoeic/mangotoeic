@@ -106,8 +106,8 @@ const DemoNavbar = () => {
                     <div className="dropdown-menu-inner">
                       <Media
                         className="d-flex align-items-center"
-                        href="https://demos.creative-tim.com/argon-design-system-react/#/documentation/overview?ref=adsr-navbar"
-                        target="_blank"
+                        href="./profile-page"
+        
                       >
                         <div className="icon icon-shape bg-gradient-primary rounded-circle text-white">
                           <i className="ni ni-spaceship" />

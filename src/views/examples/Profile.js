@@ -7,15 +7,14 @@ import { Button, Card, Container, Row, Col } from 'reactstrap';
 import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 import SimpleFooter from 'components/Footers/SimpleFooter.js';
 
-class Profile extends React.Component {
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
-  }
-  render() {
-    return (
-      <>
+const Profile =()=> {
+  // componentDidMount() {
+  //   document.documentElement.scrollTop = 0;
+  //   document.scrollingElement.scrollTop = 0;
+  //   this.refs.main.scrollTop = 0;
+  // }
+
+    return<>
         <DemoNavbar />
         <main className="profile-page" ref="main">
           <section className="section-profile-cover section-shaped my-0">
@@ -145,8 +144,7 @@ class Profile extends React.Component {
         </main>
         <SimpleFooter />
       </>
-    );
-  }
+
 }
 
 export default Profile;
