@@ -1,23 +1,13 @@
 import React from 'react';
-
 // reactstrap components
 import { Button, Card, Container, Row, Col } from 'reactstrap';
-
 // core components
 import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 import SimpleFooter from 'components/Footers/SimpleFooter.js';
-
-class Profile extends React.Component {
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
-  }
-  render() {
-    return (
-      <>
+const ScorePrediction = () => {
+    return <>
         <DemoNavbar />
-        <main className="profile-page" ref="main">
+        <main className="profile-page">
           <section className="section-profile-cover section-shaped my-0">
             {/* Circles background */}
             <div className="shape shape-style-1 bg-gradient-dark">
@@ -106,7 +96,7 @@ class Profile extends React.Component {
                   </Row>
                   <div className="text-center mt-5">
                     <h3>
-                      Jessica Jones{' '}
+                      망고토익 님{' '}
                       <span className="font-weight-light">, 27</span>
                     </h3>
                     <div className="h6 font-weight-300">
@@ -130,7 +120,7 @@ class Profile extends React.Component {
                           by Melbourne-raised, Brooklyn-based Nick Murphy —
                           writes, performs and records all of his own music,
                           giving it a warm, intimate feel with a solid groove
-                          structure. An artist of considerable range.
+                          structure. An artist of considerable rang2342e.
                         </p>
                         <a href="#pablo" onClick={(e) => e.preventDefault()}>
                           Show more
@@ -145,8 +135,6 @@ class Profile extends React.Component {
         </main>
         <SimpleFooter />
       </>
-    );
-  }
 }
 
-export default Profile;
+export default ScorePrediction;
