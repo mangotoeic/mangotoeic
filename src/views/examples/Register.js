@@ -22,17 +22,11 @@ import {
 import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 import SimpleFooter from 'components/Footers/SimpleFooter.js';
 
-class Register extends React.Component {
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
-  }
-  render() {
-    return (
-      <>
+const Register = () => {
+
+    return <>
         <DemoNavbar />
-        <main ref="main">
+        <main>
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-dark">
             </div>
@@ -114,13 +108,27 @@ class Register extends React.Component {
                             />
                           </InputGroup>
                         </FormGroup>
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative">
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="ni ni-lock-circle-open" />
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                              placeholder="Confirm Password"
+                              type="password"
+                              autoComplete="off"
+                            />
+                          </InputGroup>
+                        </FormGroup>
                         <div className="text-muted font-italic">
-                          <small>
+                          {/* <small>
                             password strength:{' '}
                             <span className="text-success font-weight-700">
                               strong
                             </span>
-                          </small>
+                          </small> */}
                         </div>
                         <Row className="my-4">
                           <Col xs="12">
@@ -166,8 +174,6 @@ class Register extends React.Component {
         </main>
         <SimpleFooter />
       </>
-    );
-  }
 }
 
 export default Register;
