@@ -59,6 +59,14 @@
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
+  --font-family-Mapo: 'MapoFlowerIsland'
+}
+
+@font-face {
+  font-family: 'MapoFlowerIsland';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoFlowerIslandA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 *,
@@ -89,7 +97,7 @@ section {
 
 body {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'MapoFlowerIsland', 'Open Sans', sans-serif, ;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -119,6 +127,7 @@ h6 {
 }
 
 p {
+  font-family: 'MapoFlowerIsland' !important;
   margin-top: 0;
   margin-bottom: 1rem;
 }

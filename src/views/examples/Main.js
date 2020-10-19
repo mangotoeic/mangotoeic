@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 // nodejs library that concatenates classes
 import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux'
+import Typist from 'react-typist';
+
 
 // reactstrap components
 import {
@@ -30,6 +32,7 @@ import '../../assets/css/landing.css';
 import '../../assets/css/argon-design-system-react.css';
 
 const Main = () => {
+
     const nameFocused = useSelector(state => state.nameFocused)
     const emailFocused = useSelector(state => state.emailFocused)
     const [nameFocus , setnameFocus] = useState('') 
@@ -49,17 +52,16 @@ const Main = () => {
                     <Col style={{ margin: '3rem 0 2rem 0' }} lg="12">
                       <h1
                         style={{ textAlign: 'center' }}
-                        className="display-3 text-white"
-                      >
-                        망고토익만의 새로운 목표 :{' '}
+                        className="display-3 text-white">
+                        망고토익만의 새로운 목표 :
                       </h1>
-                      <p
+                      <Typist avgTypingDelay={50}>
+                        <p
                         style={{ textAlign: 'center' }}
-                        className="lead text-white"
-                      >
+                        className="lead text-white">
                         AI 튜터가 지정해주는 체계적인 학습 알고리즘으로 최대한
                         빠르게 목표에 도달해보세요.
-                      </p>
+                      </p></Typist>
                       <div
                         style={{ textAlign: 'center' }}
                         className="btn-wrapper"
