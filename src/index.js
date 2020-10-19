@@ -45,6 +45,7 @@ ReactDOM.render(
       <Route path="/test_start-page" component={Test_start}/>
       <Route path="/ScorePrediction-page" component={ScorePrediction}/>
       <Route path="/register-page" component={Register}/>
+      <Route path="/register-page" component={Register}/>
       <Route path="/note-page" component={NotePage}/>
       <Redirect to="/" />
     </Switch>
