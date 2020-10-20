@@ -181,7 +181,7 @@ const DemoNavbar = () => {
                     </DropdownItem> */}
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                <Media href="./note-page" >
+               
                   <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-2" />
@@ -191,11 +191,14 @@ const DemoNavbar = () => {
                     <DropdownItem to="/note-page" tag={Link}>
                       오답노트
                     </DropdownItem>
-                    <DropdownItem to="/profile-page" tag={Link}>
-                      단어공부
+                    <DropdownItem to="/bookmark-page" tag={Link}>
+                      북마크
+                    </DropdownItem>
+                    <DropdownItem to="/vocab-page" tag={Link}>
+                      단어장
                     </DropdownItem>
                   </DropdownMenu>
-                </UncontrolledDropdown></Media>
+                </UncontrolledDropdown>
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-1" />

@@ -54,7 +54,9 @@
     "moment": "2.24.0",
     "node-sass": "4.13.1",
     "nouislider": "14.1.1",
+    "object-path": "^0.11.5",
     "react": "16.12.0",
+    "react-card-flip": "^1.0.11",
     "react-datetime": "2.16.3",
     "react-dom": "16.12.0",
     "react-redux": "^7.2.1",
@@ -74,5 +76,8 @@
     "gulp-append-prepend": "1.0.8",
     "jquery": "^3.5.1",
     "typescript": "3.7.5"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.1.3"
   }
 }

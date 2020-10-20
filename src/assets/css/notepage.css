@@ -1,0 +1,15 @@
+.text-primary {
+  color: #000000 !important;
+}
+
+a.text-primary:hover,
+a.text-primary:focus {
+  color: #233dd2 !important;
+}
+/* .h6 {
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000000;
+} */
