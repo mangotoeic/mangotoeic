@@ -28,7 +28,7 @@ import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 import '../../assets/css/notepage.css';
 import '../../assets/css/argon-design-system-react.css';
 import ReactCardFlip from 'react-card-flip';
-const NotePage = () => {
+const BookMark = () => {
   const [isFlipped,setFlip]= useState(false)
   const handleClick = (e)=> {
     e.preventDefault();
@@ -62,71 +62,116 @@ const NotePage = () => {
           </div>
           <section className="section section-lg pt-lg-0 mt--200" >
             <Container>
-
-
-              <ReactCardFlip  isFlipped={isFlipped} flipDirection='horizontal' >
-                    
-                      <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
-                        <CardBody className="py-5">
-                          <h6  style = {{color :"black !important;"}} className= "text-primary text-uppercase" >
-                            tom is so ______.
-                          </h6>
-                          <Row className="row-grid">
-                          <Col style={{margin: "20px"}} lg="6">
-                          <p   className="description mt-3">
-                            1.sick
-                          </p >
-                         
-                          
-                          <p  className="description mt-3">
-                            2.sicked
-                          </p >
-                          
-                          
-                          <p  className="description mt-3">
-                            3. sock
-                          </p >
-                          
-                          <p className="description mt-3">
-                            4. sckk
-                          </p>
-                          </Col>
-                          </Row>
-          <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}
-          style={{position : "relative",top: "0",left: "0px"}}>정답 보기</button></span>
-          </CardBody>
-        </Card>
-      
-        
-        <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
-          <CardBody className="py-5">
-            <h6  style = {{color :"black !important;"}} className= "text-primary text-uppercase" >
-              tom is so ______.
-            </h6>
-                          <Row className="row-grid">
-                          <Col lg="6">
-                          <span className="description mt-3">
-                            1.
-                          </span>
-                          <span className="description mt-3">
-                            2.
-                          </span>
-                          </Col>
-                          <Col lg="6">
-                          <span className="description mt-3">
-                            3.
-                          </span>
-                          <span className="description mt-3">
-                            4.
-                          </span>
-                          </Col>
-                          </Row>
-                          <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}
-          style={{position : "relative",top: "160px",right: "20px"}}>정답 보기</button></span>
-          </CardBody>
-                      </Card>
+              <ReactCardFlip  isFlipped={isFlipped} flipSpeedBackToFront={1.5} flipSpeedFrontToBack={1.5} flipDirection='horizontal' >
+                <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
+                  <CardBody className="py-5">
+                    <h6  style = {{color :"black !important;"}} className= "text-primary text-uppercase" >
+                      tom is so ______.
+                    </h6>
+                    <Row className="row-grid">
+                      <Col lg="6">
+                        <p className="description mt-3">
+                          1.sick
+                        </p>
+                        <p className="description mt-3">
+                          2.sicked
+                        </p>
+                        </Col>
+                        <Col lg="6">
+                        <p className="description mt-3">
+                          3. sock
+                        </p>
+                        <p className="description mt-3">
+                          4. sckk
+                        </p>
+                      </Col>
+                    </Row>
+                    <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}>정답 보기</button></span>
+                  </CardBody>
+                </Card>
+                <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
+                  <CardBody className="py-5">
+                    <h6  style = {{color :"black !important;"}} className= "text-primary text-uppercase" >
+                      tom is so ______.
+                    </h6>
+                    <Row className="row-grid">
+                      <Col lg="6">
+                        <p className="description mt-3">
+                          1.
+                        </p>
+                        <p className="description mt-3">
+                          2.
+                        </p>
+                      </Col>
+                      <Col lg="6">
+                        <p className="description mt-3">
+                          3.
+                        </p>
+                        <p className="description mt-3">
+                          4.
+                        </p>
+                      </Col>
+                    </Row>
+                    <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}>문제 보기</button></span>
+                  </CardBody>
+                </Card>
               </ReactCardFlip>
-
+            </Container>
+            <Container>
+              <ReactCardFlip  isFlipped={isFlipped} flipSpeedBackToFront={1.5} flipSpeedFrontToBack={1.5} flipDirection='horizontal' >
+                <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
+                  <CardBody className="py-5">
+                    <h6  style = {{color :"black !important;"}} className= "text-primary text-uppercase" >
+                      tom is so ______.
+                    </h6>
+                    <Row className="row-grid">
+                      <Col lg="6">
+                        <p className="description mt-3">
+                          1.sick
+                        </p>
+                        <p className="description mt-3">
+                          2.sicked
+                        </p>
+                        </Col>
+                        <Col lg="6">
+                        <p className="description mt-3">
+                          3. sock
+                        </p>
+                        <p className="description mt-3">
+                          4. sckk
+                        </p>
+                      </Col>
+                    </Row>
+                    <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}>정답 보기</button></span>
+                  </CardBody>
+                </Card>
+                <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
+                  <CardBody className="py-5">
+                    <h6  style = {{color :"black !important;"}} className= "text-primary text-uppercase" >
+                      tom is so ______.
+                    </h6>
+                    <Row className="row-grid">
+                      <Col lg="6">
+                        <p className="description mt-3">
+                          1.
+                        </p>
+                        <p className="description mt-3">
+                          2.
+                        </p>
+                      </Col>
+                      <Col lg="6">
+                        <p className="description mt-3">
+                          3.
+                        </p>
+                        <p className="description mt-3">
+                          4.
+                        </p>
+                      </Col>
+                    </Row>
+                    <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}>문제 보기</button></span>
+                  </CardBody>
+                </Card>
+              </ReactCardFlip>
             </Container>
           </section>
         </main>
@@ -135,4 +180,4 @@ const NotePage = () => {
   
 }
 
-export default NotePage;
+export default BookMark;

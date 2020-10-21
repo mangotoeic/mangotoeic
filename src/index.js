@@ -32,7 +32,7 @@ import Diagnosis from "views/pages/Diagnosis.js";
 import Test_start from "views/pages/Test_start.js";
 import NotePage from "views/pages/NotePage.js";
 import BookMark from "views/pages/BookMark.js";
-import Vocab from "views/pages/Vocab.js";
+import VocabPage from "views/pages/Vocab.js";
 import ScorePrediction from "views/pages/ScorePrediction.js";
 import { Provider } from 'react-redux'
 import store from './store'
@@ -50,7 +50,7 @@ ReactDOM.render(
       
       <Route path="/note-page" component={NotePage}/>
       <Route path="/bookmark-page" component={BookMark}/>
-      <Route path="/vocab-page" component={Vocab}/>
+      <Route path="/vocab-page" component={VocabPage}/>
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>

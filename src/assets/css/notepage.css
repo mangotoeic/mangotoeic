@@ -13,3 +13,48 @@ a.text-primary:focus {
   line-height: 1.5;
   color: #000000;
 } */
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.some-page-wrapper {
+  margin: 15px;
+  background-color: transparent;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+.column {
+  flex: 1;
+}
+
+.double-column {
+  flex: 2;
+}
+}
+
+.vocab {
+  font-size: 18px;
+  font-family: "Arial" !important;
+}
+
+.meaning {
+  font-size: 15px;
+  font-family: "Times" !important;
+}

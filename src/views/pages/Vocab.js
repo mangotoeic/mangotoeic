@@ -28,7 +28,7 @@ import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 import '../../assets/css/notepage.css';
 import '../../assets/css/argon-design-system-react.css';
 
-const NotePage = () => {
+const VocabPage = () => {
   const [isFlipped,setFlip]= useState(false)
   const handleClick = (e)=> {
     e.preventDefault();
@@ -60,45 +60,48 @@ const NotePage = () => {
             </section>
             {/* 1st Hero Variation */}
           </div>
-          <section className="section section-lg pt-lg-0 mt--200" >
-            <Container>
-                <Col lg="12">
-                      <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
-                        <CardBody className="py-5">
-                          <h6  style = {{color :"black !important;"}} className= "text-primary text-uppercase" >
-                            tom is so ______.
-                          </h6>
-                          <Row className="row-grid">
-                          <Col style={{margin: "20px"}} lg="6">
-                          <p   className="description mt-3">
-                            1.sick
-                          </p >
-                         
-                          
-                          <p  className="description mt-3">
-                            2.sicked
-                          </p >
-                          
-                          
-                          <p  className="description mt-3">
-                            3. sock
-                          </p >
-                          
-                          <p className="description mt-3">
-                            4. sckk
-                          </p>
-                          </Col>
-                          </Row>
-          
-                    </CardBody>
-                </Card>
-            </Col>
-            </Container>
-          </section>
         </main>
+        <Container>
+          <Row className="show-grid">
+            <Col lg="2">
+              <p className="vocab mt-3">
+                vocab
+              </p>
+            </Col>
+            <Col lg="10">
+              <p className="meaning mt-3">
+                meaning
+              </p>
+            </Col>
+          </Row>
+          <Row className="show-grid">
+            <Col lg="2">
+              <p className="vocab mt-3">
+                vocab
+              </p>
+            </Col>
+            <Col lg="10">
+              <p className="meaning mt-3">
+                meaning
+              </p>
+            </Col>
+          </Row>
+          <Row className="show-grid">
+            <Col lg="2">
+              <p className="vocab mt-3">
+                vocab
+              </p>
+            </Col>
+            <Col lg="10">
+              <p className="meaning mt-3">
+                meaning
+              </p>
+            </Col>
+          </Row>
+        </Container>
       </>
 
   
 }
 
-export default NotePage;
+export default VocabPage;
