@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import VocabList from '../../container/Vocab/vocablist'
+import VocabList from '../../container/Vocab/VocabList'
 // nodejs library that concatenates classes
 import classnames from 'classnames';
 
@@ -64,9 +64,12 @@ const VocabPage = ({children}) => {
             </section>
             {/* 1st Hero Variation */}
           </div>
+          <section className="section section-lg pt-lg-0 mt--200" >
+          {children}
+          </section>
         </main>
       </>
-{children}
+
   
 }
 
