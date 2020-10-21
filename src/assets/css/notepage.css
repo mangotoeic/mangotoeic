@@ -39,16 +39,6 @@ a.text-primary:focus {
   width: 100%;
 }
 
-@media screen and (min-width: 800px) {
-.column {
-  flex: 1;
-}
-
-.double-column {
-  flex: 2;
-}
-}
-
 .vocab {
   font-size: 18px;
   font-family: "Arial" !important;

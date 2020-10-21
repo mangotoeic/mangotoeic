@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import VocabList from '../../container/Vocab/vocablist'
 // nodejs library that concatenates classes
 import classnames from 'classnames';
 
@@ -28,12 +29,15 @@ import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 import '../../assets/css/notepage.css';
 import '../../assets/css/argon-design-system-react.css';
 
-const VocabPage = () => {
+const VocabPage = ({children}) => {
   const [isFlipped,setFlip]= useState(false)
   const handleClick = (e)=> {
     e.preventDefault();
    
   }
+  const elements = [];
+  const array = {"1":["vocab", "meaning"], "2":["vocabs", "meanings"]};
+    
     return <>
         <DemoNavbar />
         <main >
@@ -61,46 +65,8 @@ const VocabPage = () => {
             {/* 1st Hero Variation */}
           </div>
         </main>
-        <Container>
-          <Row className="show-grid">
-            <Col lg="2">
-              <p className="vocab mt-3">
-                vocab
-              </p>
-            </Col>
-            <Col lg="10">
-              <p className="meaning mt-3">
-                meaning
-              </p>
-            </Col>
-          </Row>
-          <Row className="show-grid">
-            <Col lg="2">
-              <p className="vocab mt-3">
-                vocab
-              </p>
-            </Col>
-            <Col lg="10">
-              <p className="meaning mt-3">
-                meaning
-              </p>
-            </Col>
-          </Row>
-          <Row className="show-grid">
-            <Col lg="2">
-              <p className="vocab mt-3">
-                vocab
-              </p>
-            </Col>
-            <Col lg="10">
-              <p className="meaning mt-3">
-                meaning
-              </p>
-            </Col>
-          </Row>
-        </Container>
       </>
-
+{children}
   
 }
 
