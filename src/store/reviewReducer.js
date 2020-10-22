@@ -1,7 +1,7 @@
-export const addPostAction = review => { 
+export const addPostAction = (name,review) => { 
     return ({
     type : "ADD_REVIEW",  // 여기서 review자리에 review,name으로 하면 두개 입력.
-    payload : review
+    payload : (name,review)
 })}
 
 
