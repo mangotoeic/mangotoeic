@@ -9,6 +9,7 @@ import {
     Row,
     Col,
   } from 'reactstrap';
+ 
 
 
 const ReviewList = () => {
@@ -17,20 +18,49 @@ const ReviewList = () => {
 
     return <>
     <Provider store = {reviewstore}>
-        {reviews && reviews.length === 0 && (
-                <p>No Review at the moment</p>
-         )}
-        {reviews && 
-            reviews.map(review => ( 
-            <div key = {review.id}>
-                <div>
-                  {/* <span style={{margin: '20px'}}>{posts.name}</span> */}
-                  <span style={{margin: '20px'}}>{review.review_post}</span>
-                </div>
-            </div>
-        ))
-        }
+        <Table striped bordered hover>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>이름</th>
+                    <th>리뷰</th>
+                    <th>별점</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th> `${ReviewInput['count']}` </th>
+                <th>
+                    {/* {reviews && reviews.length === 0 && (
+                        <p>No Review at the moment</p>
+                    )}
+                    {reviews && reviews.map(review => ( 
+                        <div key = {review.id}>
+                            <div>
+                                <span style={{margin: '20px'}}>{review.name}</span>
+                            </div>
+                        </div>
+                    ))}    */}
+                </th>
+                <th>
+                    {reviews && reviews.length === 0 && (
+                        <p>No Review at the moment</p>
+                    )}
+                    {reviews && reviews.map(review => ( 
+                        <div key = {review.id}>
+                            <div> 
+                                <span style={{margin: '20px'}}>{review.review_post}</span>
+                            </div>
+                        </div>
+                    ))}   
+                </th>
+                <th></th>
+            </tbody>
+        
+        </Table>
+    </Provider>
+    </>
 
+}
 
     {/* <Table striped bordered hover>
         <thead>
@@ -48,8 +78,5 @@ const ReviewList = () => {
             <th>empty</th>
         </tbody>
     </Table> */}
-        </Provider>
-    </>
 
-}
 export default ReviewList

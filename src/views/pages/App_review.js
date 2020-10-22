@@ -10,8 +10,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 import React, {useState} from 'react';
-import {addPostAction} from '../../store/reviewReducer'
-import {addReviewAction} from '../../store/reviewReducer2'
+import {addPostAction} from '../../store/reviewReducer' 
 import {useDispatch} from 'react-redux'
 // reactstrap components
 import {
@@ -33,9 +32,7 @@ import {
 } from 'reactstrap';
 // core components
 import DemoNavbar from 'components/Navbars/DemoNavbar.js';
-import SimpleFooter from 'components/Footers/SimpleFooter.js';
-import TodoList from 'components/TodoList.jsx';
-import TodoInput from 'components/TodoInput.jsx';
+import SimpleFooter from 'components/Footers/SimpleFooter.js'; 
 import Forms from '../IndexSections/Form_Control'
 import TextBox from '../IndexSections/TextBox'
 import Buttons2 from '../IndexSections/Buttons2'
@@ -46,7 +43,7 @@ import Pagination from '../IndexSections/Pagination'
 
 // index page sections
 import Download from '../IndexSections/Download.js';
-import '../../assets/css/landing.css';
+// import '../../assets/css/landing.css';
 import '../../assets/css/argon-design-system-react.css';
 import ReviewInput from 'components/ReviewInput'
 import ReviewList from 'components/ReviewList'
@@ -206,11 +203,7 @@ const App_review = () => {
             <ReviewList/>
 
 
-
-
-            <TodoInput/>
-            <TodoList/>
-
+ 
 
             <Pagination2/>
 
