@@ -16,13 +16,6 @@ const Profile =()=> {
           <section className="section-profile-cover section-shaped my-0">
             {/* Circles background */}
             <div className="shape shape-style-1 bg-gradient-dark">
-              {/* <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span /> */}
             </div>
             {/* SVG separator */}
             <div className="separator separator-bottom separator-skew">
