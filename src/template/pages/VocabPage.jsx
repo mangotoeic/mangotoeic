@@ -30,13 +30,13 @@ import '../../assets/css/notepage.css';
 import '../../assets/css/argon-design-system-react.css';
 
 const VocabPage = ({children}) => {
-  const [isFlipped,setFlip]= useState(false)
-  const handleClick = (e)=> {
-    e.preventDefault();
+  // const [isFlipped,setFlip]= useState(false)
+  // const handleClick = (e)=> {
+  //   e.preventDefault();
    
-  }
-  const elements = [];
-  const array = {"1":["vocab", "meaning"], "2":["vocabs", "meanings"]};
+  // }
+  // const elements = [];
+  // const array = {"1":["vocab", "meaning"], "2":["vocabs", "meanings"]};
     
     return <>
         <DemoNavbar />
