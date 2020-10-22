@@ -25,7 +25,7 @@ import "assets/scss/argon-design-system-react.scss?v1.1.0";
 
 
 import {VocabList} from "./container/Vocab"
-import {Main,Login,Profile,Register,Diagnosis,Test_start,NotePage,BookMark,VocabPage,ScorePrediction,App_review,Board} from "./template/pages";
+import {Main,Login,Profile,Register,Diagnosis,TestStart,NotePage,BookMark,ScorePrediction,AppReview,Board} from "./template/pages";
 
 
 import { Provider } from 'react-redux'
@@ -38,14 +38,15 @@ ReactDOM.render(
       <Route path="/login-page" component = {Login}/>
       <Route path="/profile-page" component={Profile}/>
       <Route path="/diagnosis-page" component={Diagnosis}/>
-      <Route path="/test_start-page" component={Test_start}/>
+      <Route path="/test-start-page" component={TestStart}/>
       <Route path="/ScorePrediction-page" component={ScorePrediction}/>
       <Route path="/register-page" component={Register}/>
-      <Route path="/app-review-page" component={App_review}/>
+      <Route path="/app-review-page" component={AppReview}/>
       <Route path="/board-page" component={Board}/>
       <Route path="/note-page" component={NotePage}/>
       <Route path="/bookmark-page" component={BookMark}/>
       <Route path="/vocab-page" component={VocabList}/>
+  
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>
