@@ -63,11 +63,67 @@
 }
 
 @font-face {
-  font-family: 'MapoFlowerIsland';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoFlowerIslandA.woff') format('woff');
+  font-family: 'YiSunShinDotumM';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'S-CoreDream-4Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-7ExtraBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-1Thin';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-1Thin.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BBTreeGR';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGR.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cafe24Oneprettynight';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* @font-face { 
+  font-family: 'GongGothicMedium'; 
+  src: url('https://github.com/projectnoonnu/noonfonts_20-10/blob/main/GongGothicMedium.woff') format('woff'); 
+  font-weight: normal; 
+  font-style: normal; 
+} */
 
 *,
 *::before,
@@ -76,7 +132,7 @@
 }
 
 html {
-  font-family: sans-serif;
+  font-family: sans-serif ;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -97,7 +153,7 @@ section {
 
 body {
   margin: 0;
-  font-family: 'MapoFlowerIsland', 'Open Sans', sans-serif, ;
+  font-family: 'Open Sans', sans-serif ;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -120,14 +176,19 @@ h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
+h5 {
+  font-family: 'Gong gothic Medium' !important;
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-weight: normal !important;
+}
+
+h6 {
+  font-family: 'S-CoreDream-4Regular'
 }
 
 p {
-  font-family: 'MapoFlowerIsland' !important;
+  font-family: 'Cafe24Oneprettynight' !important;
   margin-top: 0;
   margin-bottom: 1rem;
 }
@@ -2416,6 +2477,7 @@ textarea.form-control.is-invalid {
 }
 
 .btn {
+  font-family: 'BBTreeGR';
   display: inline-block;
   font-weight: 600;
   color: #525f7f;
@@ -5077,6 +5139,7 @@ input[type='button'].btn-block {
 }
 
 .badge {
+  font-family: 'BBTreeGR';
   display: inline-block;
   padding: 0.35rem 0.375rem;
   font-size: 66%;
@@ -17355,6 +17418,7 @@ textarea[resize='horizontal'] {
   }
 }
 .navbar-nav .nav-link .nav-link-inner--text {
+  font-family: 'S-CoreDream-3Light' !important;
   margin-left: 0.25rem;
 }
 
