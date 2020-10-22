@@ -8469,7 +8469,9 @@ button.bg-darker:focus {
 .my-8 {
   margin-top: 8rem !important;
 }
-
+.mt-8-version2 {
+  margin-top: -30rem !important;
+}
 .mr-8,
 .mx-8 {
   margin-right: 8rem !important;
