@@ -55,7 +55,7 @@ const ReviewInput = () => {
 
 
     return <> 
-    <h1 style={{margin : "30px", color:"#F0FFFF"}} >앱 리뷰</h1>
+    <h1 style={{margin : "30ren", color:"#F0FFFF"}} >앱 리뷰</h1>
     <form>
         <div>
             <Form>
