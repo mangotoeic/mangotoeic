@@ -3,7 +3,7 @@ export {default as  Main} from './Main.jsx'
 export {default as  NotePage} from './NotePage.jsx'
 export {default as  Profile} from './Profile.jsx'
 export {default as  Register} from './Register.jsx'
-export {default as  ScorePrediction} from './ScorePrediction.jsx'
+
 export {default as  VocabPage} from './VocabPage.jsx'
 export {default as  TestStart} from './TestStart.jsx'
 export {default as  BookMark} from './BookMark.jsx'

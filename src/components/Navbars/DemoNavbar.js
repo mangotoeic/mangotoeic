@@ -170,11 +170,11 @@ const DemoNavbar = () => {
                     <DropdownItem to="/diagnosis-page" tag={Link}>
                       사전정보 입력
                     </DropdownItem>
-                    <DropdownItem to="/test_start-page" tag={Link}>
+                    <DropdownItem to="/test-start-page" tag={Link}>
                       테스트 시작
                     </DropdownItem>
-                    <DropdownItem to="/ScorePrediction-page" tag={Link}>
-                      예측점수 확인
+                    <DropdownItem to="/profile-page" tag={Link}>
+                      프로필
                     </DropdownItem>
                     {/* <DropdownItem to="/register-page" tag={Link}>
                       Register

@@ -8,7 +8,7 @@ import { Button, Card, Container, Row, Col } from 'reactstrap';
 import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 import SimpleFooter from 'components/Footers/SimpleFooter.js';
 
-const Test_start = () => {
+const TestStart = () => {
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -162,4 +162,4 @@ const Test_start = () => {
       </>
 }
 
-export default Test_start;
+export default TestStart;
