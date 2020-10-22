@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import VocabList from '../../container/Vocab/VocabList'
 // nodejs library that concatenates classes
 import classnames from 'classnames';
 
@@ -28,19 +29,22 @@ import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 import '../../assets/css/notepage.css';
 import '../../assets/css/argon-design-system-react.css';
 
-const NotePage = () => {
+const VocabPage = ({children}) => {
   const [isFlipped,setFlip]= useState(false)
   const handleClick = (e)=> {
     e.preventDefault();
    
   }
+  const elements = [];
+  const array = {"1":["vocab", "meaning"], "2":["vocabs", "meanings"]};
+    
     return <>
         <DemoNavbar />
         <main >
           <div className="position-relative">
             {/* shape Hero */}
             <section className="section section-lg section-shaped pb-250">
-              <div className="shape shape-style-1 bg-gradient-dark">
+              <div className="shape shape-style-1 ">
               </div>
               <div className="separator separator-bottom separator-skew">
                 <svg
@@ -61,39 +65,7 @@ const NotePage = () => {
             {/* 1st Hero Variation */}
           </div>
           <section className="section section-lg pt-lg-0 mt--200" >
-            <Container>
-                <Col lg="12">
-                      <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
-                        <CardBody className="py-5">
-                          <h6  style = {{color :"black !important;"}} className= "text-primary text-uppercase" >
-                            tom is so ______.
-                          </h6>
-                          <Row className="row-grid">
-                          <Col style={{margin: "20px"}} lg="6">
-                          <p   className="description mt-3">
-                            1.sick
-                          </p >
-                         
-                          
-                          <p  className="description mt-3">
-                            2.sicked
-                          </p >
-                          
-                          
-                          <p  className="description mt-3">
-                            3. sock
-                          </p >
-                          
-                          <p className="description mt-3">
-                            4. sckk
-                          </p>
-                          </Col>
-                          </Row>
-          
-                    </CardBody>
-                </Card>
-            </Col>
-            </Container>
+          {children}
           </section>
         </main>
       </>
@@ -101,4 +73,4 @@ const NotePage = () => {
   
 }
 
-export default NotePage;
+export default VocabPage;

@@ -22,6 +22,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss?v1.1.0";
+<<<<<<< HEAD
 
 import Index from "views/Index.js";
 import Main from "views/pages/Main.js";
@@ -37,6 +38,10 @@ import Vocab from "views/pages/Vocab.js";
 import App_review from 'views/pages/App_review.js'
 import Board from 'views/pages/Board.js'
 import ScorePrediction from "views/pages/ScorePrediction.js";
+=======
+import {VocabList} from "./container/Vocab"
+import {Main,Login,Profile,Register,Diagnosis,Test_start,NotePage,BookMark,VocabPage,ScorePrediction} from "./template/pages";
+>>>>>>> master
 import { Provider } from 'react-redux'
 import store from './store'
 ReactDOM.render(
@@ -54,7 +59,7 @@ ReactDOM.render(
       <Route path="/board-page" component={Board}/>
       <Route path="/note-page" component={NotePage}/>
       <Route path="/bookmark-page" component={BookMark}/>
-      <Route path="/vocab-page" component={Vocab}/>
+      <Route path="/vocab-page" component={VocabList}/>
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>
