@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {VocabPage} from '../../template/pages'
-import {Vocab} from '../../components/Vocab' 
+import {Vocab} from '../../components/vocab' 
 import vocabs from "./vocab.js"
 import {
     Badge,
