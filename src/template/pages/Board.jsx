@@ -23,17 +23,12 @@ import Pagination2 from '../IndexSections/Pagination2'
 
 
 
-class Board extends React.Component {
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
-  }
-  render() {
-    return (
-      <>
+const Board=()=> {
+
+
+    return<>
         <DemoNavbar />
-        <main className="board-page" ref="main">
+        <main className="board-page">
           
           <section className="section-profile-cover section-shaped my-0">
             {/* Circles background */}
@@ -58,11 +53,18 @@ class Board extends React.Component {
             
           </section>
           
-          <section className="section"> 
+          <section className="mt-8-version2"> 
+          <Container >
+
+            <h1 style={{margin : "30px", color:"#F0FFFF"}} >게시판</h1>
+            
           <Forms/> 
+          <Card >
             <TextBox/>  
+            </Card  >
             <Buttons2/>
         <Table striped bordered hover>
+        
   <thead>
     <tr>
       <th>#</th>
@@ -89,14 +91,13 @@ class Board extends React.Component {
   </tbody>
 </Table><Pagination2/>
  
-             
+</Container>
+     
           </section>
         </main>
         
         <SimpleFooter />
       </>
-    );
-  }
 }
 
 export default Board  ;

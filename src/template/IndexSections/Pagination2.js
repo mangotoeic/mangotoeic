@@ -1,11 +1,18 @@
 import React from "react";
 // reactstrap components
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import { 
+  Table,
+  Row,
+  Col,
+} from 'reactstrap';
 
 class Paginations2 extends React.Component {
   render() {
     return (
       <>
+      <Row style={{margin :"30px", textAlign: "center"}}>
+        
         <nav aria-label="Page navigation example">
           <Pagination
             className="pagination justify-content-end"
@@ -44,7 +51,9 @@ class Paginations2 extends React.Component {
             </PaginationItem>
           </Pagination>
         </nav>
+        </Row>
       </>
+
     );
   }
 }
