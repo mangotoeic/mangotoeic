@@ -22,26 +22,12 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss?v1.1.0";
-<<<<<<< HEAD
 
-import Index from "views/Index.js";
-import Main from "views/pages/Main.js";
-import Login from "views/pages/Login.js";
-import Profile from "views/pages/Profile.js";
-import Register from "views/pages/Register.js";
-import Diagnosis from "views/pages/Diagnosis.js";
-import Test_start from "views/pages/Test_start.js";
-import NotePage from "views/pages/NotePage.js";
-import BookMark from "views/pages/BookMark.js";
-import Vocab from "views/pages/Vocab.js";
 
-import App_review from 'views/pages/App_review.js'
-import Board from 'views/pages/Board.js'
-import ScorePrediction from "views/pages/ScorePrediction.js";
-=======
 import {VocabList} from "./container/Vocab"
-import {Main,Login,Profile,Register,Diagnosis,Test_start,NotePage,BookMark,VocabPage,ScorePrediction} from "./template/pages";
->>>>>>> master
+import {Main,Login,Profile,Register,Diagnosis,Test_start,NotePage,BookMark,VocabPage,ScorePrediction,App_review,Board} from "./template/pages";
+
+
 import { Provider } from 'react-redux'
 import store from './store'
 ReactDOM.render(
