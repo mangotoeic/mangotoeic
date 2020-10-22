@@ -35,7 +35,7 @@ const NotePage = () => {
    
   }
     return <>
-        <DemoNavbar />
+        <DemoNavbar/>
         <main >
           <div className="position-relative">
             {/* shape Hero */}
@@ -62,9 +62,6 @@ const NotePage = () => {
           </div>
           <section className="section section-lg pt-lg-0 mt--200" >
             <Container>
-    
-
-         
             <Col lg="12">
                       <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
                         <CardBody className="py-5">

@@ -13,3 +13,40 @@ a.text-primary:focus {
   line-height: 1.5;
   color: #000000;
 } */
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.some-page-wrapper {
+  margin: 15px;
+  background-color: transparent;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.vocab {
+  font-size: 20px;
+  font-family: "Arial" !important;
+  text-align: center;
+}
+
+.meaning {
+  font-size: 18px;
+  font-family: "Times" !important;
+  text-align: left;
+}
