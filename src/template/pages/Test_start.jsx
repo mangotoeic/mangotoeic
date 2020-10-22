@@ -16,8 +16,13 @@ const Test_start = () => {
     const [testgen, setTestgen] = useState(1)
 
     const handleClick = () => {
-      setTestnum(testnum + 1)
-      setTestgen(testgen + 1)
+      if (testnum < 10) {
+        setTestgen(testgen + 1)
+        setTestnum(testnum + 1)
+      } 
+      else {
+        alert('테스트가 종료되었습니다.')
+      } 
   }
 
     useEffect(() => {
@@ -144,7 +149,7 @@ const Test_start = () => {
             </div>
             </Row>
             </div>
-            <button className="float-center btn btn-default btn-sm" onClick={handleClick}>확인</button>
+            <button className="float-center btn btn-default btn-lg mt-3" onClick={handleClick}>다음 문제</button>
                       </Col>
                     </Row>
                   </div>
