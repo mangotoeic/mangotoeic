@@ -181,7 +181,7 @@ const DemoNavbar = () => {
                     </DropdownItem> */}
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                <Media href="./note-page" >
+               
                   <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-2" />
@@ -191,11 +191,14 @@ const DemoNavbar = () => {
                     <DropdownItem to="/note-page" tag={Link}>
                       오답노트
                     </DropdownItem>
-                    <DropdownItem to="/profile-page" tag={Link}>
-                      단어공부
+                    <DropdownItem to="/bookmark-page" tag={Link}>
+                      북마크
+                    </DropdownItem>
+                    <DropdownItem to="/vocab-page" tag={Link}>
+                      단어장
                     </DropdownItem>
                   </DropdownMenu>
-                </UncontrolledDropdown></Media>
+                </UncontrolledDropdown>
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-1" />
@@ -216,26 +219,28 @@ const DemoNavbar = () => {
                     </DropdownItem> */}
                   </DropdownMenu>
                 </UncontrolledDropdown>
+
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav>
-                    <i className="ni ni-collection d-lg-none mr-1" />
+                    <i className="ni ni-collection d-lg-none mr-3" />
                     <span className="nav-link-inner--text">게시판</span>
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem to="/landing-page" tag={Link}>
-                      사전정보 입력
+                    <DropdownItem to="/app-review-page" tag={Link}>
+                      앱리뷰게시판
                     </DropdownItem>
-                    <DropdownItem to="/test_start-page" tag={Link}>
-                      테스트 시작
+                    <DropdownItem to="/board-page" tag={Link}>
+                      자유게시판
                     </DropdownItem>
-                    <DropdownItem to="/login-page" tag={Link}>
-                      예측점수 확인
+                    {/* <DropdownItem to="/login-page" tag={Link}>
+                      Login
                     </DropdownItem>
-                    {/* <DropdownItem to="/register-page" tag={Link}>
+                    <DropdownItem to="/register-page" tag={Link}>
                       Register
                     </DropdownItem> */}
                   </DropdownMenu>
                 </UncontrolledDropdown>
+
               </Nav>
               <Nav className="align-items-lg-center ml-lg-auto" navbar>
                 <NavItem>

@@ -23,15 +23,11 @@ import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss?v1.1.0";
 
-import Index from "views/Index.js";
-import Main from "views/examples/Main.js";
-import Login from "views/examples/Login.js";
-import Profile from "views/examples/Profile.js";
-import Register from "views/examples/Register.js";
-import Diagnosis from "views/examples/Diagnosis.js";
-import Test_start from "views/examples/Test_start.js";
-import NotePage from "views/examples/NotePage.js";
-import ScorePrediction from "views/examples/ScorePrediction.js";
+
+import {VocabList} from "./container/Vocab"
+import {Main,Login,Profile,Register,Diagnosis,Test_start,NotePage,BookMark,VocabPage,ScorePrediction,App_review,Board} from "./template/pages";
+
+
 import { Provider } from 'react-redux'
 import store from './store'
 ReactDOM.render(
@@ -45,8 +41,11 @@ ReactDOM.render(
       <Route path="/test_start-page" component={Test_start}/>
       <Route path="/ScorePrediction-page" component={ScorePrediction}/>
       <Route path="/register-page" component={Register}/>
-      <Route path="/register-page" component={Register}/>
+      <Route path="/app-review-page" component={App_review}/>
+      <Route path="/board-page" component={Board}/>
       <Route path="/note-page" component={NotePage}/>
+      <Route path="/bookmark-page" component={BookMark}/>
+      <Route path="/vocab-page" component={VocabList}/>
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>

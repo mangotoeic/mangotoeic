@@ -28,7 +28,7 @@ import CardsFooter from 'components/Footers/CardsFooter.js';
 
 // index page sections
 import Download from '../IndexSections/Download.js';
-import '../../assets/css/landing.css';
+
 import '../../assets/css/argon-design-system-react.css';
 
 const Main = () => {
