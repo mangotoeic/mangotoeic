@@ -48,11 +48,6 @@ const ReviewInput = () => {
       setReview('') 
     }
     
-    const handleChange = e => {
-      e.preventDefault()
-      setName(e.target.value)  //target 은 말 치는 박스,  value 는 그 안에 value
-      setReview(e.target.value)  //target 은 말 치는 박스,  value 는 그 안에 value
-    }
     const addReview = (review) => {
       dispatch(addPostAction(review))
     }
