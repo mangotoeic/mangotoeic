@@ -8,11 +8,5 @@ export {default as  VocabPage} from './VocabPage.jsx'
 export {default as  TestStart} from './TestStart.jsx'
 export {default as  BookMark} from './BookMark.jsx'
 export {default as  Diagnosis} from './Diagnosis.jsx'
-<<<<<<< HEAD
-export {default as  App_review} from './App_review.jsx'
-export {default as  Board} from './Board.jsx'
-
-=======
 export {default as  AppReview } from './AppReview.jsx'
 export {default as  Board } from './Board.jsx'
->>>>>>> master

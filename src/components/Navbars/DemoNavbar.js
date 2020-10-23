@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Argon Design System React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-design-system-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // JavaScript plugin that hides or shows a component based on your scroll
@@ -170,7 +153,7 @@ const DemoNavbar = () => {
                     <DropdownItem to="/diagnosis-page" tag={Link}>
                       사전정보 입력
                     </DropdownItem>
-                    <DropdownItem to="/test_start-page" tag={Link}>
+                    <DropdownItem to="/test-start-page" tag={Link}>
                       테스트 시작
                     </DropdownItem>
                     <DropdownItem to="/ScorePrediction-page" tag={Link}>
@@ -202,18 +185,18 @@ const DemoNavbar = () => {
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-1" />
-                    <span className="nav-link-inner--text">문제생성</span>
+                    <span className="nav-link-inner--text">문제 풀기</span>
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem to="/landing-page" tag={Link}>
-                      사전정보 입력
+                      문제 풀기
                     </DropdownItem>
                     <DropdownItem to="/test_start-page" tag={Link}>
-                      테스트 시작
+                      풀이 결과
                     </DropdownItem>
-                    <DropdownItem to="/login-page" tag={Link}>
+                    {/* <DropdownItem to="/login-page" tag={Link}>
                       예측점수 확인
-                    </DropdownItem>
+                    </DropdownItem> */}
                     {/* <DropdownItem to="/register-page" tag={Link}>
                       Register
                     </DropdownItem> */}
