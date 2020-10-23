@@ -5,6 +5,7 @@ import {addPostAction,reviewReducer} from '../store/reviewReducer'
  
 import reviewstore from '../store'
 import { 
+    Card,
     Table,
     Row,
     Col,
@@ -18,7 +19,10 @@ const ReviewList = () => {
 
     return <>
     <Provider store = {reviewstore}>
-        <Table striped bordered hover>
+    
+        <Row style={{margin:"20px"}}>
+        <Col md="6" lg="11" >
+        <Table  striped bordered hover >
             <thead>
                 <tr>
                     <th>#</th>
@@ -28,7 +32,7 @@ const ReviewList = () => {
                 </tr>
             </thead>
             <tbody>
-                <th> `${ReviewInput['count']}` </th>
+                <th> {ReviewInput['count']} </th>
                 <th>
                     {/* {reviews && reviews.length === 0 && (
                         <p>No Review at the moment</p>
@@ -57,6 +61,9 @@ const ReviewList = () => {
             </tbody>
         
         </Table>
+        </Col>
+        </Row>
+        
     </Provider>
     </>
 

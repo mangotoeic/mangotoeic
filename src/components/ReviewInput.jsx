@@ -1,7 +1,11 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import uuid from 'uuid/v4'
+<<<<<<< HEAD
 import {addPostAction} from '../store/reviewReducer' 
+=======
+import {addPostAction} from '../store/reviewReducer'
+>>>>>>> master
 import axios from 'axios'
 
 import {
@@ -48,11 +52,6 @@ const ReviewInput = () => {
       setReview('') 
     }
     
-    const handleChange = e => {
-      e.preventDefault()
-      setName(e.target.value)  //target 은 말 치는 박스,  value 는 그 안에 value
-      setReview(e.target.value)  //target 은 말 치는 박스,  value 는 그 안에 value
-    }
     const addReview = (review) => {
       dispatch(addPostAction(review))
     }
@@ -60,14 +59,14 @@ const ReviewInput = () => {
 
 
     return <> 
-    <h1>앱 리뷰</h1>
+    <h1 style={{margin : "30ren", color:"#F0FFFF"}} >앱 리뷰</h1>
     <form>
         <div>
             <Form>
-              <Row>
-                <Col md="6">
+              <Row style={{margin : "20px"}}>
+                <Col md="6" lg="3" >
                   <FormGroup>
-                    <Input>
+                    <Input placeholder="여기다 이름 입력하시오">
                       id="exampleFormControlInput1"
                       placeholder="여기다 이름 입력하시오"
                       type="text"
@@ -76,8 +75,10 @@ const ReviewInput = () => {
                     </Input>
                   </FormGroup>
                 </Col>
-              </Row>
-                    <Input>
+              </Row >
+              <Row style={{margin :"20px"}}>
+              <Col md="6" lg="8" >
+                    <Input lg="2" placeholder="이 앱이 어떠신가요? 소중한 의견을 남겨주세요 :)" >
                       id="exampleFormControlTextarea1"
                       placeholder="이 앱이 어떠신가요? 소중한 의견을 남겨주세요 :)"
                       rows="6"
@@ -85,9 +86,14 @@ const ReviewInput = () => {
                       name = 'review'
                       onChange = {e => setReview(e.target.value)}
                     </Input>
-                    <Button  style={{ margin: '1rem 0 3rem ' }} color="success" size = "md" onClick = {submitPost} method='POST'>
+                    </Col>
+                    <Col>
+                    <Button  color="success" size = "md" onClick = {submitPost} method='POST'>
                       리뷰 남기기
                     </Button>
+                    </Col>
+                    
+                    </Row>
             
             </Form>
         </div>
