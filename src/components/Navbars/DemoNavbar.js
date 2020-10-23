@@ -226,7 +226,7 @@ const DemoNavbar = () => {
                     <span className="nav-link-inner--text">게시판</span>
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem to="/app-review-page" tag={Link}>
+                    <DropdownItem to="/review" tag={Link}>
                       앱리뷰게시판
                     </DropdownItem>
                     <DropdownItem to="/board-page" tag={Link}>

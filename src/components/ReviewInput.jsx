@@ -22,8 +22,7 @@ import {
     Col,
   } from 'reactstrap';
 
-const ReviewInput = () => {
-    const [count, setCount] = useState(1)
+const ReviewInput = () => { 
     const [name, setName] = useState('')
     const [review, setReview] = useState('') 
     const dispatch = useDispatch()  
@@ -31,9 +30,9 @@ const ReviewInput = () => {
     const submitPost = e => {
       e.preventDefault()
       const newReview = {
-        count, name, review
+        name, review
       }
-      axios.post('http://localhost:3000/app-review-page', newReview) //여기서 post대신 get도 가능
+      axios.post('http://localhost:8080/api/reviews', newReview) //여기서 post대신 get도 가능
         .then(
             console.log('review post success')
         )
@@ -44,7 +43,6 @@ const ReviewInput = () => {
         
       addReview(newReview)
       setName('')
-      setCount(count+1)
       setReview('') 
     }
     

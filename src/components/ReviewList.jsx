@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch, Provider} from 'react-redux'
 import ReviewInput from '../components/ReviewInput'
+import axios from 'axios'
 import {addPostAction,reviewReducer} from '../store/reviewReducer'
  
 import reviewstore from '../store'
@@ -14,57 +15,52 @@ import {
 
 
 const ReviewList = () => {
-    const reviews = useSelector(state => state.reviews)
 
+    const [data, setData ] = useState([])
+    useEffect(()=> {  //버튼없이 자동실행
+        axios.get(`http://localhost:8080/api/reviews`)
+        .then(res=> {
+            alert(`List Success`)
+            setData(res.data)
+        })
+        .catch(e => {
+            alert(`List failure`)
+            throw(e)
+        })
+
+    }, [] ) //[] 있으면 overriding 일어나지 않고, 추가
 
     return <>
-    <Provider store = {reviewstore}>
+         
+ 
     
         <Row style={{margin:"20px"}}>
         <Col md="6" lg="11" >
         <Table  striped bordered hover >
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>이름</th>
+                    <th>id 댓글 #</th>
+                    <th>유저아이디</th>
                     <th>리뷰</th>
                     <th>별점</th>
                 </tr>
             </thead>
-            <tbody>
-                <th> {ReviewInput['count']} </th>
-                <th>
-                    {/* {reviews && reviews.length === 0 && (
-                        <p>No Review at the moment</p>
-                    )}
-                    {reviews && reviews.map(review => ( 
-                        <div key = {review.id}>
-                            <div>
-                                <span style={{margin: '20px'}}>{review.name}</span>
-                            </div>
-                        </div>
-                    ))}    */}
-                </th>
-                <th>
-                    {reviews && reviews.length === 0 && (
-                        <p>No Review at the moment</p>
-                    )}
-                    {reviews && reviews.map(review => ( 
-                        <div key = {review.id}>
-                            <div> 
-                                <span style={{margin: '20px'}}>{review.review_post}</span>
-                            </div>
-                        </div>
-                    ))}   
-                </th>
-                <th></th>
-            </tbody>
+            {data.map((i,index)=>(
+                <tbody>
+                    <tr key = {index}>
+                        <td>{i.id}</td>
+                        <td>{i.user_id}</td>
+                        <td>{i.review}</td>
+                        <td>{i.star}</td>
+                    </tr>
+                </tbody>
+            ))}
+            
         
         </Table>
         </Col>
         </Row>
-        
-    </Provider>
+         
     </>
 
 }
