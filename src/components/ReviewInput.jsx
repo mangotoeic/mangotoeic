@@ -1,7 +1,11 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import uuid from 'uuid/v4'
+<<<<<<< HEAD
+import {addPostAction} from '../store/reviewReducer' 
+=======
 import {addPostAction} from '../store/reviewReducer'
+>>>>>>> master
 import axios from 'axios'
 
 import {

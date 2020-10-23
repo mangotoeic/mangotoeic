@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 // reactstrap components
 import {
@@ -21,7 +23,29 @@ import {
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import SimpleFooter from "components/Footers/SimpleFooter.js";
 
-const Login = () => {
+const Login = () => { 
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const history = useHistory();
+  const onClickHandler = e => {
+    e.preventDefault()
+    axios.post(`http://localhost:8080/api/access`, {email, password})
+        .then(res => {
+            alert(`Welcome ! ${res.data["name"]}'s connection is successful. ! `)
+
+            sessionStorage.setItem("sessionUser", res.data['name']);
+            window.location.reload()
+            history.push("/main");
+            
+        })
+        .catch(error => {
+            alert("Please check your ID or password.");
+            window.location.reload();
+        })
+  }
+    
+
     return <>
         <DemoNavbar />
         <main>
@@ -79,7 +103,7 @@ const Login = () => {
                                 <i className="ni ni-email-83" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Email" type="email" />
+                            <Input placeholder="Email" type="email" onChange={e => setEmail(e.target.value)}/>
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -93,6 +117,7 @@ const Login = () => {
                               placeholder="Password"
                               type="password"
                               autoComplete="off"
+                              onChange={e => setPassword(e.target.value)}
                             />
                           </InputGroup>
                         </FormGroup>
@@ -114,6 +139,7 @@ const Login = () => {
                             className="my-4"
                             color="primary"
                             type="button"
+                            onClick={onClickHandler}
                           >
                             로그인
                           </Button>
