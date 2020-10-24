@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux'
 import Typist from 'react-typist';
-
+import {ItemChatBot} from '../../container/chatbot'
 
 // reactstrap components
 import {
@@ -884,6 +884,7 @@ const Main = () => {
           </section>
           <Download />
         </main>
+        <ItemChatBot/>  
         <CardsFooter />
       </>
 }
