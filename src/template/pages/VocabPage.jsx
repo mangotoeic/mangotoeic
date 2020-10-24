@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import VocabList from '../../container/Vocab/VocabList'
+import VocabList from '../../container/vocab/VocabList'
 // nodejs library that concatenates classes
 import classnames from 'classnames';
 
