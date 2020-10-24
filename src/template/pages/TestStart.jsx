@@ -16,7 +16,7 @@ const TestStart = () => {
     const [testgen, setTestgen] = useState(1)
 
     const handleClick = () => {
-      if (testnum < 10) {
+      if (testnum < 20) {
         setTestgen(testgen + 1)
         setTestnum(testnum + 1)
       } 
@@ -34,7 +34,7 @@ const TestStart = () => {
           // loading 상태를 true 로 바꿉니다.
           setLoading(true);
           const response = await axios.get(
-            'http://127.0.0.1:8080/api/test'
+            'http://127.0.0.1:8080/api/legacies'
           );
           setTests(response.data);
           console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
