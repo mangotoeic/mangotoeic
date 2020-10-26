@@ -7,7 +7,7 @@ import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss?v1.1.0";
 
 import {ProfileCard} from "./container/profile"
-import {VocabList} from "./container/vocab"
+import {VocabList} from "./container/Vocab"
 import {TestCard} from "./container/test"
 import {Main,Login,Register,Diagnosis,NotePage,BookMark,AppReview,Board} from "./template/pages";
 

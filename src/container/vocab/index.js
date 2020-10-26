@@ -1,2 +1,2 @@
 export {default as VocabList} from './VocabList'
-export {default as vacabs} from './vocab' 
+export {default as vocabs} from './vocab'
