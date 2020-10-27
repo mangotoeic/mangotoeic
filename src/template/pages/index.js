@@ -10,4 +10,3 @@ export {default as  BookMark} from './BookMark'
 export {default as  Diagnosis} from './Diagnosis'
 export {default as  AppReview } from './AppReview'
 export {default as  Board } from './Board'
-
