@@ -230,7 +230,7 @@ const DemoNavbar = () => {
                       앱리뷰게시판
                     </DropdownItem>
                     <DropdownItem to="/board-page" tag={Link}>
-                      자유게시판
+                      앱리뷰 쓰기
                     </DropdownItem>
                     {/* <DropdownItem to="/login-page" tag={Link}>
                       Login

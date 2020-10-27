@@ -23,35 +23,27 @@ import {
   } from 'reactstrap';
 
 const ReviewInput = () => { 
-    const [name, setName] = useState('')
+    const [user_id, setUserid] = useState('')
     const [review, setReview] = useState('') 
-    const dispatch = useDispatch()  
-    
+    const [ id, setId ] = useState(1)
     const submitPost = e => {
       e.preventDefault()
-      const newReview = {
-        name, review
-      }
-      axios.post('http://localhost:8080/api/reviews', newReview) //여기서 post대신 get도 가능
-        .then(
-            console.log('review post success')
+      
+      alert(`id : ${id}, user_id: ${user_id}, review: ${review}`)
+      axios.post(`http://localhost:8080/api/reviews`, {'id':id, 'user_id':123, 'review':review}) //여기서 post대신 get도 가능
+        .then( res => {
+          alert(`WRITING SUCCESS`)
+        })
+        .catch(
+          e => {
+            alert(`Writing ${e}`)
+          }
         )
-        .error(
-            console.log('reviewpost fail')
-        )
-
-        
-      addReview(newReview)
-      setName('')
+      setId(id + 1)
+      setUserid('')
       setReview('') 
     }
-    
-    const addReview = (review) => {
-      dispatch(addPostAction(review))
-    }
-    
-
-
+   
     return <> 
     <h1 style={{margin : "30ren", color:"#F0FFFF"}} >앱 리뷰</h1>
     <form>
@@ -60,12 +52,12 @@ const ReviewInput = () => {
               <Row style={{margin : "20px"}}>
                 <Col md="6" lg="3" >
                   <FormGroup>
-                    <Input placeholder="여기다 이름 입력하시오">
+                    <Input placeholder="여기다 유저 아이디를 입력하시오">
                       id="exampleFormControlInput1"
-                      placeholder="여기다 이름 입력하시오"
+                      placeholder="여기다 유저 아이디를 입력하시오"
                       type="text"
-                      name = 'name'
-                      onChange = {e => setName(e.target.value)}
+                      name = 'user_id'
+                      onChange = {e => setUserid(e.target.value)}
                     </Input>
                   </FormGroup>
                 </Col>

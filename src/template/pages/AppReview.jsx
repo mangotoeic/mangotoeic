@@ -49,7 +49,7 @@ import ReviewInput from 'components/ReviewInput'
 import ReviewList from 'components/ReviewList'
 
 
-const App_review = () => {
+const AppReview = () => {
   
       return<>
             <DemoNavbar />
@@ -89,4 +89,4 @@ const App_review = () => {
   }
 
 
-export default App_review;
+export default AppReview;

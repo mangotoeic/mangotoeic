@@ -19,7 +19,8 @@ import SimpleFooter from 'components/Footers/SimpleFooter.js';
 import Forms from '../IndexSections/Form_Control'
 import TextBox from '../IndexSections/TextBox'   
 import Buttons2 from '../IndexSections/Buttons2'    
-import Pagination2 from '../IndexSections/Pagination2'    
+import Pagination2 from '../IndexSections/Pagination2'   
+import ReviewWrite from 'components/ReviewWrite' 
 
 
 
@@ -28,7 +29,8 @@ const Board=()=> {
 
     return<>
         <DemoNavbar />
-        <main className="board-page">
+        
+        <main className="/board-page">
           
           <section className="section-profile-cover section-shaped my-0">
             {/* Circles background */}
@@ -90,7 +92,14 @@ const Board=()=> {
     </tr>
   </tbody>
 </Table><Pagination2/>
- 
+
+
+
+<ReviewWrite/>
+
+
+
+
 </Container>
      
           </section>
