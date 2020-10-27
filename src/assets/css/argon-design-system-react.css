@@ -118,6 +118,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'YESMyoungjo-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESMyoungjo-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* @font-face { 
   font-family: 'GongGothicMedium'; 
   src: url('https://github.com/projectnoonnu/noonfonts_20-10/blob/main/GongGothicMedium.woff') format('woff'); 
@@ -188,7 +195,7 @@ h6 {
 }
 
 p {
-  font-family: 'Cafe24Oneprettynight' !important;
+  font-family: 'YESMyoungjo-Regular' !important;
   margin-top: 0;
   margin-bottom: 1rem;
 }
@@ -1550,7 +1557,7 @@ pre code {
 .table th,
 .table td {
   padding: 1rem;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 0.0625rem solid #dee2e6;
 }
 .table thead th {

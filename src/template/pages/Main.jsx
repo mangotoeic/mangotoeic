@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux'
 import Typist from 'react-typist';
-
+import {ItemChatBot} from '../../container/chatbot'
 
 // reactstrap components
 import {
@@ -121,7 +121,7 @@ const Main = () => {
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
                           <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                            <i className="ni ni-check-bold" />
+                            <i class="fas fa-check"></i>
                           </div>
                           <h6 className="text-primary text-uppercase">
                             엄선된 문제를 통한 자가 진단
@@ -155,7 +155,7 @@ const Main = () => {
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
                           <div className="icon icon-shape icon-shape-success rounded-circle mb-4">
-                            <i className="fa fa-clipboard"/>
+                            <i class="fas fa-book-open"></i>
                           </div>
                           <h6 className="text-success text-uppercase">
                             자신만의 오답노트를 관리하고 AI가 추천해주는 단어를 공부해 보세요.
@@ -189,7 +189,7 @@ const Main = () => {
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
                           <div className="icon icon-shape icon-shape-warning rounded-circle mb-4">
-                            <i className="ni ni-planet" />
+                            <i class="fas fa-search"></i>
                           </div>
                           <h6 className="text-warning text-uppercase">
                             망고토익 리뷰
@@ -236,14 +236,12 @@ const Main = () => {
                 </Col>
                 <Col className="order-md-1" md="6">
                   <div className="pr-md-5">
-                    <div className="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5">
-                      <i className="ni ni-settings-gear-65" />
-                    </div>
-                    <h3>Awesome features</h3>
+                    {/* <div className="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5">
+                      <i class="fas fa-crosshairs"></i>
+                    </div> */}
+                    <h2>망고토익으로 990점까지!</h2>
                     <p>
-                      The kit comes with three pre-built pages to help you get
-                      started faster. You can change the text and images and
-                      you're good to go.
+                      저희 망고토익은 수강생 평균 253점 향상이라는 놀라운 데이터로 
                     </p>
                     <ul className="list-unstyled mt-5">
                       <li className="py-2">
@@ -253,12 +251,12 @@ const Main = () => {
                               className="badge-circle mr-3"
                               color="success"
                             >
-                              <i className="ni ni-settings-gear-65" />
+                              <i class="fas fa-hand-holding-usd"></i>
                             </Badge>
                           </div>
                           <div>
                             <h6 className="mb-0">
-                              Carefully crafted components
+                              지금 신청하면 1개월 무료
                             </h6>
                           </div>
                         </div>
@@ -270,11 +268,11 @@ const Main = () => {
                               className="badge-circle mr-3"
                               color="success"
                             >
-                              <i className="ni ni-html5" />
+                              <i class="fas fa-exclamation"></i>
                             </Badge>
                           </div>
                           <div>
-                            <h6 className="mb-0">Amazing page examples</h6>
+                            <h6 className="mb-0">친구와 함께 수강시 30% 할인</h6>
                           </div>
                         </div>
                       </li>
@@ -285,12 +283,12 @@ const Main = () => {
                               className="badge-circle mr-3"
                               color="success"
                             >
-                              <i className="ni ni-satisfied" />
+                              <i class="far fa-smile-wink"></i>
                             </Badge>
                           </div>
                           <div>
                             <h6 className="mb-0">
-                              Super friendly support team
+                              목표점수 도달 시 100% 환급
                             </h6>
                           </div>
                         </div>
@@ -884,6 +882,7 @@ const Main = () => {
           </section>
           <Download />
         </main>
+        <ItemChatBot/>  
         <CardsFooter />
       </>
 }
