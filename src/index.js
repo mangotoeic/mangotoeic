@@ -6,9 +6,10 @@ import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss?v1.1.0";
 
-
+import {ProfileCard} from "./container/profile"
 import {VocabList} from "./container/Vocab"
-import {Main,Login,Profile,Register,Diagnosis,TestStart,NotePage,BookMark,AppReview,Board} from "./template/pages";
+import {TestCard} from "./container/test"
+import {Main,Login,Register,Diagnosis,NotePage,BookMark,AppReview,Board} from "./template/pages";
 
 
 import { Provider } from 'react-redux'
@@ -20,9 +21,9 @@ ReactDOM.render(
       <Route exact path="/" component ={Main} />
       <Redirect from = {'/main'} to={'/'}/> 
       <Route path="/login-page" component = {Login}/>
-      <Route path="/profile-page" component={Profile}/>
+      <Route path="/profile-page" component={ProfileCard}/>
       <Route path="/diagnosis-page" component={Diagnosis}/>
-      <Route path="/test-start-page" component={TestStart}/>
+      <Route path="/test-start-page" component={TestCard}/>
       <Route path="/register-page" component={Register}/>
       <Route path="/app-review-page" component={AppReview}/>
       <Route path="/board-page" component={Board}/>

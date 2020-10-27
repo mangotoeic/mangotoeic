@@ -191,7 +191,7 @@ const DemoNavbar = () => {
                     <DropdownItem to="/landing-page" tag={Link}>
                       문제 풀기
                     </DropdownItem>
-                    <DropdownItem to="/test_start-page" tag={Link}>
+                    <DropdownItem to="/test-start-page" tag={Link}>
                       풀이 결과
                     </DropdownItem>
                     {/* <DropdownItem to="/login-page" tag={Link}>

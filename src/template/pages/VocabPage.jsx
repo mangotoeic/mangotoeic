@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import VocabList from '../../container/Vocab/VocabList'
+import React, {useState} from 'react';
+// import VocabList from '../../container/Vocab/VocabList'
 // nodejs library that concatenates classes
 import classnames from 'classnames';
 
@@ -30,13 +30,13 @@ import '../../assets/css/notepage.css';
 import '../../assets/css/argon-design-system-react.css';
 
 const VocabPage = ({children}) => {
-  // const [isFlipped,setFlip]= useState(false)
-  // const handleClick = (e)=> {
-  //   e.preventDefault();
+  const [isFlipped,setFlip]= useState(false)
+  const handleClick = (e)=> {
+    e.preventDefault();
    
-  // }
-  // const elements = [];
-  // const array = {"1":["vocab", "meaning"], "2":["vocabs", "meanings"]};
+  }
+  const elements = [];
+  const array = {"1":["vocab", "meaning"], "2":["vocabs", "meanings"]};
     
     return <>
         <DemoNavbar />
@@ -69,8 +69,6 @@ const VocabPage = ({children}) => {
           </section>
         </main>
       </>
-
   
 }
-
 export default VocabPage;
