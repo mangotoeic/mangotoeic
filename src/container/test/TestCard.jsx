@@ -10,7 +10,7 @@ import { Button, Card, Container, Row, Col } from 'reactstrap';
 // import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 // import SimpleFooter from 'components/Footers/SimpleFooter.js';
 
-const TestCard =()=> {
+const TestCard = () => {
 
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
@@ -19,7 +19,7 @@ const TestCard =()=> {
     const [testgen, setTestgen] = useState(1)
 
     const handleClick = () => {
-      if (testnum < 20) {
+      if (testnum < 10) {
         setTestgen(testgen + 1)
         setTestnum(testnum + 1)
       } 
@@ -37,7 +37,7 @@ const TestCard =()=> {
           // loading 상태를 true 로 바꿉니다.
           setLoading(true);
           const response = await axios.get(
-            'http://127.0.0.1:8080/api/legacies'
+            'http://127.0.0.1:8080/api/minitest'
           );
           setTests(response.data);
           console.log(response.data) // 데이터는 response.data 안에 들어있습니다.

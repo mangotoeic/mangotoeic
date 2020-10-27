@@ -7,9 +7,9 @@ import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss?v1.1.0";
 
 import {ProfileCard} from "./container/profile"
-import {VocabList} from "./container/Vocab"
-import {TestCard} from "./container/test"
-import {Main,Login,Register,Diagnosis,NotePage,BookMark,AppReview,Board} from "./template/pages";
+import {VocabList} from "./container/vocab"
+import {TestCard, DiagnosisCard} from "./container/test"
+import {Main,Login,Register,NotePage,BookMark,AppReview,Board} from "./template/pages";
 
 
 import { Provider } from 'react-redux'
@@ -22,7 +22,7 @@ ReactDOM.render(
       <Redirect from = {'/main'} to={'/'}/> 
       <Route path="/login-page" component = {Login}/>
       <Route path="/profile-page" component={ProfileCard}/>
-      <Route path="/diagnosis-page" component={Diagnosis}/>
+      <Route path="/diagnosis-page" component={DiagnosisCard}/>
       <Route path="/test-start-page" component={TestCard}/>
       <Route path="/register-page" component={Register}/>
       <Route path="/app-review-page" component={AppReview}/>

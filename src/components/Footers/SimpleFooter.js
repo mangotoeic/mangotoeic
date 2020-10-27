@@ -29,8 +29,7 @@ import {
   UncontrolledTooltip
 } from "reactstrap";
 
-class SimpleFooter extends React.Component {
-  render() {
+const SimpleFooter = () => {
     return (
       <>
         <footer className=" footer">
@@ -38,11 +37,11 @@ class SimpleFooter extends React.Component {
             <Row className=" row-grid align-items-center mb-5">
               <Col lg="6">
                 <h3 className=" text-primary font-weight-light mb-2">
-                  Thank you for supporting us!
+                  망고토익을 이용해 주셔서 감사합니다!
                 </h3>
-                <h4 className=" mb-0 font-weight-light">
-                  Let's get in touch on any of these platforms.
-                </h4>
+                <h5 className=" mb-0 font-weight-light">
+                  문의사항은 Github를 통해 주시기 바랍니다.
+                </h5>
               </Col>
               <Col className="text-lg-center btn-wrapper" lg="6">
                 <Button
@@ -112,7 +111,7 @@ class SimpleFooter extends React.Component {
                     href="https://www.creative-tim.com?ref=adsr-footer"
                     target="_blank"
                   >
-                    Creative Tim
+                    Payload Team
                   </a>
                   .
                 </div>
@@ -124,7 +123,7 @@ class SimpleFooter extends React.Component {
                       href="https://www.creative-tim.com?ref=adsr-footer"
                       target="_blank"
                     >
-                      Creative Tim
+                      Tel. 02-0000-0000
                     </NavLink>
                   </NavItem>
                   <NavItem>
@@ -140,7 +139,7 @@ class SimpleFooter extends React.Component {
                       href="http://blog.creative-tim.com?ref=adsr-footer"
                       target="_blank"
                     >
-                      Blog
+                      Github
                     </NavLink>
                   </NavItem>
                   <NavItem>
@@ -158,7 +157,6 @@ class SimpleFooter extends React.Component {
         </footer>
       </>
     );
-  }
 }
 
 export default SimpleFooter;
