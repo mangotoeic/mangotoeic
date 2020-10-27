@@ -9,7 +9,6 @@ import DemoNavbar from 'components/Navbars/DemoNavbar.js';
 import SimpleFooter from 'components/Footers/SimpleFooter.js';
 
 const TestStart = ({children}) => {
-    
     return <>
         <DemoNavbar />
         <main className="profile-page">
@@ -41,5 +40,4 @@ const TestStart = ({children}) => {
         <SimpleFooter />
       </>
 }
-
 export default TestStart;

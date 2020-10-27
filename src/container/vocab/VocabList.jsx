@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import {VocabPage} from '../../template/pages'
-import {Vocab} from '../../components/Vocab' 
+import {Vocab} from '../../components' 
 import vocabs from "./vocab.js"
 import {
     Badge,
