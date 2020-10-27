@@ -32,15 +32,14 @@ const Login = () => {
     e.preventDefault()
     axios.post(`http://localhost:8080/api/access`, {email, password})
         .then(res => {
-            alert(`Welcome ! ${res.data["name"]}'s connection is successful. ! `)
-
-            sessionStorage.setItem("sessionUser", res.data['name']);
-            window.location.reload()
+            alert(`${res.data["user_name"]}님 환영합니다! `)
+            sessionStorage.setItem("sessionUser", res.data['email']);
+            // window.location.reload()
             history.push("/main");
             
         })
         .catch(error => {
-            alert("Please check your ID or password.");
+            alert('메일주소와 비밀번호가 일치하지 않습니다.');
             window.location.reload();
         })
   }

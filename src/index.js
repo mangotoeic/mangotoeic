@@ -18,6 +18,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component ={Main} />
+      <Redirect from = {'/main'} to={'/'}/> 
       <Route path="/login-page" component = {Login}/>
       <Route path="/profile-page" component={Profile}/>
       <Route path="/diagnosis-page" component={Diagnosis}/>
