@@ -35,7 +35,7 @@ const Login = () => {
             alert(`${res.data["user_name"]}님 환영합니다! `)
             sessionStorage.setItem("sessionUser", res.data['email']);
             history.push("/");
-            // window.location.reload()
+            window.location.reload()
         })
         .catch(error => {
             alert('메일주소와 비밀번호가 일치하지 않습니다.');
