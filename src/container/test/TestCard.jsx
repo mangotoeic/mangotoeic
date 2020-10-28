@@ -56,7 +56,7 @@ const TestCard =()=> {
     
   
       const handleClick = () => {
-        if (testnum < 20) {
+        if (testnum < 10) {
           setTestgen(testgen + 1)
           setTestnum(testnum + 1)
         } 
