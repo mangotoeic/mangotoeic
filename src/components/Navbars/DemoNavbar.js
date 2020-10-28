@@ -45,7 +45,7 @@ const DemoNavbar = props => {
         e.preventDefault();
         sessionStorage.removeItem("sessionUser")
         history.push('/')
-        // window.location.reload()
+        window.location.reload()
     }
 
   return (
