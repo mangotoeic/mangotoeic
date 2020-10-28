@@ -1,33 +1,34 @@
 
 import {TestStart} from '../../template/pages'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useReducer } from 'react';
 import axios from 'axios'
+import {useSelector, useDispatch} from "react-redux";
+import { debounce } from 'throttle-debounce'
 
-// reactstrap components
 import { Button, Card, Container, Row, Col } from 'reactstrap';
+const initialState =[];
+const addAction= data =>({type:'ADD',payload: data})
+const reducer=(state, action)=>{
+  switch(action.type){
+    case 'ADD':
+      return [...state,action.payload]
+    default:
+      throw new Error();
+  }
+}
 
-// core components
-// import DemoNavbar from 'components/Navbars/DemoNavbar.js';
-// import SimpleFooter from 'components/Footers/SimpleFooter.js';
-
-const TestCard = () => {
-
+const TestCard =()=> {
+ 
+  
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [testgen, setTestgen] = useState(1)
-
-    const handleClick = () => {
-      if (testnum < 10) {
-        setTestgen(testgen + 1)
-        setTestnum(testnum + 1)
-      } 
-      else {
-        alert('테스트가 종료되었습니다.')
-      } 
-  }
-
+    const [answer , setAns] = useState(null)
+    const [correct , setCorrect] = useState(true)
+    const [states, dispatch] = useReducer(reducer, initialState)
+    
     useEffect(() => {
       const fetchTests = async () => {
         try {
@@ -37,7 +38,7 @@ const TestCard = () => {
           // loading 상태를 true 로 바꿉니다.
           setLoading(true);
           const response = await axios.get(
-            'http://127.0.0.1:8080/api/minitest'
+            'http://127.0.0.1:8080/api/legacies'
           );
           setTests(response.data);
           console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
@@ -52,6 +53,49 @@ const TestCard = () => {
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>에러가 발생했습니다</div>;
     if (!tests) return null;
+    
+  
+      const handleClick = () => {
+        if (testnum < 20) {
+          setTestgen(testgen + 1)
+          setTestnum(testnum + 1)
+        } 
+        else {
+          alert('테스트가 종료되었습니다.')
+          axios.post(
+            'http://127.0.0.1:8080/api/odap'
+          ).then(() => {
+            alert('good !')
+            
+        })
+        .catch(error => {throw (error)})
+        } 
+    }
+    
+   
+    const confirm =(e) =>{
+      e.preventDefault();
+      const addTodoList =(item) =>{
+        setCorrect(false)
+        dispatch(addAction(item))
+        console.log(states)
+      }
+      
+      let myAnswer=''
+      {document.getElementById("customRadio1").checked && (tests[testgen].ansA===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
+      {document.getElementById("customRadio2").checked && (tests[testgen].ansB===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
+      {document.getElementById("customRadio3").checked && (tests[testgen].ansC===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
+      {document.getElementById("customRadio4").checked && (tests[testgen].ansD===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
+      
+      {'' !== myAnswer ? handleClick(): addTodoList(tests[testgen])}
+      
+  
+    }
+    const nextQuestion =()=>{
+      handleClick()
+      setCorrect(true)  
+
+    }
 
     return<>
     <TestStart>
@@ -84,9 +128,10 @@ const TestCard = () => {
                 id="customRadio1"
                 name="custom-radio-1"
                 type="radio"
+                
               />
               <label className="custom-control-label" htmlFor="customRadio1">
-                <span>{tests.[testgen].[1]}</span>
+                <span>{tests[testgen].ansA}</span>
               </label>
             </div>
             <div className="custom-control custom-radio mb-3">
@@ -96,9 +141,10 @@ const TestCard = () => {
                 id="customRadio2"
                 name="custom-radio-1"
                 type="radio"
+                
               />
               <label className="custom-control-label" htmlFor="customRadio2">
-                <span>{tests.[testgen].[2]}</span>
+                <span>{tests[testgen].ansB}</span>
               </label>
             </div>
             </Row>
@@ -110,9 +156,10 @@ const TestCard = () => {
                 id="customRadio3"
                 name="custom-radio-1"
                 type="radio"
+                
               />
               <label className="custom-control-label" htmlFor="customRadio3">
-                <span>{tests.[testgen].[3]}</span>
+                <span>{tests[testgen].ansC}</span>
               </label>
             </div>
             <div className="custom-control custom-radio mb-3">
@@ -122,19 +169,22 @@ const TestCard = () => {
                 id="customRadio4"
                 name="custom-radio-1"
                 type="radio"
+                
               />
               <label className="custom-control-label" htmlFor="customRadio4">
-                <span>{tests.[testgen].[4]}</span>
+                <span>{tests[testgen].ansD}</span>
               </label>
             </div>
             </Row>
             </div>
-            <button className="float-center btn btn-default btn-lg mt-3" onClick={handleClick}>다음 문제</button>
+            {!correct && <div>땡! 정답은 <span>{tests[testgen].answer}</span></div>}
+            {!correct ? <button className="float-center btn btn-default btn-lg mt-3" onClick={nextQuestion}>다음 문제</button> :<button className="float-center btn btn-default btn-lg mt-3" onClick={confirm}>정답 제출</button>}
                       </Col>
                     </Row>
                   </div>
                 </div>
               </Card>
+              
             </Container>
             </TestStart>
             </>
