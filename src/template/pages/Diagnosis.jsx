@@ -9,7 +9,7 @@ import SimpleFooter from 'components/Footers/SimpleFooter.js';
 
 const Diagnosis = ({children}) => {
     return <>
-        <DemoNavbar />
+        
         <main className="profile-page">
           <section className="section-profile-cover section-shaped my-0">
             <div className="shape shape-style-1 bg-gradient-dark">

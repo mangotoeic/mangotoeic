@@ -74,7 +74,7 @@ import ReviewList from 'components/ReviewList'
 
 const App_review = () => {
       // return<>
-      //       <DemoNavbar />
+      //       
       //   <main >
       //   <section className="section-profile-cover section-shaped my-0">
       //       {/* Circles background */}
@@ -108,7 +108,7 @@ const App_review = () => {
       //   </main>
       // </>
       return <> 
-        <DemoNavbar />
+        
         <main>
           <Header />
         <Container className="mt--7" fluid>

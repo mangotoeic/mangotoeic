@@ -34,9 +34,8 @@ const Login = () => {
         .then(res => {
             alert(`${res.data["user_name"]}님 환영합니다! `)
             sessionStorage.setItem("sessionUser", res.data['email']);
+            history.push("/");
             // window.location.reload()
-            history.push("/main");
-            
         })
         .catch(error => {
             alert('메일주소와 비밀번호가 일치하지 않습니다.');
@@ -46,7 +45,7 @@ const Login = () => {
     
 
     return <>
-        <DemoNavbar />
+        
         <main>
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-dark">

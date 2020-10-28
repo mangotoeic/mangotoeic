@@ -11,7 +11,7 @@ const Profile =({children})=> {
 
 
     return<>
-        <DemoNavbar />
+        
         <main className="profile-page">
           <section className="section-profile-cover section-shaped my-0">
             {/* Circles background */}
