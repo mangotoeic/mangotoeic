@@ -178,7 +178,7 @@ h5 {
 }
 
 h6 {
-  font-family: 'S-CoreDream-4Regular'
+  font-family: 'S-CoreDream-4Regular' !important;
 }
 
 p {

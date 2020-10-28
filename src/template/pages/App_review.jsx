@@ -83,7 +83,7 @@ const App_review = () => {
   //   return (
   //     <>
         
-  //       <DemoNavbar />
+  //       
 
   //       <main className="board-page">
 

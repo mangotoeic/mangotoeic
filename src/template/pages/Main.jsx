@@ -39,7 +39,7 @@ const Main = () => {
     const [emailFocus , setemailFocus] = useState('') 
     const dispatch = useDispatch()
     return<>
-        <DemoNavbar />
+        
         <main >
           <div className="position-relative">
             {/* shape Hero */}

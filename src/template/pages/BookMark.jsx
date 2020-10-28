@@ -35,7 +35,7 @@ const BookMark = () => {
     setFlip(!isFlipped);
   }
     return <>
-        <DemoNavbar />
+        
         <main >
           <div className="position-relative">
             {/* shape Hero */}

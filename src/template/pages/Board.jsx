@@ -27,7 +27,7 @@ const Board=()=> {
 
 
     return<>
-        <DemoNavbar />
+        
         <main className="board-page">
           
           <section className="section-profile-cover section-shaped my-0">

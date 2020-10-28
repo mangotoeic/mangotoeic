@@ -39,7 +39,7 @@ const VocabPage = ({children}) => {
   const array = {"1":["vocab", "meaning"], "2":["vocabs", "meanings"]};
     
     return <>
-        <DemoNavbar />
+        
         <main >
           <div className="position-relative">
             {/* shape Hero */}

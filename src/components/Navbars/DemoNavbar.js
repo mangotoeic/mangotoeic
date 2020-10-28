@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useHistory} from 'react-router-dom';
 // JavaScript plugin that hides or shows a component based on your scroll
 import Headroom from 'headroom.js';
 // reactstrap components
+// import loggedIn from '../../App'
 import {
   Button,
   UncontrolledCollapse,
@@ -22,7 +23,7 @@ import {
   UncontrolledTooltip,
 } from 'reactstrap';
 
-const DemoNavbar = () => {
+const DemoNavbar = props => {
   // const componentDidMount = () => {
   //   let headroom = new Headroom(document.getElementById('navbar-main'));
   //   // initialise
@@ -38,6 +39,14 @@ const DemoNavbar = () => {
   const onExited = () => {
     setCollapseClasses('');
   };
+  const history  = useHistory()
+  const logout = e => {
+        alert('logout')
+        e.preventDefault();
+        sessionStorage.removeItem("sessionUser")
+        history.push('/')
+        // window.location.reload()
+    }
 
   return (
     <>
@@ -48,7 +57,7 @@ const DemoNavbar = () => {
           id="navbar-main"
         >
           <Container>
-            <NavbarBrand className="mr-lg-5" to="/Main" tag={Link}>
+            <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
               <img alt="..." src={require('assets/img/brand/mango_logo.png')} />
             </NavbarBrand>
             <button className="navbar-toggler" id="navbar_global">
@@ -80,70 +89,6 @@ const DemoNavbar = () => {
                 </Row>
               </div>
               <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-                {/* <UncontrolledDropdown nav>
-                  <DropdownToggle nav>
-                    <i className="ni ni-ui-04 d-lg-none mr-1" />
-                    <span className="nav-link-inner--text">menu</span>
-                  </DropdownToggle>
-                  <DropdownMenu className="dropdown-menu-xl">
-                    <div className="dropdown-menu-inner">
-                      <Media
-                        className="d-flex align-items-center"
-                        href="./profile-page"
-        
-                      >
-                        <div className="icon icon-shape bg-gradient-primary rounded-circle text-white">
-                          <i className="ni ni-spaceship" />
-                        </div>
-                        <Media body className="ml-3">
-                          <h6 className="heading text-primary mb-md-1">
-                            내정보 관리
-                          </h6>
-                          <p className="description d-none d-md-inline-block mb-0">
-                            Learn how to use Argon compiling Scss, change brand
-                            colors and more.
-                          </p>
-                        </Media>
-                      </Media>
-                      <Media
-                        className="d-flex align-items-center"
-                        href="https://demos.creative-tim.com/argon-design-system-react/#/documentation/colors?ref=adsr-navbar"
-                        target="_blank"
-                      >
-                        <div className="icon icon-shape bg-gradient-success rounded-circle text-white">
-                          <i className="ni ni-palette" />
-                        </div>
-                        <Media body className="ml-3">
-                          <h6 className="heading text-primary mb-md-1">
-                            Foundation
-                          </h6>
-                          <p className="description d-none d-md-inline-block mb-0">
-                            Learn more about colors, typography, icons and the
-                            grid system we used for Argon.
-                          </p>
-                        </Media>
-                      </Media>
-                      <Media
-                        className="d-flex align-items-center"
-                        href="https://demos.creative-tim.com/argon-design-system-react/#/documentation/alert?ref=adsr-navbar"
-                        target="_blank"
-                      >
-                        <div className="icon icon-shape bg-gradient-warning rounded-circle text-white">
-                          <i className="ni ni-ui-04" />
-                        </div>
-                        <Media body className="ml-3">
-                          <h5 className="heading text-warning mb-md-1">
-                            Components
-                          </h5>
-                          <p className="description d-none d-md-inline-block mb-0">
-                            Browse our 50 beautiful handcrafted components
-                            offered in the Free version.
-                          </p>
-                        </Media>
-                      </Media>
-                    </div>
-                  </DropdownMenu>
-                </UncontrolledDropdown> */}
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-1" />
@@ -291,6 +236,8 @@ const DemoNavbar = () => {
                   </UncontrolledTooltip>
                 </NavItem>
                 <NavItem className="d-none d-lg-block ml-lg-4">
+                { props.isAuth === null ?
+                <>
                   <Button
                     className="btn-neutral btn-icon"
                     color="default"
@@ -301,6 +248,21 @@ const DemoNavbar = () => {
                     </span>
                     <span className="nav-link-inner--text ml-1"> 로그인 </span>
                   </Button>
+                  </>
+                  :
+                  <>
+                  <Button
+                  className="btn-neutral btn-icon"
+                  color="default"
+                  onClick ={logout}
+                >
+                  <span className="btn-inner--icon">
+                    <i className="fa fa-user-plus" />
+                  </span>
+                  <span className="nav-link-inner--text ml-1"> 로그아웃 </span>
+                </Button>
+                </>
+                }
                 </NavItem>
               </Nav>
             </UncontrolledCollapse>
