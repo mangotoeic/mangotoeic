@@ -10,10 +10,10 @@ import {VocabList} from "./container/vocab"
 import {TestCard, DiagnosisCard} from "./container/test"
 import {Main,Login,Register,NotePage,BookMark,AppReview,Board} from "./template/pages";
 import { createStore, applyMiddleware, combineReducers} from 'redux'
-
+import {odapReducer} from './store'
 import ReduxThunk from 'redux-thunk'
 const rootReducer = combineReducers({
-    
+    odapReducer
 })
 
 
