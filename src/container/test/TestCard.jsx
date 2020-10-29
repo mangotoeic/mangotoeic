@@ -34,10 +34,8 @@ const TestCard =()=> {
     // const [states, dispatch] = useReducer(reducer, initialState)
     const dispatch = useDispatch()
     const updates =()=>{
-      if (testnum < 11) {}
+      if (testnum % 1 ===0) {}
       else{
-        alert('테스트가 종료되었습니다.')
-                   
           axios.post(
             'http://127.0.0.1:8080/api/odaps', { user_id: loggedIn  ,qId:states}
           ).then(() => {
@@ -76,23 +74,8 @@ const TestCard =()=> {
     
   
       const handleClick = () => {
-        if (testnum < 11) {
           setTestgen(testgen + 1)
-          setTestnum(testnum + 1)
-        } 
-        else {
-          setUpdate(true)
-        //   console.log(states)
-        //   alert('테스트가 종료되었습니다.')
-                   
-        //   axios.post(
-        //     'http://127.0.0.1:8080/api/odaps', {  }
-        //   ).then(() => {
-        //     alert('good !')
-            
-        // })
-        // .catch(error => {throw (error)})
-        } 
+          setTestnum(testnum + 1) 
     }
     
    
