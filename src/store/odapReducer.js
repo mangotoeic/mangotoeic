@@ -4,7 +4,7 @@ export const addAction = data => {
     payload : data.qId
 })}
 
-const initialState = {qId : [9]}
+const initialState = {qId : []}
 
 const odapReducer = (state = initialState, action) => { 
     

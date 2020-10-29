@@ -6,6 +6,7 @@ import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
 import {addAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
+
 // const initialState =[];
 // const addAction= data =>({type:'ADD',payload: data.qId})
 // const reducer=(state, action)=>{
@@ -18,8 +19,11 @@ import { Button, Card, Container, Row, Col } from 'reactstrap';
 // }
 
 const TestCard =()=> {
+    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
+    console.log(loggedIn)
     const states =useSelector(state=>state['odapReducer'])
-
+    console.log(states)
+    const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -29,6 +33,21 @@ const TestCard =()=> {
     const [correct , setCorrect] = useState(true)
     // const [states, dispatch] = useReducer(reducer, initialState)
     const dispatch = useDispatch()
+    const updates =()=>{
+      if (testnum < 11) {}
+      else{
+        alert('테스트가 종료되었습니다.')
+                   
+          axios.post(
+            'http://127.0.0.1:8080/api/odaps', { user_id: loggedIn  ,qId:states}
+          ).then(() => {
+            alert('good !')
+            
+        })
+        .catch(error => {throw (error)})
+      }
+    }
+    updates()
     useEffect(() => {
       const fetchTests = async () => {
         try {
@@ -57,21 +76,22 @@ const TestCard =()=> {
     
   
       const handleClick = () => {
-        if (testgen < 10) {
+        if (testnum < 11) {
           setTestgen(testgen + 1)
           setTestnum(testnum + 1)
         } 
         else {
-          console.log(states)
-          alert('테스트가 종료되었습니다.')
+          setUpdate(true)
+        //   console.log(states)
+        //   alert('테스트가 종료되었습니다.')
                    
-          axios.post(
-            'http://127.0.0.1:8080/api/odaps', {  }
-          ).then(() => {
-            alert('good !')
+        //   axios.post(
+        //     'http://127.0.0.1:8080/api/odaps', {  }
+        //   ).then(() => {
+        //     alert('good !')
             
-        })
-        .catch(error => {throw (error)})
+        // })
+        // .catch(error => {throw (error)})
         } 
     }
     
@@ -92,7 +112,7 @@ const TestCard =()=> {
         dispatch(addAction(item))
         console.log(`-----------------------5-----------------> `)
         
-        states['odapReducer'][`qId`].forEach(function(value){console.log(value)})
+        states[`qId`].forEach(function(value){console.log(value)})
         console.log(states)
       }
       

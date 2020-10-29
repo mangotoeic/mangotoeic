@@ -33,7 +33,7 @@ const Login = () => {
     axios.post(`http://localhost:8080/api/access`, {email, password})
         .then(res => {
             alert(`${res.data["user_name"]}님 환영합니다! `)
-            sessionStorage.setItem("sessionUser", res.data['email']);
+            sessionStorage.setItem("sessionUser", res.data['user_id']);
             history.push("/");
             window.location.reload()
         })
