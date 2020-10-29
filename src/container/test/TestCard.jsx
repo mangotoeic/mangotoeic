@@ -4,31 +4,31 @@ import React, { useState, useEffect,useReducer } from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-
+import {addAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
-const initialState =[];
-const addAction= data =>({type:'ADD',payload: data})
-const reducer=(state, action)=>{
-  switch(action.type){
-    case 'ADD':
-      return [...state,action.payload]
-    default:
-      throw new Error();
-  }
-}
+// const initialState =[];
+// const addAction= data =>({type:'ADD',payload: data.qId})
+// const reducer=(state, action)=>{
+//   switch(action.type){
+//     case 'ADD':
+//       return [...state,action.payload]
+//     default:
+//       throw new Error();
+//   }
+// }
 
 const TestCard =()=> {
- 
-  
+    const states =useSelector(state=>state['odapReducer'])
+
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [testgen, setTestgen] = useState(1)
+    const [testgen, setTestgen] = useState(0)
     const [answer , setAns] = useState(null)
     const [correct , setCorrect] = useState(true)
-    const [states, dispatch] = useReducer(reducer, initialState)
-    
+    // const [states, dispatch] = useReducer(reducer, initialState)
+    const dispatch = useDispatch()
     useEffect(() => {
       const fetchTests = async () => {
         try {
@@ -41,6 +41,7 @@ const TestCard =()=> {
             'http://127.0.0.1:8080/api/legacies'
           );
           setTests(response.data);
+          console.log('-----------------------1-----------------')
           console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
         } catch (e) {
           setError(e);
@@ -56,14 +57,16 @@ const TestCard =()=> {
     
   
       const handleClick = () => {
-        if (testnum < 10) {
+        if (testgen < 10) {
           setTestgen(testgen + 1)
           setTestnum(testnum + 1)
         } 
         else {
+          console.log(states)
           alert('테스트가 종료되었습니다.')
+                   
           axios.post(
-            'http://127.0.0.1:8080/api/odap'
+            'http://127.0.0.1:8080/api/odaps', {  }
           ).then(() => {
             alert('good !')
             
@@ -75,9 +78,21 @@ const TestCard =()=> {
    
     const confirm =(e) =>{
       e.preventDefault();
+      console.log('-----------------------2-----------------')
       const addTodoList =(item) =>{
+        
+        // if( typeof states['odapReducer']['qid'] == "undefined" ){
+        //   console.log(states['odapReducer']['qid'])
+        //   console.log('-----------------------3.5-----------------')
+        //   dispatch(addAction(item))
+        //   console.log(states)
+        // }
+        console.log('-----------------------4-----------------')
         setCorrect(false)
         dispatch(addAction(item))
+        console.log(`-----------------------5-----------------> `)
+        
+        states['odapReducer'][`qId`].forEach(function(value){console.log(value)})
         console.log(states)
       }
       
@@ -86,7 +101,8 @@ const TestCard =()=> {
       {document.getElementById("customRadio2").checked && (tests[testgen].ansB===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio3").checked && (tests[testgen].ansC===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio4").checked && (tests[testgen].ansD===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
-      
+      console.log(tests[testgen])
+      console.log('-----------------------3-----------------')
       {'' !== myAnswer ? handleClick(): addTodoList(tests[testgen])}
       
   
@@ -178,7 +194,9 @@ const TestCard =()=> {
             </Row>
             </div>
             {!correct && <div>땡! 정답은 <span>{tests[testgen].answer}</span></div>}
-            {!correct ? <button className="float-center btn btn-default btn-lg mt-3" onClick={nextQuestion}>다음 문제</button> :<button className="float-center btn btn-default btn-lg mt-3" onClick={confirm}>정답 제출</button>}
+            {!correct 
+            ? <button className="float-center btn btn-default btn-lg mt-3" onClick={nextQuestion}>다음 문제</button> 
+            :<button className="float-center btn btn-default btn-lg mt-3" onClick={confirm}>정답 제출</button>}
                       </Col>
                     </Row>
                   </div>
