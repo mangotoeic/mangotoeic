@@ -1,11 +1,14 @@
 
 import {TestStart} from '../../template/pages'
-import React, { useState, useEffect,useReducer } from 'react';
+import React, { useState, useEffect,useReducer,useRef } from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-import {addAction} from '../../store'
+import {addOdapQidAction,addUserInfoAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
+import Clock from 'react-live-clock';
+import ReactStopwatch from 'react-stopwatch';
+import {Stopwatch} from "../../components/Timers"
 
 // const initialState =[];
 // const addAction= data =>({type:'ADD',payload: data.qId})
@@ -17,12 +20,43 @@ import { Button, Card, Container, Row, Col } from 'reactstrap';
 //       throw new Error();
 //   }
 // }
+// Usage
+function App() {
+  // State value and setter for our example
+  const [count, setCount] = useState(0);
+  
+  // Get the previous value (was passed into hook on last render)
+  const prevCount = usePrevious(count);
+  
+  // Display both current and previous count value
+  return (
+    <div>
+      <h1>Now: {count}, before: {prevCount}</h1>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+   );
+}
 
+// Hook
+function usePrevious(value) {
+  // The ref object is a generic container whose current property is mutable ...
+  // ... and can hold any value, similar to an instance property on a class
+  const ref = useRef();
+  
+  // Store current value in ref
+  useEffect(() => {
+    ref.current = value;
+  }, [value]); // Only re-run if value changes
+  
+  // Return previous value (happens before update in useEffect above)
+  return ref.current;
+}
 const TestCard =()=> {
+    const time = useSelector(state=>state['timeReducer'])
+    const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
+    console.log(userInfoFromTest)
     const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
-    console.log(loggedIn)
     const states =useSelector(state=>state['odapReducer'])
-    console.log(states)
     const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
@@ -30,19 +64,28 @@ const TestCard =()=> {
     const [error, setError] = useState(null);
     const [testgen, setTestgen] = useState(0)
     const [answer , setAns] = useState(null)
-    const [correct , setCorrect] = useState(true)
-    // const [states, dispatch] = useReducer(reducer, initialState)
+    const [priorQuestionTime , setPriorQuestionTime] = useState(0)
+    const [correct ,setCorrect] =useState(true)
+    // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
     const updates =()=>{
-      if (testnum % 1 ===0) {}
+      if (testnum <5) {}
       else{
-          axios.post(
-            'http://127.0.0.1:8080/api/odaps', { user_id: loggedIn  ,qId:states}
-          ).then(() => {
-            alert('good !')
+        //   axios.post(
+        //     'http://127.0.0.1:8080/api/odaps', { user_id: loggedIn  ,qId:states}
+        //   ).then(() => {
+        //     alert('good !')
             
-        })
-        .catch(error => {throw (error)})
+        // })
+        // .catch(error => {throw (error)})
+
+        axios.post(
+          'http://127.0.0.1:8080/api/user', { user_id: loggedIn  ,qId:states}
+        ).then(() => {
+          alert('good !')
+          
+      })
+      .catch(error => {throw (error)})
       }
     }
     updates()
@@ -78,25 +121,20 @@ const TestCard =()=> {
           setTestnum(testnum + 1) 
     }
     
-   
+  const addUserInfo = (qId,answeredCorrectly,timeStamp,priorQuestionElapseTime)=>({
+      qId:qId,
+      answeredCorrectly:answeredCorrectly,
+      timeStamp:timeStamp,
+      priorQuestionElapseTime:priorQuestionElapseTime
+    })
+    
+
+
     const confirm =(e) =>{
       e.preventDefault();
-      console.log('-----------------------2-----------------')
       const addTodoList =(item) =>{
-        
-        // if( typeof states['odapReducer']['qid'] == "undefined" ){
-        //   console.log(states['odapReducer']['qid'])
-        //   console.log('-----------------------3.5-----------------')
-        //   dispatch(addAction(item))
-        //   console.log(states)
-        // }
-        console.log('-----------------------4-----------------')
         setCorrect(false)
-        dispatch(addAction(item))
-        console.log(`-----------------------5-----------------> `)
-        
-        states[`qId`].forEach(function(value){console.log(value)})
-        console.log(states)
+        dispatch(addOdapQidAction(item))
       }
       
       let myAnswer=''
@@ -104,16 +142,22 @@ const TestCard =()=> {
       {document.getElementById("customRadio2").checked && (tests[testgen].ansB===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio3").checked && (tests[testgen].ansC===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio4").checked && (tests[testgen].ansD===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
-      console.log(tests[testgen])
-      console.log('-----------------------3-----------------')
+      let priorQuestionElapseTime=0
+      
+      console.log(priorQuestionTime)
+      console.log(time.timeStamp)
+      priorQuestionElapseTime=subtracTimeFromPrior(priorQuestionTime,time.timeStamp)
+      {'' !== myAnswer ? dispatch(addUserInfoAction(addUserInfo(tests[testgen].qId,true,time.timeStamp,priorQuestionElapseTime))):dispatch(addUserInfoAction(addUserInfo( tests[testgen].qId,false,time.timeStamp,priorQuestionElapseTime)))}
       {'' !== myAnswer ? handleClick(): addTodoList(tests[testgen])}
       
-  
+      
     }
+    const subtracTimeFromPrior=(priorQuestionTime,currentQuestionTime)=> (currentQuestionTime-priorQuestionTime)
+  
     const nextQuestion =()=>{
       handleClick()
       setCorrect(true)  
-
+      setPriorQuestionTime(time.timeStamp)
     }
 
     return<>
@@ -121,6 +165,8 @@ const TestCard =()=> {
     <Container>
               <Card className="card-profile shadow mt--300">
                 <div className="px-4">
+                {/* <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'} /> */}
+                <Stopwatch/>
                   <div className="text-center mt-5">
                     <h3>
                       {testnum}번 문제{' '}
