@@ -56,7 +56,7 @@ const TestCard =()=> {
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
     console.log(userInfoFromTest)
     const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
-    const states =useSelector(state=>state['odapReducer'])
+    const states =useSelector(state=>state['testReducer'])
     const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
