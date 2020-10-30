@@ -63,7 +63,7 @@ const TestCard =()=> {
         else {
           alert('테스트가 종료되었습니다.')
           axios.post(
-            'http://127.0.0.1:8080/api/odap'
+            'http://127.0.0.1:8080/api/odaps'
           ).then(() => {
             alert('good !')
             
