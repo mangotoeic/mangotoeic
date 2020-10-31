@@ -1,71 +1,46 @@
 
 import {TestStart} from '../../template/pages'
-import React, { useState, useEffect,useReducer,useRef } from 'react';
+import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-import {addOdapQidAction,addUserInfoAction} from '../../store'
+import {addOdapQidAction,addUserInfoAction, isActiveAciton} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
-import Clock from 'react-live-clock';
-import ReactStopwatch from 'react-stopwatch';
 import {Stopwatch} from "../../components/Timers"
+import {context as c} from '../../context'
 
-// const initialState =[];
-// const addAction= data =>({type:'ADD',payload: data.qId})
-// const reducer=(state, action)=>{
-//   switch(action.type){
-//     case 'ADD':
-//       return [...state,action.payload]
-//     default:
-//       throw new Error();
-//   }
-// }
-// Usage
-function App() {
-  // State value and setter for our example
-  const [count, setCount] = useState(0);
-  
-  // Get the previous value (was passed into hook on last render)
-  const prevCount = usePrevious(count);
-  
-  // Display both current and previous count value
-  return (
-    <div>
-      <h1>Now: {count}, before: {prevCount}</h1>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </div>
-   );
-}
-
-// Hook
-function usePrevious(value) {
-  // The ref object is a generic container whose current property is mutable ...
-  // ... and can hold any value, similar to an instance property on a class
-  const ref = useRef();
-  
-  // Store current value in ref
-  useEffect(() => {
-    ref.current = value;
-  }, [value]); // Only re-run if value changes
-  
-  // Return previous value (happens before update in useEffect above)
-  return ref.current;
-}
 const TestCard =()=> {
+  const [data, setData] = useState([])
+  const bulk = useCallback(async e =>{
+      e.preventDefault()
+      try {
+          const req = {
+              method: c.get,
+              url: `${c.url}/api/users`
+          }
+          const res = await axios(req)
+      } catch (error) {
+          
+      }
+  }, [])
+
     const time = useSelector(state=>state['timeReducer'])
+    console.log(time)
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
     console.log(userInfoFromTest)
     const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
     const states =useSelector(state=>state['testReducer'])
+    console.log(states)
     const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [testgen, setTestgen] = useState(0)
-    const [answer , setAns] = useState(null)
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [correct ,setCorrect] =useState(true)
+    const [isActive,setIsActve] =useState(true)
+    
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
     const updates =()=>{
@@ -128,13 +103,18 @@ const TestCard =()=> {
       priorQuestionElapseTime:priorQuestionElapseTime
     })
     
+    const toggle=()=> {
+      dispatch(isActiveAciton(isActive)) ;
 
+    }
 
     const confirm =(e) =>{
       e.preventDefault();
       const addTodoList =(item) =>{
         setCorrect(false)
         dispatch(addOdapQidAction(item))
+        
+        toggle()
       }
       
       let myAnswer=''
@@ -147,7 +127,7 @@ const TestCard =()=> {
       console.log(priorQuestionTime)
       console.log(time.timeStamp)
       priorQuestionElapseTime=subtracTimeFromPrior(priorQuestionTime,time.timeStamp)
-      {'' !== myAnswer ? dispatch(addUserInfoAction(addUserInfo(tests[testgen].qId,true,time.timeStamp,priorQuestionElapseTime))):dispatch(addUserInfoAction(addUserInfo( tests[testgen].qId,false,time.timeStamp,priorQuestionElapseTime)))}
+      {'' !== myAnswer ? dispatch(addUserInfoAction(addUserInfo(tests[testgen].qId,1,time.timeStamp,priorQuestionElapseTime))):dispatch(addUserInfoAction(addUserInfo( tests[testgen].qId,0,time.timeStamp,priorQuestionElapseTime)))}
       {'' !== myAnswer ? handleClick(): addTodoList(tests[testgen])}
       
       
@@ -158,12 +138,15 @@ const TestCard =()=> {
       handleClick()
       setCorrect(true)  
       setPriorQuestionTime(time.timeStamp)
+      toggle()
     }
-
+    const saveEveryThing =() =>{}
+    
     return<>
     <TestStart>
     <Container>
               <Card className="card-profile shadow mt--300">
+                <Button onClick={saveEveryThing}>그만 풀기</Button>
                 <div className="px-4">
                 {/* <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'} /> */}
                 <Stopwatch/>
