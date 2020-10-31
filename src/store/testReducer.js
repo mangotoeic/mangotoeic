@@ -36,7 +36,8 @@ const userInfoFromTestState={
 export const userInfoFromTestReducer =(state = userInfoFromTestState, action)=>{
     switch(action.type){
         case "ADD_USER_INFO_FROM_TEST":
-            return {...state, qId:[...state.qId, action.qId],answeredCorrectly: [...state.answeredCorrectly,action.answeredCorrectly ],
+            return {...state, qId:[...state.qId, action.qId],
+                answeredCorrectly: [...state.answeredCorrectly,action.answeredCorrectly ],
             timeStamp:[...state.timeStamp, action.timeStamp],
             priorQuestionElapseTime : [...state.priorQuestionElapseTime ,action.priorQuestionElapseTime]}
         default:
@@ -46,10 +47,19 @@ export const userInfoFromTestReducer =(state = userInfoFromTestState, action)=>{
 
 const initialState = {qId : []}
 
+export const isActiveAciton =data=>({type:'TIME_ACTIVE_TOGGLE', isActive:data })
 
-
-
+const timerToggleState ={isActive: true}
 const timeState ={hours:0 ,minutes : 0 ,seconds: 0, timeStamp:0}
+export const timerToggleReducer =(state = timerToggleState ,action)=>{
+    switch(action.type){
+        case "TIME_ACTIVE_TOGGLE":
+            return { isAcitve: !state.isAcitve }
+        default:
+            return state
+
+    }
+} 
 
 const testReducer = (state = initialState, action) => { 
     

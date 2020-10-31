@@ -1,12 +1,14 @@
 import React,{useState, useEffect} from 'react';
-import {useDispatch} from 'react-redux'
-import {returnCurrentTime} from '../../store'
+import {useDispatch,useSelector} from 'react-redux'
+import {returnCurrentTime, timerToggleReducer} from '../../store'
 
  
 
 const Stopwatch = () => {
-
-    const dispatch = useDispatch()
+  const isActive= useSelector(state => state['timerToggleReducer'].isActive )
+  
+  console.log(isActive)
+  const dispatch = useDispatch()
 
   const [seconds, setSeconds] = useState(0);
   const [minutes,setMinutes] =useState(0)
@@ -23,23 +25,25 @@ const Stopwatch = () => {
     let interval = null;
     
       interval = setInterval(() => {
-        setSeconds(seconds => seconds + 1);
         setTimeStamp(timeStamp=> timeStamp+1000)
+        if (isActive) {
+        setSeconds(seconds => seconds + 1);
         if( seconds !==0 && seconds % 59 ===0 )
         {
             setSeconds(0)
             setMinutes(minutes => minutes+1)
         }
-        if(minutes !==0 && minutes % 59 ===0){
+        else if(minutes !==0 && minutes % 59 ===0){
             setMinutes(0)
             setHours(hours => hours+1)
         }
+      }
       }, 1000);
    
     return () => {clearInterval(interval) 
         dispatch(returnCurrentTime(addTimeList(hours,minutes,seconds,timeStamp)))
        };
-  }, [hours,minutes,seconds,timeStamp]);
+  }, [isActive,hours,minutes,seconds,timeStamp]);
 
   return (
     <div className="app">
