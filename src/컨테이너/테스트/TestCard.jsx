@@ -76,25 +76,8 @@ const TestCard =()=> {
     
   
       const handleClick = () => {
-<<<<<<< HEAD
-        if (testnum < 10) {
-          setTestgen(testgen + 1)
-          setTestnum(testnum + 1)
-        } 
-        else {
-          alert('테스트가 종료되었습니다.')
-          axios.post(
-            'http://127.0.0.1:8080/api/odaps'
-          ).then(() => {
-            alert('good !')
-            
-        })
-        .catch(error => {throw (error)})
-        } 
-=======
           setTestgen(testgen=>testgen + 1)
           setTestnum(testnum=>testnum + 1) 
->>>>>>> master
     }
     
   const addUserInfo = (qId,answeredCorrectly,timeStamp,priorQuestionElapseTime)=>({
