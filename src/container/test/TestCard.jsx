@@ -1,34 +1,53 @@
 
 import {TestStart} from '../../template/pages'
-import React, { useState, useEffect,useReducer } from 'react';
+import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-
+import {addOdapQidAction,addUserInfoAction, isActiveAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
-const initialState =[];
-const addAction= data =>({type:'ADD',payload: data})
-const reducer=(state, action)=>{
-  switch(action.type){
-    case 'ADD':
-      return [...state,action.payload]
-    default:
-      throw new Error();
-  }
-}
-
+import {Stopwatch} from "../../components/Timers"
+import {context as c} from '../../context.js'
 const TestCard =()=> {
- 
-  
+  const [data, setData] = useState([])
+    const time = useSelector(state=>state['timeReducer'])
+    console.log(time)
+    const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
+    console.log(userInfoFromTest)
+    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
+    const states =useSelector(state=>state['testReducer'])
+    console.log(states)
+    const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [testgen, setTestgen] = useState(1)
-    const [answer , setAns] = useState(null)
-    const [correct , setCorrect] = useState(true)
-    const [states, dispatch] = useReducer(reducer, initialState)
+    const [testgen, setTestgen] = useState(0)
+    const [priorQuestionTime , setPriorQuestionTime] = useState(0)
+    const [correct ,setCorrect] =useState(true)
+    const [isActive,setIsActve] =useState(true)
     
+    // const prevCount = usePrevious(priorQuestionTime);
+    const dispatch = useDispatch()
+
+    const save = useCallback(async () => {
+  
+      
+      try {
+          const req = {
+              method: c.post,
+              url: `${c.url}/api/odaps`,
+              data: {user_id: loggedIn  ,qId:states.qId},
+              
+          }
+          const res = await axios(req)
+          res()
+      } catch (error) {
+          
+      }
+  }, [states])
+
+  
     useEffect(() => {
       const fetchTests = async () => {
         try {
@@ -41,6 +60,7 @@ const TestCard =()=> {
             'http://127.0.0.1:8080/api/legacies'
           );
           setTests(response.data);
+          console.log('-----------------------1-----------------')
           console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
         } catch (e) {
           setError(e);
@@ -56,6 +76,7 @@ const TestCard =()=> {
     
   
       const handleClick = () => {
+<<<<<<< HEAD
         if (testnum < 10) {
           setTestgen(testgen + 1)
           setTestnum(testnum + 1)
@@ -70,15 +91,31 @@ const TestCard =()=> {
         })
         .catch(error => {throw (error)})
         } 
+=======
+          setTestgen(testgen=>testgen + 1)
+          setTestnum(testnum=>testnum + 1) 
+>>>>>>> master
     }
     
-   
+  const addUserInfo = (qId,answeredCorrectly,timeStamp,priorQuestionElapseTime)=>({
+      qId:qId,
+      answeredCorrectly:answeredCorrectly,
+      timeStamp:timeStamp,
+      priorQuestionElapseTime:priorQuestionElapseTime
+    })
+    
+    const toggle=()=> {
+      dispatch(isActiveAction()) ;
+
+    }
+
     const confirm =(e) =>{
       e.preventDefault();
       const addTodoList =(item) =>{
         setCorrect(false)
-        dispatch(addAction(item))
-        console.log(states)
+        dispatch(addOdapQidAction(item))
+        
+        toggle()
       }
       
       let myAnswer=''
@@ -86,22 +123,34 @@ const TestCard =()=> {
       {document.getElementById("customRadio2").checked && (tests[testgen].ansB===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio3").checked && (tests[testgen].ansC===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio4").checked && (tests[testgen].ansD===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
+      let priorQuestionElapseTime=0
       
+      console.log(priorQuestionTime)
+      console.log(time.timeStamp)
+      priorQuestionElapseTime=subtracTimeFromPrior(priorQuestionTime,time.timeStamp)
+      {'' !== myAnswer ? dispatch(addUserInfoAction(addUserInfo(tests[testgen].qId,1,time.timeStamp,priorQuestionElapseTime))):dispatch(addUserInfoAction(addUserInfo( tests[testgen].qId,0,time.timeStamp,priorQuestionElapseTime)))}
       {'' !== myAnswer ? handleClick(): addTodoList(tests[testgen])}
       
-  
+      
     }
-    const nextQuestion =()=>{
+    const subtracTimeFromPrior=(priorQuestionTime,currentQuestionTime)=> (currentQuestionTime-priorQuestionTime)
+  
+    const nextQuestion =(e)=>{e.preventDefault();
       handleClick()
       setCorrect(true)  
-
+      setPriorQuestionTime(time.timeStamp)
+      toggle()
     }
+    const saveEveryThing =() =>{ save()}
 
     return<>
     <TestStart>
     <Container>
               <Card className="card-profile shadow mt--300">
+                <Button onClick={saveEveryThing}>그만 풀기</Button>
                 <div className="px-4">
+                {/* <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'} /> */}
+                <Stopwatch/>
                   <div className="text-center mt-5">
                     <h3>
                       {testnum}번 문제{' '}
@@ -178,7 +227,9 @@ const TestCard =()=> {
             </Row>
             </div>
             {!correct && <div>땡! 정답은 <span>{tests[testgen].answer}</span></div>}
-            {!correct ? <button className="float-center btn btn-default btn-lg mt-3" onClick={nextQuestion}>다음 문제</button> :<button className="float-center btn btn-default btn-lg mt-3" onClick={confirm}>정답 제출</button>}
+            {!correct 
+            ? <button className="float-center btn btn-default btn-lg mt-3" onClick={nextQuestion}>다음 문제</button> 
+            :<button className="float-center btn btn-default btn-lg mt-3" onClick={confirm}>정답 제출</button>}
                       </Col>
                     </Row>
                   </div>
