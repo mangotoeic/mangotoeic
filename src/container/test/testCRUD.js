@@ -2,8 +2,8 @@ import React , {useCallback, useEffect, useState} from 'react'
 import axios from 'axios'
 import {context as c} from '../../context'
 
-    const [data, setData] = useState([])
-    const bulk = useCallback(async e =>{
+    // const [data, setData] = useState([])
+export  const bulk = useCallback(async e =>{
         e.preventDefault()
         try {
             const req = {
@@ -11,6 +11,7 @@ import {context as c} from '../../context'
                 url: `${c.url}/api/users`
             }
             const res = await axios(req)
+            
         } catch (error) {
             
         }

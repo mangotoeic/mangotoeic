@@ -7,23 +7,11 @@ import { debounce } from 'throttle-debounce'
 import {addOdapQidAction,addUserInfoAction, isActiveAciton} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
-import {context as c} from '../../context'
-
+import {bulk} from './'
 const TestCard =()=> {
   const [data, setData] = useState([])
-  const bulk = useCallback(async e =>{
-      e.preventDefault()
-      try {
-          const req = {
-              method: c.get,
-              url: `${c.url}/api/users`
-          }
-          const res = await axios(req)
-      } catch (error) {
-          
-      }
-  }, [])
-
+  
+    
     const time = useSelector(state=>state['timeReducer'])
     console.log(time)
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
@@ -55,7 +43,7 @@ const TestCard =()=> {
         // .catch(error => {throw (error)})
 
         axios.post(
-          'http://127.0.0.1:8080/api/user', { user_id: loggedIn  ,qId:states}
+          'http://127.0.0.1:8080/api/user', { user_id: loggedIn , userInfoFromTest}
         ).then(() => {
           alert('good !')
           
@@ -141,7 +129,7 @@ const TestCard =()=> {
       toggle()
     }
     const saveEveryThing =() =>{}
-    
+
     return<>
     <TestStart>
     <Container>
