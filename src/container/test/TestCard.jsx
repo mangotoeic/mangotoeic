@@ -30,12 +30,6 @@ const TestCard =()=> {
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
 
-<<<<<<< HEAD
-        axios.post(
-          'http://127.0.0.1:8080/api/user', { user_id: loggedIn , userInfoFromTest}
-        ).then(() => {
-          alert('good !')
-=======
     const save = useCallback(async () => {
   
       
@@ -49,7 +43,6 @@ const TestCard =()=> {
           const res = await axios(req)
           res()
       } catch (error) {
->>>>>>> 89f5cc89e7e03e824ae01ddb0b19ec0adeb729f0
           
       }
   }, [states])
