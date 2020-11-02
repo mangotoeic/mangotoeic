@@ -47,14 +47,14 @@ export const userInfoFromTestReducer =(state = userInfoFromTestState, action)=>{
 
 const initialState = {qId : []}
 
-export const isActiveAciton =data=>({type:'TIME_ACTIVE_TOGGLE', isActive:data })
+export const isActiveAction =()=>({type:'TIME_ACTIVE_TOGGLE'  })
 
-const timerToggleState ={isActive: true}
+const timerToggleState ={isActive: 1}
 const timeState ={hours:0 ,minutes : 0 ,seconds: 0, timeStamp:0}
 export const timerToggleReducer =(state = timerToggleState ,action)=>{
     switch(action.type){
         case "TIME_ACTIVE_TOGGLE":
-            return { isAcitve: !state.isAcitve }
+            return {isActive: (state.isActive===1? 0 : 1) }
         default:
             return state
 
