@@ -37,7 +37,7 @@ const TestCard =()=> {
           const req = {
               method: c.post,
               url: `${c.url}/api/odaps`,
-              data: {user_id: loggedIn  ,qId:states.qId},
+              data: {user_id: loggedIn  ,qId:states.qId}
               
           }
           const res = await axios(req)
