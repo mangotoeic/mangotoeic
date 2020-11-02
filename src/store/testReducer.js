@@ -7,6 +7,7 @@ export const addOdapQidAction = data => {
     type : "ADD_ODAP",  // 여기서 review자리에 review,name으로 하면 두개 입력.
     payload : data.qId
 })}
+export const initOdapQidAction = () => ({type: "INIT_QID"})
 export const addUserInfoAction = data => ({type:"ADD_USER_INFO_FROM_TEST",
 qId:data.qId,
 answeredCorrectly:data.answeredCorrectly,
@@ -65,7 +66,9 @@ const testReducer = (state = initialState, action) => {
     
     switch(action.type){
         case "ADD_ODAP" :
-            return {...state, qId: [...state.qId, action.payload ]}  
+            return {...state, qId: [...state.qId, action.payload ]} 
+        case "INIT_QID":
+            return { qId:[]}
         default:                // 여기도 reviews 자리를 post로 바꾸고 인자 2개 받던지..바꾸기..
             return state
     }

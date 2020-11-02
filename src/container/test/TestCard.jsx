@@ -4,7 +4,7 @@ import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-import {addOdapQidAction,addUserInfoAction, isActiveAction} from '../../store'
+import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
 import {context as c} from '../../context.js'
@@ -124,7 +124,8 @@ const TestCard =()=> {
       setPriorQuestionTime(time.timeStamp)
       toggle()
     }
-    const saveEveryThing =() =>{ save()}
+    const saveEveryThing =() =>{ save() 
+      dispatch(initOdapQidAction()) }
 
     return<>
     <TestStart>
