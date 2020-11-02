@@ -44,25 +44,25 @@ const TestCard =()=> {
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
     const updates =()=>{
-      if (testnum <5) {}
-      else{
-        //   axios.post(
-        //     'http://127.0.0.1:8080/api/odaps', { user_id: loggedIn  ,qId:states}
-        //   ).then(() => {
-        //     alert('good !')
+      if (testnum % 5===0){
+          axios.post(
+            'http://127.0.0.1:8080/api/odaps', { user_id: loggedIn  ,qId:states.qId}
+          ).then(() => {
+            alert('good !')
+            setTestnum(testnum => testnum+1)
             
-        // })
-        // .catch(error => {throw (error)})
-
-        axios.post(
-          'http://127.0.0.1:8080/api/user', { user_id: loggedIn  ,qId:states}
-        ).then(() => {
-          alert('good !')
+        })
+        .catch(error => {throw (error)})
+        // axios.post(
+        //   'http://127.0.0.1:8080/api/user', { user_id: loggedIn  ,qId:states}
+        // ).then(() => {
+        //   alert('good !')
           
-      })
-      .catch(error => {throw (error)})
+      // })
+      // .catch(error => {throw (error)})
       }
     }
+
     updates()
     useEffect(() => {
       const fetchTests = async () => {

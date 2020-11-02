@@ -15,21 +15,19 @@ import {
     Col,
   } from 'reactstrap';
 
-const Vocab = () => {
-return<>
-<Row className="show-grid">
-<Col lg="2">
-    <p className="vocab mt-3">
-      vocab
-    </p>
-  </Col>
-  <Col lg="10">
-    <p className="meaning mt-3">
-      meaning
-    </p>
-  </Col>
-</Row>
-</>
-}
+import array from '../container/Vocab/VocabList'
+import '../assets/css/notepage.css';
+import '../assets/css/argon-design-system-react.css';
+  
+const Vocab = () => (
+  <div className="VocabList">
+    {array.map((vocab) => (
+      <div key={vocab.index}>
+        <p> {vocab.vocabs} </p>
+        <p> {vocab.meanings} </p>
+      </div>
+    ))}
+  </div>
+)
 
 export default Vocab;
