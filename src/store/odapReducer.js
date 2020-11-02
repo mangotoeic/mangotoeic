@@ -1,10 +1,12 @@
+import { TestCard } from '../container/test' 
+
 export const addAction = data => { 
     return ({
     type : "ADD_ODAP",  // 여기서 review자리에 review,name으로 하면 두개 입력.
     payload : data.qId
 })}
 
-const initialState = {qId : [9]}
+const initialState = {qId : [3]}
 
 const odapReducer = (state = initialState, action) => { 
     

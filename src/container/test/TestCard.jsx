@@ -18,8 +18,7 @@ import { Button, Card, Container, Row, Col } from 'reactstrap';
 // }
 
 const TestCard =()=> {
-    const states =useSelector(state=>state['odapReducer'])
-
+    const states = useSelector(state=>state['odapReducer'])
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -96,14 +95,14 @@ const TestCard =()=> {
         console.log(states)
       }
       
-      let myAnswer=''
+      let myAnswer = ''
       {document.getElementById("customRadio1").checked && (tests[testgen].ansA===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio2").checked && (tests[testgen].ansB===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio3").checked && (tests[testgen].ansC===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio4").checked && (tests[testgen].ansD===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       console.log(tests[testgen])
       console.log('-----------------------3-----------------')
-      {'' !== myAnswer ? handleClick(): addTodoList(tests[testgen])}
+      { myAnswer !== '' ? handleClick() : addTodoList(tests[testgen])}
       
   
     }
@@ -127,7 +126,7 @@ const TestCard =()=> {
                     </div>
                     <div className="h6 mt-4">
                       <i className="ni business_briefcase-24 mr-2" />
-                        {tests.[testgen].question}
+                        {tests[testgen].question}
                     </div>
                   </div>
                   <div className="mt-5 py-5 text-center">
