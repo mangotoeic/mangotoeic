@@ -7,7 +7,7 @@ import { debounce } from 'throttle-debounce'
 import {addOdapQidAction,addUserInfoAction, isActiveAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
-import {bulk} from './'
+import {context as c} from '../../context.js'
 const TestCard =()=> {
   const [data, setData] = useState([])
     const time = useSelector(state=>state['timeReducer'])
@@ -47,9 +47,7 @@ const TestCard =()=> {
       }
   }, [states])
 
-  if (testnum===5){
-  save()
-  setTestnum(testnum => testnum+1)   }
+  
     useEffect(() => {
       const fetchTests = async () => {
         try {
@@ -126,7 +124,7 @@ const TestCard =()=> {
       setPriorQuestionTime(time.timeStamp)
       toggle()
     }
-    const saveEveryThing =() =>{}
+    const saveEveryThing =() =>{ save()}
 
     return<>
     <TestStart>
