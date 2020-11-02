@@ -1,34 +1,69 @@
 
 import {TestStart} from '../../template/pages'
-import React, { useState, useEffect,useReducer } from 'react';
+import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-import {addAction} from '../../store'
+import {addOdapQidAction,addUserInfoAction, isActiveAciton} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
-// const initialState =[];
-// const addAction= data =>({type:'ADD',payload: data.qId})
-// const reducer=(state, action)=>{
-//   switch(action.type){
-//     case 'ADD':
-//       return [...state,action.payload]
-//     default:
-//       throw new Error();
-//   }
-// }
+import {Stopwatch} from "../../components/Timers"
+import {context as c} from '../../context'
 
 const TestCard =()=> {
-    const states =useSelector(state=>state['odapReducer'])
+  const [data, setData] = useState([])
+  const bulk = useCallback(async e =>{
+      e.preventDefault()
+      try {
+          const req = {
+              method: c.get,
+              url: `${c.url}/api/users`
+          }
+          const res = await axios(req)
+      } catch (error) {
+          
+      }
+  }, [])
 
+    const time = useSelector(state=>state['timeReducer'])
+    console.log(time)
+    const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
+    console.log(userInfoFromTest)
+    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
+    const states =useSelector(state=>state['testReducer'])
+    console.log(states)
+    const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [testgen, setTestgen] = useState(0)
-    const [answer , setAns] = useState(null)
-    const [correct , setCorrect] = useState(true)
-    // const [states, dispatch] = useReducer(reducer, initialState)
+    const [priorQuestionTime , setPriorQuestionTime] = useState(0)
+    const [correct ,setCorrect] =useState(true)
+    const [isActive,setIsActve] =useState(true)
+    
+    // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
+    const updates =()=>{
+      if (testnum <5) {}
+      else{
+        //   axios.post(
+        //     'http://127.0.0.1:8080/api/odaps', { user_id: loggedIn  ,qId:states}
+        //   ).then(() => {
+        //     alert('good !')
+            
+        // })
+        // .catch(error => {throw (error)})
+
+        axios.post(
+          'http://127.0.0.1:8080/api/user', { user_id: loggedIn  ,qId:states}
+        ).then(() => {
+          alert('good !')
+          
+      })
+      .catch(error => {throw (error)})
+      }
+    }
+    updates()
     useEffect(() => {
       const fetchTests = async () => {
         try {
@@ -57,67 +92,64 @@ const TestCard =()=> {
     
   
       const handleClick = () => {
-        if (testgen < 10) {
           setTestgen(testgen + 1)
-          setTestnum(testnum + 1)
-        } 
-        else {
-          console.log(states)
-          alert('테스트가 종료되었습니다.')
-                   
-          axios.post(
-            'http://127.0.0.1:8080/api/odaps', {  }
-          ).then(() => {
-            alert('good !')
-            
-        })
-        .catch(error => {throw (error)})
-        } 
+          setTestnum(testnum + 1) 
     }
     
-   
+  const addUserInfo = (qId,answeredCorrectly,timeStamp,priorQuestionElapseTime)=>({
+      qId:qId,
+      answeredCorrectly:answeredCorrectly,
+      timeStamp:timeStamp,
+      priorQuestionElapseTime:priorQuestionElapseTime
+    })
+    
+    const toggle=()=> {
+      dispatch(isActiveAciton(isActive)) ;
+
+    }
+
     const confirm =(e) =>{
       e.preventDefault();
-      console.log('-----------------------2-----------------')
       const addTodoList =(item) =>{
-        
-        // if( typeof states['odapReducer']['qid'] == "undefined" ){
-        //   console.log(states['odapReducer']['qid'])
-        //   console.log('-----------------------3.5-----------------')
-        //   dispatch(addAction(item))
-        //   console.log(states)
-        // }
-        console.log('-----------------------4-----------------')
         setCorrect(false)
-        dispatch(addAction(item))
-        console.log(`-----------------------5-----------------> `)
+        dispatch(addOdapQidAction(item))
         
-        states['odapReducer'][`qId`].forEach(function(value){console.log(value)})
-        console.log(states)
+        toggle()
       }
       
-      let myAnswer=''
+      let myAnswer = ''
       {document.getElementById("customRadio1").checked && (tests[testgen].ansA===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio2").checked && (tests[testgen].ansB===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio3").checked && (tests[testgen].ansC===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
       {document.getElementById("customRadio4").checked && (tests[testgen].ansD===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
-      console.log(tests[testgen])
-      console.log('-----------------------3-----------------')
+      let priorQuestionElapseTime=0
+      
+      console.log(priorQuestionTime)
+      console.log(time.timeStamp)
+      priorQuestionElapseTime=subtracTimeFromPrior(priorQuestionTime,time.timeStamp)
+      {'' !== myAnswer ? dispatch(addUserInfoAction(addUserInfo(tests[testgen].qId,1,time.timeStamp,priorQuestionElapseTime))):dispatch(addUserInfoAction(addUserInfo( tests[testgen].qId,0,time.timeStamp,priorQuestionElapseTime)))}
       {'' !== myAnswer ? handleClick(): addTodoList(tests[testgen])}
       
-  
+      
     }
+    const subtracTimeFromPrior=(priorQuestionTime,currentQuestionTime)=> (currentQuestionTime-priorQuestionTime)
+  
     const nextQuestion =()=>{
       handleClick()
       setCorrect(true)  
-
+      setPriorQuestionTime(time.timeStamp)
+      toggle()
     }
-
+    const saveEveryThing =() =>{}
+    
     return<>
     <TestStart>
     <Container>
               <Card className="card-profile shadow mt--300">
+                <Button onClick={saveEveryThing}>그만 풀기</Button>
                 <div className="px-4">
+                {/* <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'} /> */}
+                <Stopwatch/>
                   <div className="text-center mt-5">
                     <h3>
                       {testnum}번 문제{' '}
@@ -127,7 +159,7 @@ const TestCard =()=> {
                     </div>
                     <div className="h6 mt-4">
                       <i className="ni business_briefcase-24 mr-2" />
-                        {tests.[testgen].question}
+                        {tests[testgen].question}
                     </div>
                   </div>
                   <div className="mt-5 py-5 text-center">
