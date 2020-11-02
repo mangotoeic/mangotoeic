@@ -4,14 +4,12 @@ import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-import {addOdapQidAction,addUserInfoAction, isActiveAciton} from '../../store'
+import {addOdapQidAction,addUserInfoAction, isActiveAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
 import {bulk} from './'
 const TestCard =()=> {
   const [data, setData] = useState([])
-  
-    
     const time = useSelector(state=>state['timeReducer'])
     console.log(time)
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
@@ -31,27 +29,34 @@ const TestCard =()=> {
     
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
-    const updates =()=>{
-      if (testnum <5) {}
-      else{
-        //   axios.post(
-        //     'http://127.0.0.1:8080/api/odaps', { user_id: loggedIn  ,qId:states}
-        //   ).then(() => {
-        //     alert('good !')
-            
-        // })
-        // .catch(error => {throw (error)})
 
+<<<<<<< HEAD
         axios.post(
           'http://127.0.0.1:8080/api/user', { user_id: loggedIn , userInfoFromTest}
         ).then(() => {
           alert('good !')
+=======
+    const save = useCallback(async () => {
+  
+      
+      try {
+          const req = {
+              method: c.post,
+              url: `${c.url}/api/odaps`,
+              data: {user_id: loggedIn  ,qId:states.qId},
+              
+          }
+          const res = await axios(req)
+          res()
+      } catch (error) {
+>>>>>>> 89f5cc89e7e03e824ae01ddb0b19ec0adeb729f0
           
-      })
-      .catch(error => {throw (error)})
       }
-    }
-    updates()
+  }, [states])
+
+  if (testnum===5){
+  save()
+  setTestnum(testnum => testnum+1)   }
     useEffect(() => {
       const fetchTests = async () => {
         try {
@@ -80,8 +85,8 @@ const TestCard =()=> {
     
   
       const handleClick = () => {
-          setTestgen(testgen + 1)
-          setTestnum(testnum + 1) 
+          setTestgen(testgen=>testgen + 1)
+          setTestnum(testnum=>testnum + 1) 
     }
     
   const addUserInfo = (qId,answeredCorrectly,timeStamp,priorQuestionElapseTime)=>({
@@ -92,7 +97,7 @@ const TestCard =()=> {
     })
     
     const toggle=()=> {
-      dispatch(isActiveAciton(isActive)) ;
+      dispatch(isActiveAction()) ;
 
     }
 
@@ -122,7 +127,7 @@ const TestCard =()=> {
     }
     const subtracTimeFromPrior=(priorQuestionTime,currentQuestionTime)=> (currentQuestionTime-priorQuestionTime)
   
-    const nextQuestion =()=>{
+    const nextQuestion =(e)=>{e.preventDefault();
       handleClick()
       setCorrect(true)  
       setPriorQuestionTime(time.timeStamp)
