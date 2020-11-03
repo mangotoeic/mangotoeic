@@ -27,40 +27,32 @@ const TestCard =()=> {
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
 
-    const save = useCallback(async () => {
-  
-      
+    const save1 = useCallback(async () => {
       try {
-          const req2 = {
+          const req1 = {
               method: c.post,
               url: `${c.url}/api/testresults`,
               data: {user_id: loggedIn , qId:userInfoFromTest.qId, timestamp:userInfoFromTest.timeStamp, 
                 prior_question_elapsed_time:userInfoFromTest.priorQuestionElapseTime, answered_correctly:userInfoFromTest.answeredCorrectly,
                 user_answer: userInfoFromTest.userAnswer}
-                
           }
-          const res2 = await axios(req2)
-          res2()
-          console.log(req2.data)
+          const res1 = await axios(req1)
+          res1()
+          console.log(req1.data)
       } catch (error) {
           
       }
   }, [states])
 
   const save2 = useCallback(async () => {
-  
-      
     try {
-        const req1 = {
+        const req2 = {
             method: c.post,
             url: `${c.url}/api/odaps`,
-            data: {user_id: loggedIn  ,qId:states.qId}
-            
+            data: {user_id: loggedIn  ,qId:states.qId}    
         }
-   
-        const res1 = await axios(req1)
-        
-        res1()
+        const res2 = await axios(req2) 
+        res2()
     } catch (error) {
         
     }
@@ -142,7 +134,8 @@ const TestCard =()=> {
       toggle()
     }
     const saveEveryThing =() =>{  
-      save()
+      save1()
+      save2()
       dispatch(initOdapQidAction()) }
 
     return<>
