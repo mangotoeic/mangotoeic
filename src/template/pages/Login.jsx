@@ -42,6 +42,7 @@ const Login = () => {
             alert('메일주소와 비밀번호가 일치하지 않습니다.');
             window.location.reload();
         })
+    
   }
     
 

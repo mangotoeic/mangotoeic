@@ -56,7 +56,7 @@ const Register = () => {
       })
            .then(()=> {
               alert('회원가입 성공')
-              history.push("/main");
+              history.push("/");
             })
            .catch(() => {
               alert('회원가입 실패')

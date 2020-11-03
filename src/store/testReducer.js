@@ -12,7 +12,8 @@ export const addUserInfoAction = data => ({type:"ADD_USER_INFO_FROM_TEST",
 qId:data.qId,
 answeredCorrectly:data.answeredCorrectly,
 timeStamp:data.timeStamp,
-priorQuestionElapseTime:data.priorQuestionElapseTime
+priorQuestionElapseTime:data.priorQuestionElapseTime,
+userAnswer:data.userAnswer
 })
 
 export const timeReducer =(state = timeState, action)=>{
@@ -29,18 +30,22 @@ const userInfoFromTestState={
     qId:[],
     answeredCorrectly:[],
     timeStamp:[],
-    priorQuestionElapseTime:[]
+    priorQuestionElapseTime:[],
+    userAnswer:[]
 }
 
 
 
 export const userInfoFromTestReducer =(state = userInfoFromTestState, action)=>{
+
     switch(action.type){
         case "ADD_USER_INFO_FROM_TEST":
             return {...state, qId:[...state.qId, action.qId],
                 answeredCorrectly: [...state.answeredCorrectly,action.answeredCorrectly ],
             timeStamp:[...state.timeStamp, action.timeStamp],
-            priorQuestionElapseTime : [...state.priorQuestionElapseTime ,action.priorQuestionElapseTime]}
+            priorQuestionElapseTime : [...state.priorQuestionElapseTime ,action.priorQuestionElapseTime],
+            userAnswer : [...state.userAnswer, action.userAnswer]
+        }
         default:
             return state
 }
