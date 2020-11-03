@@ -10,12 +10,9 @@ import {context as c} from '../../context.js'
 const TestCard =()=> {
   const [data, setData] = useState([])
     const time = useSelector(state=>state['timeReducer'])
-    console.log(time)
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
-    console.log(userInfoFromTest)
     const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
     const states =useSelector(state=>state['testReducer'])
-    console.log(states)
     const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
@@ -25,7 +22,8 @@ const TestCard =()=> {
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [correct ,setCorrect] =useState(true)
     const [isActive,setIsActve] =useState(true)
-    
+    // const [userAnswer, setUserAnswer] = useState(0)
+
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
 
@@ -33,18 +31,40 @@ const TestCard =()=> {
   
       
       try {
-          const req = {
+          const req2 = {
               method: c.post,
-              url: `${c.url}/api/odaps`,
-              data: {user_id: loggedIn  ,qId:states.qId}
-              
+              url: `${c.url}/api/testresults`,
+              data: {user_id: loggedIn , qId:userInfoFromTest.qId, timestamp:userInfoFromTest.timeStamp, 
+                prior_question_elapsed_time:userInfoFromTest.priorQuestionElapseTime, answered_correctly:userInfoFromTest.answeredCorrectly,
+                user_answer: userInfoFromTest.userAnswer}
+                
           }
-          const res = await axios(req)
-          res()
+          const res2 = await axios(req2)
+          res2()
+          console.log(req2.data)
       } catch (error) {
           
       }
   }, [states])
+
+  const save2 = useCallback(async () => {
+  
+      
+    try {
+        const req1 = {
+            method: c.post,
+            url: `${c.url}/api/odaps`,
+            data: {user_id: loggedIn  ,qId:states.qId}
+            
+        }
+   
+        const res1 = await axios(req1)
+        
+        res1()
+    } catch (error) {
+        
+    }
+}, [states])
 
   
     useEffect(() => {
@@ -59,8 +79,6 @@ const TestCard =()=> {
             'http://127.0.0.1:8080/api/legacies'
           );
           setTests(response.data);
-          console.log('-----------------------1-----------------')
-          console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
         } catch (e) {
           setError(e);
         }
@@ -79,11 +97,12 @@ const TestCard =()=> {
           setTestnum(testnum=>testnum + 1) 
     }
     
-  const addUserInfo = (qId,answeredCorrectly,timeStamp,priorQuestionElapseTime)=>({
+  const addUserInfo = (qId,answeredCorrectly,timeStamp,priorQuestionElapseTime,userAnswer)=>({
       qId:qId,
       answeredCorrectly:answeredCorrectly,
       timeStamp:timeStamp,
-      priorQuestionElapseTime:priorQuestionElapseTime
+      priorQuestionElapseTime:priorQuestionElapseTime,
+      userAnswer
     })
     
     const toggle=()=> {
@@ -101,16 +120,15 @@ const TestCard =()=> {
       }
       
       let myAnswer = ''
-      {document.getElementById("customRadio1").checked && (tests[testgen].ansA===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
-      {document.getElementById("customRadio2").checked && (tests[testgen].ansB===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
-      {document.getElementById("customRadio3").checked && (tests[testgen].ansC===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
-      {document.getElementById("customRadio4").checked && (tests[testgen].ansD===tests[testgen].answer ? myAnswer = tests[testgen].answer: myAnswer='')}
+      let userAnswer = 0
+      {document.getElementById("customRadio1").checked && (tests[testgen].ansA===tests[testgen].answer ? myAnswer = tests[testgen].answer: userAnswer=0)}
+      {document.getElementById("customRadio2").checked && (tests[testgen].ansB===tests[testgen].answer ? myAnswer = tests[testgen].answer: userAnswer=1)}
+      {document.getElementById("customRadio3").checked && (tests[testgen].ansC===tests[testgen].answer ? myAnswer = tests[testgen].answer: userAnswer=2)}
+      {document.getElementById("customRadio4").checked && (tests[testgen].ansD===tests[testgen].answer ? myAnswer = tests[testgen].answer: userAnswer=3)}
       let priorQuestionElapseTime=0
       
-      console.log(priorQuestionTime)
-      console.log(time.timeStamp)
       priorQuestionElapseTime=subtracTimeFromPrior(priorQuestionTime,time.timeStamp)
-      {'' !== myAnswer ? dispatch(addUserInfoAction(addUserInfo(tests[testgen].qId,1,time.timeStamp,priorQuestionElapseTime))):dispatch(addUserInfoAction(addUserInfo( tests[testgen].qId,0,time.timeStamp,priorQuestionElapseTime)))}
+      {'' !== myAnswer ? dispatch(addUserInfoAction(addUserInfo(tests[testgen].qId,1,time.timeStamp,priorQuestionElapseTime,userAnswer))):dispatch(addUserInfoAction(addUserInfo( tests[testgen].qId,0,time.timeStamp,priorQuestionElapseTime,userAnswer)))}
       {'' !== myAnswer ? handleClick(): addTodoList(tests[testgen])}
       
       
@@ -123,7 +141,8 @@ const TestCard =()=> {
       setPriorQuestionTime(time.timeStamp)
       toggle()
     }
-    const saveEveryThing =() =>{ save() 
+    const saveEveryThing =() =>{  
+      save()
       dispatch(initOdapQidAction()) }
 
     return<>
