@@ -24,6 +24,8 @@ const OdapList = () => {
     const [odaps, setOdaps] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
+    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
+    console.log(typeof odaps)
     // const history = useHistory()
     // const bulk = useEffect(async e => {
     //     e.preventDefault()
@@ -38,6 +40,16 @@ const OdapList = () => {
     //     }
     // }, [])
     useEffect(() => {
+
+        const giveOdaps = async () => {
+            await axios.post(
+                'http://127.0.0.1:8080/api/odap',
+                { user_id: loggedIn}
+            ).
+            then((res)=>{setOdaps(res.data)})
+            .catch(()=>{})
+        }
+
         const fetchOdaps = async () => {
           try {
             // 요청이 시작 할 때에는 error 와 tests 를 초기화하고
@@ -56,8 +68,10 @@ const OdapList = () => {
           }
           setLoading(false);
         };
-    
-        fetchOdaps();
+        
+        giveOdaps();
+        // fetchOdaps();
+        console.log(odaps);
       }, []);
       if (loading) return <div>로딩중..</div>;
       if (error) return <div>에러가 발생했습니다</div>;
@@ -65,30 +79,31 @@ const OdapList = () => {
 
 return <NotePage>
 <Container>
-<Col lg="12">
+{odaps.map((odap, index) =>(
+<Col lg="12" key={index}>
     <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
             <CardBody className="py-5">
               <h6  style = {{color :"black !important;"}} className= "text-primary text-uppercase" >
-                tom is so ______.
+                {odap.question}
               </h6>
               <Row className="row-grid">
               <Col style={{margin: "20px"}} lg="6">
               <p   className="description mt-3">
-                1.sick
+                {odap.ansA}
               </p >
              
               
               <p  className="description mt-3">
-                2.sicked
+              {odap.ansB}
               </p >
               
               
               <p  className="description mt-3">
-                3. sock
+              {odap.ansC}
               </p >
               
               <p className="description mt-3">
-                4. sckk
+              {odap.ansD}
               </p>
               </Col>
               </Row>
@@ -96,36 +111,7 @@ return <NotePage>
 </CardBody>
 </Card>
 </Col>
-<Col lg="12">
-<Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
-<CardBody className="py-5">
-<h6  style = {{color :"black !important;"}} className= "text-primary text-uppercase" >
-  tom is so ______.
-</h6>
-              <Row className="row-grid">
-              <Col lg="6">
-              <span className="description mt-3">
-                1.
-              </span>
-              <span className="description mt-3">
-                2.
-              </span>
-              </Col>
-              <Col lg="6">
-              <span className="description mt-3">
-                3.
-              </span>
-              <span className="description mt-3">
-                4.
-              </span>
-              </Col>
-              </Row>
-              
-
-</CardBody>
-          </Card>
-          </Col>
-
+))}
 </Container>
 </NotePage>
 }
