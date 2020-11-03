@@ -1,11 +1,11 @@
 import React,{useState, useEffect} from 'react';
 import {useDispatch,useSelector} from 'react-redux'
-import {returnCurrentTime, timerToggleReducer} from '../../store'
+import {returnCurrentTime} from '../../store'
 
  
 
 const Stopwatch = () => {
-  const isActive= useSelector(state => state['timerToggleReducer'].isActive )
+  const isActive= useSelector(state => state['timerToggleReducer'].isActive)
   
   console.log(isActive)
   const dispatch = useDispatch()
