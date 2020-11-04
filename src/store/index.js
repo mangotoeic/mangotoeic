@@ -4,6 +4,7 @@ import reviewReducer from './reviewReducer'
 export {default as testReducer } from './testReducer'
 export {addOdapQidAction,addUserInfoAction, timeReducer ,returnCurrentTime,userInfoFromTestReducer,
      isActiveAction, timerToggleReducer, initOdapQidAction} from './testReducer'
+export {diagnosisReducer, addUserDiagnosisAction} from './diagnosisReducer'
 
 
 

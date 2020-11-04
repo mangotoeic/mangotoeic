@@ -1,26 +1,74 @@
-import React, { useEffect } from 'react';
-import {Diagnosis} from '../../template/pages' 
+import React, { useEffect, useState, useCallback } from 'react';
+import {Diagnosis} from '../../template/pages'
+import {useSelector, useDispatch} from "react-redux"; 
 import axios from 'axios'
-
+import {addUserDiagnosisAction,initUserDiagnosisAction} from '../../store'
+import {context as c} from '../../context.js'
+import { useHistory } from 'react-router-dom'
 // reactstrap components
 import { Button, Card, Container, Row, Col } from 'reactstrap';
-import { useState } from 'react';
-
 
 const DiagnosisCard = () => {
+    const history = useHistory();
     const [asks, setAsks] = useState(null);
-    const [asksnum, setAsksNum] = useState(1);
+    const [asksnum, setAsksNum] = useState(0);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const diagnosis = useSelector(state=>state['diagnosisReducer'])
+    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
 
     const handleClick = () => {
       if (asksnum < 4) {
-        setAsksNum(asksnum + 1)
+      console.log(asksnum)
+
+      let userAnswer = 0
+      let meanless=""
+      {document.getElementById("customRadio5").checked ? userAnswer= 0:meanless=""}
+      {document.getElementById("customRadio6").checked ? userAnswer= 1:meanless=""}
+      {document.getElementById("customRadio7").checked ? userAnswer= 2:meanless=""}
+      {document.getElementById("customRadio8").checked ? userAnswer= 3:meanless=""}
+      dispatch(addUserDiagnosisAction(userAnswer))
+      // console.log(userAnswer)
+      const num_check =num=>{
+        if(num===4){
+          num=0
+          diagnosis.data.push(userAnswer) 
+          save()
+          let endtest = window.confirm('테스트가 종료되었습니다. 진단 테스트로 바로 갈까요?');
+          if (endtest === true) {
+            history.push("/test-start-page")
+          }
+          else {
+            history.push("/")
+          }
+        }
+        return num
+      }
+      setAsksNum(num_check(asksnum+1))
+      console.log(asksnum)
       } 
       else {
+        save()
         alert('테스트가 종료되었습니다.')
       } 
   }
+
+  const dispatch = useDispatch()
+
+  const save = useCallback(async () => {
+    try {
+        const req1 = {
+            method: c.post,
+            url: `${c.url}/api/preinfo`,
+            data: {user_id: loggedIn , diagnosis: diagnosis.data }
+        }
+        const res1 = await axios(req1)
+        res1()
+        console.log(req1.data)
+    } catch (error) {
+        
+    }
+}, [diagnosis])
 
     useEffect(() => {
       const fetchAsks = async () => {
@@ -47,6 +95,8 @@ const DiagnosisCard = () => {
     if (error) return <div>에러가 발생했습니다</div>;
     if (!asks) return null;
 
+
+    
     return <>
         <Diagnosis>
         <Container>
@@ -60,7 +110,7 @@ const DiagnosisCard = () => {
                       <i className="ni location_pin mr-2" />
                     </div>
                     <div className="h6 mt-4">
-                      <h5>{asks.[asksnum].question}</h5>
+                      <h5>{asks[asksnum].question}</h5>
                     </div>
                   </div>
                   <div className="mt-5 py-5 text-center">
@@ -76,7 +126,7 @@ const DiagnosisCard = () => {
                               type="radio"
                             />
                             <label className="custom-control-label" htmlFor="customRadio5">
-                                {asks.[asksnum].[1]}
+                                {asks[asksnum][1]}
                             </label>
                           </div>
                         </Row>
@@ -89,7 +139,7 @@ const DiagnosisCard = () => {
                               type="radio"
                             />
                             <label className="custom-control-label" htmlFor="customRadio6">
-                                {asks.[asksnum].[2]}
+                                {asks[asksnum][2]}
                             </label>
                           </div>
                         </Row>
@@ -102,7 +152,7 @@ const DiagnosisCard = () => {
                               type="radio"
                             />
                             <label className="custom-control-label" htmlFor="customRadio7">
-                                {asks.[asksnum].[3]}
+                                {asks[asksnum][3]}
                             </label>
                           </div>
                           </Row>
@@ -115,7 +165,7 @@ const DiagnosisCard = () => {
                               type="radio"
                             />
                             <label className="custom-control-label" htmlFor="customRadio8">
-                                {asks.[asksnum].[4]}
+                                {asks[asksnum][4]}
                           </label>
                           </div>
                         </Row>
@@ -125,6 +175,8 @@ const DiagnosisCard = () => {
                     </Row>
                   </div>
                 </div>
+                {/* <Button className='btn-darker'
+                        onClick={saveEveryThing}>사전 정보 입력 종료</Button> */}
               </Card>
             </Container>
             </Diagnosis>
