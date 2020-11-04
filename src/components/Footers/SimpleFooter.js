@@ -40,14 +40,13 @@ const SimpleFooter = () => {
                   망고토익을 이용해 주셔서 감사합니다!
                 </h3>
                 <h5 className=" mb-0 font-weight-light">
-                  문의사항은 Github를 통해 주시기 바랍니다.
+                  문의사항 : super1947@naver.com
                 </h5>
               </Col>
               <Col className="text-lg-center btn-wrapper" lg="6">
                 <Button
                   className="btn-icon-only rounded-circle"
                   color="twitter"
-                  href="https://twitter.com/creativetim"
                   id="tooltip475038074"
                   target="_blank"
                 >
@@ -61,7 +60,6 @@ const SimpleFooter = () => {
                 <Button
                   className="btn-icon-only rounded-circle ml-1"
                   color="facebook"
-                  href="https://www.facebook.com/creativetim"
                   id="tooltip837440414"
                   target="_blank"
                 >
@@ -75,7 +73,6 @@ const SimpleFooter = () => {
                 <Button
                   className="btn-icon-only rounded-circle ml-1"
                   color="dribbble"
-                  href="https://dribbble.com/creativetim"
                   id="tooltip829810202"
                   target="_blank"
                 >
@@ -89,7 +86,7 @@ const SimpleFooter = () => {
                 <Button
                   className="btn-icon-only rounded-circle ml-1"
                   color="github"
-                  href="https://github.com/creativetimofficial"
+                  href="https://github.com/mangotoeic/mangotoeic"
                   id="tooltip495507257"
                   target="_blank"
                 >
@@ -108,7 +105,6 @@ const SimpleFooter = () => {
                 <div className=" copyright">
                   © {new Date().getFullYear()}{" "}
                   <a
-                    href="https://www.creative-tim.com?ref=adsr-footer"
                     target="_blank"
                   >
                     Payload Team
@@ -120,7 +116,6 @@ const SimpleFooter = () => {
                 <Nav className=" nav-footer justify-content-end">
                   <NavItem>
                     <NavLink
-                      href="https://www.creative-tim.com?ref=adsr-footer"
                       target="_blank"
                     >
                       Tel. 02-0000-0000
@@ -128,7 +123,6 @@ const SimpleFooter = () => {
                   </NavItem>
                   <NavItem>
                     <NavLink
-                      href="https://www.creative-tim.com/presentation?ref=adsr-footer"
                       target="_blank"
                     >
                       About Us
@@ -136,7 +130,7 @@ const SimpleFooter = () => {
                   </NavItem>
                   <NavItem>
                     <NavLink
-                      href="http://blog.creative-tim.com?ref=adsr-footer"
+                      href="https://github.com/mangotoeic/mangotoeic"
                       target="_blank"
                     >
                       Github

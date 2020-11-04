@@ -22,7 +22,6 @@ const TestCard =()=> {
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [correct ,setCorrect] =useState(true)
     const [isActive,setIsActve] =useState(true)
-    // const [userAnswer, setUserAnswer] = useState(0)
 
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()

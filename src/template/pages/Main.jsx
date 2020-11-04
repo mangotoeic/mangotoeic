@@ -23,8 +23,7 @@ import {
 } from 'reactstrap';
 
 // core components
-import DemoNavbar from 'components/Navbars/DemoNavbar.js';
-import CardsFooter from 'components/Footers/CardsFooter.js';
+import SimpleFooter from 'components/Footers/SimpleFooter.js';
 
 // index page sections
 import Download from '../IndexSections/Download.js';
@@ -56,26 +55,14 @@ const Main = () => {
                         망고토익만의 새로운 목표 :
                       </h1>
                       <Typist avgTypingDelay={50}>
-                        <p
-                        style={{ textAlign: 'center' }}
-                        className="lead text-white">
+                        <h5
+                        className="lead text-white text-center">
                         AI 튜터가 지정해주는 체계적인 학습 알고리즘으로 최대한
                         빠르게 목표에 도달해보세요.
-                      </p></Typist>
+                      </h5></Typist>
                       <div
-                        style={{ textAlign: 'center' }}
-                        className="btn-wrapper"
+                        className="btn-wrapper text-center"
                       >
-                        {/* <Button
-                          className="btn-icon mb-3 mb-sm-0"
-                          color="info"
-                          href="https://demos.creative-tim.com/argon-design-system-react/#/documentation/alerts?ref=adsr-landing-page"
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <i className="fa fa-code" />
-                          </span>
-                          <span className="btn-inner--text">Components</span> */}
-                        {/* </Button> */}
                         <Button
                           className="btn-white btn-icon mb-3 mb-sm-0 ml-1"
                           color="default"
@@ -127,7 +114,7 @@ const Main = () => {
                             엄선된 문제를 통한 자가 진단
                           </h6>
                           <p className="description mt-3">
-                            망고토익의 AI 알고리즘은 적은 문제로도 당신의 점수를 예측해줍니다. 지금 진단테스트를 통해 당신의 실력을 진단하고, 한 단계 나아갈 준비를 해보세요.
+                            망고토익의 AI 알고리즘은 적은 문제로도 당신의 점수를 예측해줍니다.  <br /> 지금 진단테스트를 통해 당신의 실력을 측정하고, 망고토익과 함께 목표 달성을 위해 함께 노력해요!
                           </p>
                           <div>
                             <Badge color="primary" pill className="mr-1">
@@ -158,10 +145,11 @@ const Main = () => {
                             <i class="fas fa-book-open"></i>
                           </div>
                           <h6 className="text-success text-uppercase">
-                            자신만의 오답노트를 관리하고 AI가 추천해주는 단어를 공부해 보세요.
+                            오답노트 관리 & 단어 공부
                           </h6>
                           <p className="description mt-3">
-                            망고토익의 
+                            이제 더 이상 단어장은 그만!!! <br /> 망고토익에서 엄선한 문제를 풀고 문제 속 단어들을 한 방에 정리해 보세요. <br />
+                            또한, 토익에서 자주 출제되는 관련 단어도 함께 공부할 수 있습니다.
                           </p>
                           <div>
                             <Badge color="success" pill className="mr-1">
@@ -169,9 +157,6 @@ const Main = () => {
                             </Badge>
                             <Badge color="success" pill className="mr-1">
                               #AI가추천하는단어집
-                            </Badge>
-                            <Badge color="success" pill className="mr-1">
-                              #단어,로맨틱,성공적
                             </Badge>
                           </div>
                           <Button
@@ -192,20 +177,20 @@ const Main = () => {
                             <i class="fas fa-search"></i>
                           </div>
                           <h6 className="text-warning text-uppercase">
-                            망고토익 리뷰
+                            망고토익 리뷰 작성하기
                           </h6>
                           <p className="description mt-3">
-                            ㅇㅇㄴㄴ
+                            더 나은 서비스를 위해 망고토익 리뷰작성에 참여해 주세요.  <br /> 여러분의 리뷰 하나 하나가 저희에게 큰 힘이 됩니다. 리뷰를 작성하시면 별점이 자동으로 매겨집니다!
                           </p>
                           <div>
                             <Badge color="warning" pill className="mr-1">
-                              marketing
+                              #리뷰게시판
                             </Badge>
                             <Badge color="warning" pill className="mr-1">
-                              product
+                              #자동별점
                             </Badge>
                             <Badge color="warning" pill className="mr-1">
-                              launch
+                              #경품이와르르
                             </Badge>
                           </div>
                           <Button
@@ -231,7 +216,7 @@ const Main = () => {
                   <img
                     alt="..."
                     className="img-fluid floating"
-                    src={require('assets/img/theme/promo-1.png')}
+                    src={require('assets/img/theme/chart-increasing-emoji-clipart-original.svg')}
                   />
                 </Col>
                 <Col className="order-md-1" md="6">
@@ -241,7 +226,8 @@ const Main = () => {
                     </div> */}
                     <h2>망고토익으로 990점까지!</h2>
                     <p>
-                      저희 망고토익은 수강생 평균 253점 향상이라는 놀라운 데이터로 
+                      저희 망고토익은 수강생 평균 253점 향상이라는 놀라운 데이터로 여러분의 실력 향상을 책임지고 있습니다.  <br />
+                      못 믿으시겠다구요? 지금 바로 시작해 보세요!
                     </p>
                     <ul className="list-unstyled mt-5">
                       <li className="py-2">
@@ -300,75 +286,6 @@ const Main = () => {
             </Container>
           </section>
           <section className="section bg-secondary">
-            <Container>
-              <Row className="row-grid align-items-center">
-                <Col md="6">
-                  <Card className="bg-default shadow border-0">
-                    <CardImg
-                      alt="..."
-                      src={require('assets/img/theme/img-1-1200x1000.jpg')}
-                      top
-                    />
-                    <blockquote className="card-blockquote">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="svg-bg"
-                        preserveAspectRatio="none"
-                        viewBox="0 0 583 95"
-                      >
-                        <polygon
-                          className="fill-default"
-                          points="0,52 583,95 0,95"
-                        />
-                        <polygon
-                          className="fill-default"
-                          opacity=".2"
-                          points="0,42 583,95 683,0 0,95"
-                        />
-                      </svg>
-                      <h4 className="display-3 font-weight-bold text-white">
-                        Design System
-                      </h4>
-                      <p className="lead text-italic text-white">
-                        The Arctic Ocean freezes every winter and much of the
-                        sea-ice then thaws every summer, and that process will
-                        continue whatever happens.
-                      </p>
-                    </blockquote>
-                  </Card>
-                </Col>
-                <Col md="6">
-                  <div className="pl-md-5">
-                    <div className="icon icon-lg icon-shape icon-shape-warning shadow rounded-circle mb-5">
-                      <i className="ni ni-settings" />
-                    </div>
-                    <h3>Our customers</h3>
-                    <p className="lead">
-                      Don't let your uses guess by attaching tooltips and
-                      popoves to any element. Just make sure you enable them
-                      first via JavaScript.
-                    </p>
-                    <p>
-                      The kit comes with three pre-built pages to help you get
-                      started faster. You can change the text and images and
-                      you're good to go.
-                    </p>
-                    <p>
-                      The kit comes with three pre-built pages to help you get
-                      started faster. You can change the text and images and
-                      you're good to go.
-                    </p>
-                    <a
-                      className="font-weight-bold text-warning mt-5"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      A beautiful UI Kit for impactful websites
-                    </a>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
           </section>
           <section className="section pb-0 bg-gradient-warning">
             <Container>
@@ -378,24 +295,16 @@ const Main = () => {
                     <img
                       alt="..."
                       className="img-center img-fluid"
-                      src={require('assets/img/ill/ill-2.svg')}
+                      src={require('assets/img/theme/1.png')}
                     />
                   </div>
                 </Col>
                 <Col className="order-lg-1" lg="6">
                   <div className="d-flex px-3">
                     <div>
-                      <div className="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
-                        <i className="ni ni-building text-primary" />
-                      </div>
                     </div>
                     <div className="pl-4">
-                      <h4 className="display-3 text-white">Modern Interface</h4>
-                      <p className="text-white">
-                        The Arctic Ocean freezes every winter and much of the
-                        sea-ice then thaws every summer, and that process will
-                        continue whatever.
-                      </p>
+                      <h4 className="display-3 text-white">언제 어디서든 간편하게</h4>
                     </div>
                   </div>
                   <Card className="shadow shadow-lg--hover mt-5">
@@ -408,20 +317,11 @@ const Main = () => {
                         </div>
                         <div className="pl-4">
                           <h5 className="title text-success">
-                            Awesome Support
+                            이제 학원까지 갈 필요 없어요
                           </h5>
                           <p>
-                            The Arctic Ocean freezes every winter and much of
-                            the sea-ice then thaws every summer, and that
-                            process will continue whatever.
+                            무거운 몸을 이끌고 1시간 걸려 학원까지 가기 싫으시죠? 망고토익을 이용하시면 힘들게 학원까지 가지 않으셔도 됩니다.
                           </p>
-                          <a
-                            className="text-success"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Learn more
-                          </a>
                         </div>
                       </div>
                     </CardBody>
@@ -436,20 +336,11 @@ const Main = () => {
                         </div>
                         <div className="pl-4">
                           <h5 className="title text-warning">
-                            Modular Components
+                            웹 & 모바일 어디에서나 자유롭게
                           </h5>
                           <p>
-                            The Arctic Ocean freezes every winter and much of
-                            the sea-ice then thaws every summer, and that
-                            process will continue whatever.
+                            망고토익에서는 검증된 인공지능 튜터의 코치 아래 언제 어디서나 간편하게 토익공부를 할 수 있습니다.
                           </p>
-                          <a
-                            className="text-warning"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Learn more
-                          </a>
                         </div>
                       </div>
                     </CardBody>
@@ -704,46 +595,14 @@ const Main = () => {
             </Container>
           </section>
           <section className="section section-lg pt-0">
-            <Container>
-              <Card className="bg-gradient-warning shadow-lg border-0">
-                <div className="p-5">
-                  <Row className="align-items-center">
-                    <Col lg="8">
-                      <h3 className="text-white">
-                        We made website building easier for you.
-                      </h3>
-                      <p className="lead text-white mt-3">
-                        I will be the leader of a company that ends up being
-                        worth billions of dollars, because I got the answers. I
-                        understand culture.
-                      </p>
-                    </Col>
-                    <Col className="ml-lg-auto" lg="3">
-                      <Button
-                        block
-                        className="btn-white"
-                        color="default"
-                        href="https://www.creative-tim.com/product/argon-design-system-react?ref=adsr-landing-page"
-                        size="lg"
-                      >
-                        Download React
-                      </Button>
-                    </Col>
-                  </Row>
-                </div>
-              </Card>
-            </Container>
           </section>
           <section className="section section-lg bg-gradient-default">
             <Container className="pt-lg pb-300">
               <Row className="text-center justify-content-center">
                 <Col lg="10">
-                  <h2 className="display-3 text-white">Build something</h2>
+                  <h2 className="display-3 text-white">세상에 없던, 나를 위한 문제 생성 시스템</h2>
                   <p className="lead text-white">
-                    According to the National Oceanic and Atmospheric
-                    Administration, Ted, Scambos, NSIDClead scentist, puts the
-                    potentially record low maximum sea ice extent tihs year down
-                    to low ice.
+                    저희 망고토익에서는 기존에 있던 문제 풀이 뿐만 아니라, 오직 한 사람을 위해 생성된 문제 풀이를 통해 더 빠르게 목표에 도달할 수 있도록 도와드립니다.
                   </p>
                 </Col>
               </Row>
@@ -797,93 +656,11 @@ const Main = () => {
               </svg>
             </div>
           </section>
-          <section className="section section-lg pt-lg-0 section-contact-us">
-            <Container>
-              <Row className="justify-content-center mt--300">
-                <Col lg="8">
-                  <Card className="bg-gradient-secondary shadow">
-                    <CardBody className="p-lg-5">
-                      <h4 className="mb-1">Want to work with us?</h4>
-                      <p className="mt-0">
-                        Your project is very important to us.
-                      </p>
-                      <FormGroup
-                        className={classnames('mt-5', {
-                          focused: nameFocused,
-                        })}
-                      >
-                        <InputGroup className="input-group-alternative">
-                          <InputGroupAddon addonType="prepend">
-                            <InputGroupText>
-                              <i className="ni ni-user-run" />
-                            </InputGroupText>
-                          </InputGroupAddon>
-                          <Input
-                            placeholder="Your name"
-                            type="text"
-                            onFocus={(e) =>
-                              setnameFocus(true)
-                            }
-                            onBlur={(e) =>
-                              setnameFocus(false)
-                            }
-                          />
-                        </InputGroup>
-                      </FormGroup>
-                      <FormGroup
-                        className={classnames({
-                          focused: emailFocused,
-                        })}
-                      >
-                        <InputGroup className="input-group-alternative">
-                          <InputGroupAddon addonType="prepend">
-                            <InputGroupText>
-                              <i className="ni ni-email-83" />
-                            </InputGroupText>
-                          </InputGroupAddon>
-                          <Input
-                            placeholder="Email address"
-                            type="email"
-                            onFocus={(e) =>
-                              setemailFocus(true)
-                            }
-                            onBlur={(e) =>
-                              setemailFocus( false)
-                            }
-                          />
-                        </InputGroup>
-                      </FormGroup>
-                      <FormGroup className="mb-4">
-                        <Input
-                          className="form-control-alternative"
-                          cols="80"
-                          name="name"
-                          placeholder="Type a message..."
-                          rows="4"
-                          type="textarea"
-                        />
-                      </FormGroup>
-                      <div>
-                        <Button
-                          block
-                          className="btn-round"
-                          color="default"
-                          size="lg"
-                          type="button"
-                        >
-                          Send Message
-                        </Button>
-                      </div>
-                    </CardBody>
-                  </Card>
-                </Col>
-              </Row>
-            </Container>
-          </section>
-          <Download />
+          <div className="mt-5">
+          </div>
         </main>
         <ItemChatBot/>  
-        <CardsFooter />
+        <SimpleFooter />
       </>
 }
 
