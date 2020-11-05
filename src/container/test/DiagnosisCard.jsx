@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 
 const DiagnosisCard = () => {
-      
+    const history = useHistory()  
     const [asks, setAsks] = useState(null);
     const [asksnum, setAsksNum] = useState(0);
     const [loading, setLoading] = useState(false);
