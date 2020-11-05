@@ -34,6 +34,8 @@ const Login = () => {
             alert(`${res.data["user_name"]}님 환영합니다! `)
             sessionStorage.setItem("sessionUser", res.data['user_id']);
             sessionStorage.setItem("sessionEmail", res.data['email']);
+            sessionStorage.setItem("sessionName", res.data['user_name']);
+            console.log(res.data['user_name']);
             history.push("/");
             window.location.reload()
         })
