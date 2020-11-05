@@ -98,7 +98,7 @@ const DemoNavbar = props => {
                     <DropdownItem to="/diagnosis-page" tag={Link}>
                       사전정보 입력
                     </DropdownItem>
-                    <DropdownItem to="/test-start-page" tag={Link}>
+                    <DropdownItem to="/diagnosis-test-page" tag={Link}>
                       테스트 시작
                     </DropdownItem>
                     <DropdownItem to="/profile-page" tag={Link}>
@@ -133,7 +133,7 @@ const DemoNavbar = props => {
                     <span className="nav-link-inner--text">문제 풀기</span>
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem to="/landing-page" tag={Link}>
+                    <DropdownItem to="/test-start-page" tag={Link}>
                       문제 풀기
                     </DropdownItem>
                     <DropdownItem to="/test_start-page" tag={Link}>

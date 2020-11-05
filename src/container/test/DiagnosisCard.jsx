@@ -36,7 +36,7 @@ const DiagnosisCard = () => {
           save()
           let endtest = window.confirm('테스트가 종료되었습니다. 진단 테스트로 바로 갈까요?');
           if (endtest === true) {
-            history.push("/test-start-page")
+            history.push("/diagnosis-test-page")
           }
           else {
             history.push("/")

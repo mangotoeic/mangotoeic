@@ -8,7 +8,7 @@ import DemoNavbar from './components/Navbars/DemoNavbar'
 import {ProfileCard} from "./container/profile"
 import {VocabList} from "./container/vocab"
 import {OdapList} from "./container/Odap"
-import {TestCard, DiagnosisCard} from "./container/test"
+import {TestCard, DiagnosisCard,DiagnosisTestCard} from "./container/test"
 import {Main,Login,Register,NotePage,BookMark,AppReview,Board} from "./template/pages";
 import { createStore, applyMiddleware, combineReducers} from 'redux'
 import {testReducer,timeReducer,userInfoFromTestReducer,timerToggleReducer,diagnosisReducer} from './store'
@@ -41,6 +41,7 @@ const App = () => {
         <Route path="/note-page" component={OdapList}/>
         <Route path="/bookmark-page" component={BookMark}/>
         <Route path="/vocab-page" component={VocabList}/>
+        <Route path="/diagnosis-test-page" component={DiagnosisTestCard}/>
         </Provider>
       </Switch>
     </BrowserRouter>
