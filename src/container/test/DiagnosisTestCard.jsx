@@ -15,7 +15,7 @@ const DiagnosisTestCard =()=> {
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
     const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
-    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
+    const [id, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
     const states =useSelector(state=>state['testReducer'])
     let testgen =useSelector(state => state['testgenReducer'])
     console.log(testgen)
@@ -32,9 +32,11 @@ const DiagnosisTestCard =()=> {
         if(testnum===11  && testgen ===5){
           dispatch(initNumAction())
           testgen=0
-          save1()
-          save2()
-          dispatch(initOdapQidAction()) 
+          console.log(userInfoFromTest)
+          save1(userInfoFromTest)
+          save2(states)
+          dispatch(initOdapQidAction())
+          getMinitestSet(diagnosisTestInfo)
           let endtest = window.confirm('테스트가 종료되었습니다. 진단 테스트로 바로 갈까요?');
           if (endtest === true) {
             history.push("/test-start-page")
@@ -50,21 +52,21 @@ const DiagnosisTestCard =()=> {
           dispatch(activeLoadingAction())
           dispatch(initNumAction())
           testgen=0
-          tests=null
+          
           // loading =true
-          getMinitestSet()
+          getMinitestSet(diagnosisTestInfo)
         }
         
       }
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
 
-    const save1 = useCallback(async () => {
+    const save1 = useCallback(async (userInfoFromTest) => {
       try {
           const req1 = {
               method: c.post,
               url: `${c.url}/api/testresults`,
-              data: {user_id: loggedIn , qId:userInfoFromTest.qId, timestamp:userInfoFromTest.timeStamp, 
+              data: {user_id: id , qId:userInfoFromTest.qId, timestamp:userInfoFromTest.timeStamp, 
                 prior_question_elapsed_time:userInfoFromTest.priorQuestionElapseTime, answered_correctly:userInfoFromTest.answeredCorrectly,
                 user_answer: userInfoFromTest.userAnswer}
           }
@@ -76,12 +78,12 @@ const DiagnosisTestCard =()=> {
       }
   }, [states])
 
-  const save2 = useCallback(async () => {
+  const save2 = useCallback(async (states) => {
     try {
         const req2 = {
             method: c.post,
             url: `${c.url}/api/odaps`,
-            data: {user_id: loggedIn  ,qId:states.qId}    
+            data: {user_id: id  ,qId:states.qId}    
         }
         const res2 = await axios(req2) 
         res2()
@@ -91,13 +93,13 @@ const DiagnosisTestCard =()=> {
     }
 }, [states])
 
-const getMinitestSet = useCallback(async () => {
+const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
     try {
       
         const req = {
             method: c.post,
             url: `${c.url}/api/minitests`,
-            data: {user_id: loggedIn  ,qId:diagnosisTestInfo.qId, answer_correctly: diagnosisTestInfo.answeredCorrectly }    
+            data: {user_id: id  ,qId:diagnosisTestInfo.qId, answer_correctly: diagnosisTestInfo.answeredCorrectly }    
         }
         const res = await axios(req) 
         setTests(res.data)
