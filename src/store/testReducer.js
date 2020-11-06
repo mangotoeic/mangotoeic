@@ -14,6 +14,19 @@ export const addUserInfoAction = data => ({ type:"ADD_USER_INFO_FROM_TEST",
                                             priorQuestionElapseTime:data.priorQuestionElapseTime,
                                             userAnswer:data.userAnswer
 })
+export const increaseNumAction =() => ({type:"INCREASE_NUM"})
+export const initNumAction=() =>({type:"INIT_NUM"})
+const testgenState = 0
+export const testgenReducer=( state =testgenState , action)=>{
+    switch(action.type){
+        case "INCREASE_NUM":
+            return state+1
+        case "INIT_NUM":
+            return  0
+        default:
+            return state
+    }
+}
 
 export const timeReducer =(state = timeState, action)=>{
     switch(action.type){
