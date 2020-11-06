@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
 import axios from 'axios'
 import ReactDOM from 'react-dom';
-import BasicElements from '../../template/IndexSections/Buttons2'
+import {context as c} from '../../context.js'
 // import {BookmarkIcon} from '@primer/octicons-react'
 import {
     Badge,
@@ -28,6 +28,7 @@ import {
 
 const OdapList = () => {
     const [odaps, setOdaps] = useState(null)
+    const [checked, setChecked] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
@@ -41,6 +42,16 @@ const OdapList = () => {
         then((res)=>{setOdaps(res.data)})
         .catch(()=>{})
       }
+      // const bookmark = async () => {
+      //   await axios.post(
+      //     'http://127.0.0.1:8080/api/bookmark',
+      //     {user_id: loggedIn,
+      //     input: checked}
+
+      //   ).
+      //   then((res)=>{setOdaps(res.data)})
+      //   .catch(()=>{})
+      // }
       const fetchOdaps = async () => {
         try {
           // 요청이 시작 할 때에는 error 와 tests 를 초기화하고
@@ -63,22 +74,34 @@ const OdapList = () => {
       // fetchOdaps();
       console.log(odaps);
     }, []);
+
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>에러가 발생했습니다</div>;
     if (!odaps) return null;
     const bookmark=e=>{e.preventDefault()
       console.log('된다')
     }
+
   return <NotePage>
     <Container>
       {odaps.map((odap, index) =>(
       <Col lg="12" key={index}>
         <Card className="card-lift--hover shadow border-0" style={{margin :"15px"}}>
           <CardBody className="py-5">
-            <h6  style = {{color :"black !important;"}} className= "text-note" >
-              {odap.question}
-            </h6><BasicElements/>
-            
+            <Row className="row-grid">
+              <Col lg="11">
+                <h6 className= "text-note" >
+                  {odap.question} 
+                </h6>
+              </Col>
+              <Col lg="1">
+                <label className="custom-toggle">
+                {/* onClick={bookmark} */}
+                  <input type="checkbox" />
+                  <span className="custom-toggle-slider rounded-circle" />
+                </label>
+              </Col>
+            </Row>            
             <Row className="row-grid">
               <Col lg="6">
                 <p className="description mt-3">
@@ -97,7 +120,9 @@ const OdapList = () => {
                 </p>
               </Col>
             </Row>
-            <p className = "text-right text-bold" style={{margin :"30px"}}>Answer: {odap.answer}</p>
+            <p className = "text-right text-bold" style={{margin :"30px"}}>
+              Answer: {odap.answer}
+            </p>
           </CardBody>
         </Card>
       </Col>
