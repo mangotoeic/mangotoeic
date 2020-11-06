@@ -28,7 +28,7 @@ const DiagnosisTestCard =()=> {
     const [changeMode,setChangeMode] =useState(false)
 
     const num_check2 =()=>{
-        if(testnum===11){
+        if(testnum===11 ){
           dispatch(initNumAction())
           testgen=0
           save1()
@@ -45,7 +45,7 @@ const DiagnosisTestCard =()=> {
         return testnum
       }
       const num_check =()=>{
-        if(testnum===6){
+        if(testnum===6 && testgen ===5){
           dispatch(initNumAction())
           testgen=0
           getMinitestSet()
@@ -91,7 +91,7 @@ const getMinitestSet = useCallback(async () => {
         const req = {
             method: c.post,
             url: `${c.url}/api/minitests`,
-            data: {user_id: loggedIn  ,qId:diagnosisTestInfo.qId, answered_correctly: diagnosisTestInfo.answeredCorrectly }    
+            data: {user_id: loggedIn  ,qId:diagnosisTestInfo.qId, answer_correctly: diagnosisTestInfo.answeredCorrectly }    
         }
         const res = await axios(req) 
         setTests(res.data)
