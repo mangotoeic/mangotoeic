@@ -3,7 +3,8 @@ import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-import {addOdapQidAction,addUserInfoAction, initOdapQidAction,addResultAction,increaseNumAction,initNumAction} from '../../store'
+import {addOdapQidAction,addUserInfoAction, initOdapQidAction,
+  addResultAction,increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
 import {context as c} from '../../context.js'
@@ -20,15 +21,15 @@ const DiagnosisTestCard =()=> {
     console.log(testgen)
     const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
-    const [tests, setTests] = useState(null);
-    const [loading, setLoading] = useState(false);
+    let [tests, setTests] = useState(null);
+    let loading = useSelector(state=> state['loadingReducer'])
     const [error, setError] = useState(null);
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [isActive,setIsActve] =useState(true)
     const [changeMode,setChangeMode] =useState(false)
 
     const num_check2 =()=>{
-        if(testnum===11 ){
+        if(testnum===11  && testgen ===5){
           dispatch(initNumAction())
           testgen=0
           save1()
@@ -36,7 +37,7 @@ const DiagnosisTestCard =()=> {
           dispatch(initOdapQidAction()) 
           let endtest = window.confirm('테스트가 종료되었습니다. 진단 테스트로 바로 갈까요?');
           if (endtest === true) {
-            history.push("/diagnosis-test-page")
+            history.push("/test-start-page")
           }
           else {
             history.push("/")
@@ -46,11 +47,14 @@ const DiagnosisTestCard =()=> {
       }
       const num_check =()=>{
         if(testnum===6 && testgen ===5){
+          dispatch(activeLoadingAction())
           dispatch(initNumAction())
           testgen=0
+          tests=null
+          // loading =true
           getMinitestSet()
         }
-
+        
       }
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
@@ -82,12 +86,14 @@ const DiagnosisTestCard =()=> {
         const res2 = await axios(req2) 
         res2()
     } catch (error) {
-        
+      
+
     }
 }, [states])
 
 const getMinitestSet = useCallback(async () => {
     try {
+      
         const req = {
             method: c.post,
             url: `${c.url}/api/minitests`,
@@ -98,7 +104,9 @@ const getMinitestSet = useCallback(async () => {
     } catch (error) {
         
     }
-}, [states])
+    dispatch(deactiveLoadingAction())
+
+}, [loading])
 
 
 
@@ -110,7 +118,7 @@ const getMinitestSet = useCallback(async () => {
           setError(null);
           setTests(null);
           // loading 상태를 true 로 바꿉니다.
-          setLoading(true);
+          
           const req = {
             method: c.get,
             url: `${c.url}/api/selectedqs`            
@@ -121,20 +129,19 @@ const getMinitestSet = useCallback(async () => {
         } catch (e) {
           setError(e);
         }
-        setLoading(false);
+        
       };
-  
+      
       fetchTests();
     }, []);
-
-    if (loading) return <div>로딩중..</div>;
-    if (error) return <div>에러가 발생했습니다</div>;
-    if (!tests) return null;
+    
+    
 
   
       const handleClick = () => {
           dispatch(increaseNumAction())
-          setTestnum(testnum=>testnum + 1) 
+          setTestnum(testnum=>testnum + 1)
+          
     }
     
   const addUserInfo = (qId,answeredCorrectly,timeStamp,priorQuestionElapseTime,userAnswer)=>({
@@ -173,7 +180,9 @@ const getMinitestSet = useCallback(async () => {
     const subtracTimeFromPrior=(priorQuestionTime,currentQuestionTime)=> (currentQuestionTime-priorQuestionTime)
     num_check()
     num_check2()
-   
+    if (loading) return <div>로딩중..</div>;
+    if (error) return <div>에러가 발생했습니다</div>;
+    if (!tests) return null;
 
     return<>
     <TestStart>
