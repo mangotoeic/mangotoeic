@@ -8,7 +8,6 @@ const diagnosisState={
 }
 
 export const diagnosisReducer =(state = diagnosisState, action)=>{
-    console.log(action)
     switch(action.type){
         case "ADD_USER_DIAGNOSIS": 
             return {...state, data:[...state.data, action.data]}

@@ -196,6 +196,10 @@ p {
   /* font-weight: normal; */
 }
 
+.big-font {
+  font-size: 7rem;
+}
+
 abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;
@@ -245,6 +249,10 @@ strong {
 
 small {
   font-size: 80%;
+}
+
+span {
+  font-family: 'NEXON Lv1 Gothic OTF' !important;
 }
 
 sub,

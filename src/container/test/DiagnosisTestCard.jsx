@@ -3,14 +3,17 @@ import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction} from '../../store'
+import {addOdapQidAction,addUserInfoAction, initOdapQidAction,addResultAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
 import {context as c} from '../../context.js'
+import { useHistory } from 'react-router-dom'
 const DiagnosisTestCard =()=> {
-  const [data, setData] = useState([])
+    const history = useHistory();
+    const [data, setData] = useState([])
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
+    const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
     const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
     const states =useSelector(state=>state['testReducer'])
     const [update, setUpdate] = useState(false);
@@ -20,9 +23,40 @@ const DiagnosisTestCard =()=> {
     const [error, setError] = useState(null);
     const [testgen, setTestgen] = useState(0)
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
-    const [correct ,setCorrect] =useState(true)
     const [isActive,setIsActve] =useState(true)
+    const [changeMode,setChangeMode] =useState(false)
 
+    const num_check2 =num=>{
+        if(num===10){
+          num=0
+          
+          save1()
+          save2()
+          save3()
+          dispatch(initOdapQidAction()) 
+          let endtest = window.confirm('테스트가 종료되었습니다. 진단 테스트로 바로 갈까요?');
+          if (endtest === true) {
+            history.push("/diagnosis-test-page")
+          }
+          else {
+            history.push("/")
+          }
+        }
+        return num
+      }
+      const num_check =num=>{
+        if(num===5){
+          num=0
+          save1()
+          save2()
+          save3()
+          dispatch(initOdapQidAction())
+          getMinitestSet()
+          
+        
+        }
+
+      }
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
 
@@ -56,8 +90,35 @@ const DiagnosisTestCard =()=> {
         
     }
 }, [states])
+const save3 = useCallback(async () => {
+    try {
+        const req2 = {
+            method: c.post,
+            url: `${c.url}/api/selectedqs`,
+            data: {user_id: loggedIn  ,qId:diagnosisTestInfo.qId, answered_correctly: diagnosisTestInfo.answeredCorrectly }    
+        }
+        const res2 = await axios(req2) 
+        res2()
+    } catch (error) {
+        
+    }
+}, [states])
 
-  
+const getMinitestSet = useCallback(async () => {
+    try {
+        const req = {
+            method: c.post,
+            url: `${c.url}/api/minitest`,
+            data: {data}    
+        }
+        const res = await axios(req) 
+        tests= res.data
+    } catch (error) {
+        
+    }
+}, [states])
+
+
     useEffect(() => {
       const fetchTests = async () => {
         try {
@@ -66,9 +127,12 @@ const DiagnosisTestCard =()=> {
           setTests(null);
           // loading 상태를 true 로 바꿉니다.
           setLoading(true);
-          const response = await axios.get(
-            `${c.url}/api/selectedqs`
-          );
+          const req = {
+            method: c.get,
+            url: `${c.url}/api/selectedqs`            
+        }
+        const response = await axios(req) 
+
           setTests(response.data);
         } catch (e) {
           setError(e);
@@ -78,10 +142,11 @@ const DiagnosisTestCard =()=> {
   
       fetchTests();
     }, []);
+
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>에러가 발생했습니다</div>;
     if (!tests) return null;
-    
+
   
       const handleClick = () => {
           setTestgen(testgen=>testgen + 1)
@@ -96,20 +161,15 @@ const DiagnosisTestCard =()=> {
       userAnswer
     })
     
-    const toggle=()=> {
-      dispatch(isActiveAction()) ;
 
-    }
 
     const confirm =(e) =>{
       e.preventDefault();
-      const addTodoList =(item) =>{
-        setCorrect(false)
-        dispatch(addOdapQidAction(item))
-        
-        toggle()
-      }
-      
+      const addToMinitest =(qId ,answeredCorrectly) =>({
+        qId,
+        answeredCorrectly
+      })
+    
       let myAnswer = ''
       let userAnswer = 0
       {document.getElementById("customRadio1").checked && (tests[testgen].ansA===tests[testgen].answer ? myAnswer = tests[testgen].answer: userAnswer=0)}
@@ -120,28 +180,21 @@ const DiagnosisTestCard =()=> {
       
       priorQuestionElapseTime=subtracTimeFromPrior(priorQuestionTime,time.timeStamp)
       {'' !== myAnswer ? dispatch(addUserInfoAction(addUserInfo(tests[testgen].qId,1,time.timeStamp,priorQuestionElapseTime,userAnswer))):dispatch(addUserInfoAction(addUserInfo( tests[testgen].qId,0,time.timeStamp,priorQuestionElapseTime,userAnswer)))}
-      {'' !== myAnswer ? handleClick(): addTodoList(tests[testgen])}
-      
-      
+      {'' !== myAnswer ? dispatch(addResultAction(addToMinitest(tests[testgen].qId,1))): dispatch(addResultAction(addToMinitest(tests[testgen].qId,0)))}
+      {'' !== myAnswer ? console.log("next"): dispatch(addOdapQidAction(tests[testgen]))}
+      handleClick()
+      setPriorQuestionTime(time.timeStamp)
+      num_check()
     }
     const subtracTimeFromPrior=(priorQuestionTime,currentQuestionTime)=> (currentQuestionTime-priorQuestionTime)
   
-    const nextQuestion =(e)=>{e.preventDefault();
-      handleClick()
-      setCorrect(true)  
-      setPriorQuestionTime(time.timeStamp)
-      toggle()
-    }
-    const saveEveryThing =() =>{  
-      save1()
-      save2()
-      dispatch(initOdapQidAction()) }
+   
 
     return<>
     <TestStart>
     <Container>
               <Card className="card-profile shadow mt--300">
-                <Button onClick={saveEveryThing}>그만 풀기</Button>
+                
                 <div className="px-4">
                 {/* <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'} /> */}
                 <Stopwatch/>
@@ -220,16 +273,12 @@ const DiagnosisTestCard =()=> {
             </div>
             </Row>
             </div>
-            {!correct && <div>땡! 정답은 <span>{tests[testgen].answer}</span></div>}
-            {!correct 
-            ? <button className="float-center btn btn-default btn-lg mt-3" onClick={nextQuestion}>다음 문제</button> 
-            :<button className="float-center btn btn-default btn-lg mt-3" onClick={confirm}>정답 제출</button>}
+            <button className="float-center btn btn-default btn-lg mt-3" onClick={confirm}>정답 제출</button>
                       </Col>
                     </Row>
                   </div>
                 </div>
               </Card>
-              
             </Container>
             </TestStart>
             </>
