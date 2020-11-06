@@ -4,8 +4,7 @@ import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
 import axios from 'axios'
 import ReactDOM from 'react-dom';
-import { ToggleButton } from '@material-ui/lab';
-import { selected, setSelected, CheckIcon } from '@material-ui/icons'
+import BasicElements from '../../template/IndexSections/Buttons2'
 // import {BookmarkIcon} from '@primer/octicons-react'
 import {
     Badge,
@@ -77,16 +76,8 @@ const OdapList = () => {
         <Card className="card-lift--hover shadow border-0" style={{margin :"15px"}}>
           <CardBody className="py-5">
             <h6  style = {{color :"black !important;"}} className= "text-note" >
-              {odap.question}<ToggleButton
-  value="check"
-  selected={selected}
-  onChange={() => {
-    setSelected(!selected);
-  }}
->
-  <CheckIcon />
-</ToggleButton>
-            </h6>
+              {odap.question}
+            </h6><BasicElements/>
             
             <Row className="row-grid">
               <Col lg="6">

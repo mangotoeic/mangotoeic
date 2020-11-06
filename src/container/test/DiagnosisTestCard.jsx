@@ -3,7 +3,7 @@ import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-import {addOdapQidAction,addUserInfoAction, initOdapQidAction,addResultAction} from '../../store'
+import {addOdapQidAction,addUserInfoAction, initOdapQidAction,addResultAction,increaseNumAction,initNumAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
 import {context as c} from '../../context.js'
@@ -16,23 +16,23 @@ const DiagnosisTestCard =()=> {
     const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
     const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
     const states =useSelector(state=>state['testReducer'])
+    let testgen =useSelector(state => state['testgenReducer'])
+    console.log(testgen)
     const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [testgen, setTestgen] = useState(0)
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [isActive,setIsActve] =useState(true)
     const [changeMode,setChangeMode] =useState(false)
 
-    const num_check2 =num=>{
-        if(num===10){
-          num=0
-          
+    const num_check2 =()=>{
+        if(testnum===11){
+          dispatch(initNumAction())
+          testgen=0
           save1()
           save2()
-          save3()
           dispatch(initOdapQidAction()) 
           let endtest = window.confirm('테스트가 종료되었습니다. 진단 테스트로 바로 갈까요?');
           if (endtest === true) {
@@ -42,18 +42,13 @@ const DiagnosisTestCard =()=> {
             history.push("/")
           }
         }
-        return num
+        return testnum
       }
-      const num_check =num=>{
-        if(num===5){
-          num=0
-          save1()
-          save2()
-          save3()
-          dispatch(initOdapQidAction())
+      const num_check =()=>{
+        if(testnum===6){
+          dispatch(initNumAction())
+          testgen=0
           getMinitestSet()
-          
-        
         }
 
       }
@@ -90,33 +85,22 @@ const DiagnosisTestCard =()=> {
         
     }
 }, [states])
-const save3 = useCallback(async () => {
-    try {
-        const req2 = {
-            method: c.post,
-            url: `${c.url}/api/selectedqs`,
-            data: {user_id: loggedIn  ,qId:diagnosisTestInfo.qId, answered_correctly: diagnosisTestInfo.answeredCorrectly }    
-        }
-        const res2 = await axios(req2) 
-        res2()
-    } catch (error) {
-        
-    }
-}, [states])
 
 const getMinitestSet = useCallback(async () => {
     try {
         const req = {
             method: c.post,
-            url: `${c.url}/api/minitest`,
-            data: {data}    
+            url: `${c.url}/api/minitests`,
+            data: {user_id: loggedIn  ,qId:diagnosisTestInfo.qId, answered_correctly: diagnosisTestInfo.answeredCorrectly }    
         }
         const res = await axios(req) 
-        tests= res.data
+        setTests(res.data)
     } catch (error) {
         
     }
 }, [states])
+
+
 
 
     useEffect(() => {
@@ -149,7 +133,7 @@ const getMinitestSet = useCallback(async () => {
 
   
       const handleClick = () => {
-          setTestgen(testgen=>testgen + 1)
+          dispatch(increaseNumAction())
           setTestnum(testnum=>testnum + 1) 
     }
     
@@ -184,10 +168,11 @@ const getMinitestSet = useCallback(async () => {
       {'' !== myAnswer ? console.log("next"): dispatch(addOdapQidAction(tests[testgen]))}
       handleClick()
       setPriorQuestionTime(time.timeStamp)
-      num_check()
+      
     }
     const subtracTimeFromPrior=(priorQuestionTime,currentQuestionTime)=> (currentQuestionTime-priorQuestionTime)
-  
+    num_check()
+    num_check2()
    
 
     return<>

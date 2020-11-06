@@ -11,7 +11,7 @@ import {OdapList} from "./container/Odap"
 import {TestCard, DiagnosisCard,DiagnosisTestCard} from "./container/test"
 import {Main,Login,Register,NotePage,BookMark,AppReview,Board} from "./template/pages";
 import { createStore, applyMiddleware, combineReducers} from 'redux'
-import {testReducer,timeReducer,userInfoFromTestReducer,timerToggleReducer,diagnosisReducer,diagnosisTestReducer} from './store'
+import {testReducer,timeReducer,userInfoFromTestReducer,timerToggleReducer,diagnosisReducer,diagnosisTestReducer,testgenReducer} from './store'
 import ReduxThunk from 'redux-thunk'
 const rootReducer = combineReducers({
     testReducer,
@@ -19,7 +19,8 @@ const rootReducer = combineReducers({
     userInfoFromTestReducer,
     timerToggleReducer,
     diagnosisReducer,
-    diagnosisTestReducer
+    diagnosisTestReducer,
+    testgenReducer
 })
 
 
