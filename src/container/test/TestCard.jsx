@@ -11,6 +11,7 @@ const TestCard =()=> {
   const [data, setData] = useState([])
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
+    
     const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
     const states =useSelector(state=>state['testReducer'])
     const [update, setUpdate] = useState(false);
@@ -26,7 +27,7 @@ const TestCard =()=> {
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
 
-    const save1 = useCallback(async () => {
+    const save1 = useCallback(async (userInfoFromTest) => {
       try {
           const req1 = {
               method: c.post,
@@ -133,7 +134,9 @@ const TestCard =()=> {
       toggle()
     }
     const saveEveryThing =() =>{  
-      save1()
+      console.log(userInfoFromTest)
+      
+      save1(userInfoFromTest)
       save2()
       dispatch(initOdapQidAction()) }
 
