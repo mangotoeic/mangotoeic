@@ -130,14 +130,14 @@ const DemoNavbar = props => {
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-1" />
-                    <span className="nav-link-inner--text">문제 풀기</span>
+                    <span className="nav-link-inner--text">문제</span>
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem to="/test-start-page" tag={Link}>
                       문제 풀기
                     </DropdownItem>
-                    <DropdownItem to="/test_start-page" tag={Link}>
-                      풀이 결과
+                    <DropdownItem to="/generate-test-page" tag={Link}>
+                      문제 생성하기
                     </DropdownItem>
                     {/* <DropdownItem to="/login-page" tag={Link}>
                       예측점수 확인
