@@ -56,7 +56,7 @@ return<>
 <Container>
 {vocabs.map((vocab, index) =>(
 <Row className="show-grid" key={index}>
-<Col lg="2">
+<Col lg="2 border-right">
     <p className="vocab mt-3">
       {Object.keys(vocab)}
     </p>

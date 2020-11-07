@@ -28,30 +28,46 @@ import {
 
 const OdapList = () => {
     const [odaps, setOdaps] = useState(null)
+    const [bookmarks, setBookmarks] = useState(null)
     const [checked, setChecked] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
+    const [id, setid] = useState(sessionStorage.getItem('sessionUser'))
     console.log(typeof odaps)
+    const save = useCallback(async (e) => {
+      try {
+        console.log(e.target.value)
+       
+          const req2 = {
+              method: c.post,
+              url: `${c.url}/api/bookmark`,
+              data: {user_id: id, qId:e.target.value}    
+          }
+          const res2 = await axios(req2) 
+          res2()
+      } catch (error) {
+          
+      }
+  }, [this])
     useEffect(() => {
       const giveOdaps = async () => {
         await axios.post(
           'http://127.0.0.1:8080/api/odap',
-          {user_id: loggedIn}
+          {user_id: id}
         ).
         then((res)=>{setOdaps(res.data)})
         .catch(()=>{})
       }
-      // const bookmark = async () => {
-      //   await axios.post(
-      //     'http://127.0.0.1:8080/api/bookmark',
-      //     {user_id: loggedIn,
-      //     input: checked}
+      const giveBookmarks = async () => {
+        
+        await axios.get(
 
-      //   ).
-      //   then((res)=>{setOdaps(res.data)})
-      //   .catch(()=>{})
-      // }
+          `http://127.0.0.1:8080/api/bookmarks/${id}`,
+          
+        ).
+        then((res)=>{setBookmarks(res.data)})
+        .catch(()=>{})
+      }
       const fetchOdaps = async () => {
         try {
           // 요청이 시작 할 때에는 error 와 tests 를 초기화하고
@@ -87,7 +103,7 @@ const OdapList = () => {
       {odaps.map((odap, index) =>(
       <Col lg="12" key={index}>
         <Card className="card-lift--hover shadow border-0" style={{margin :"15px"}}>
-          <CardBody className="py-5">
+          <CardBody className="pt-5 pb-3">
             <Row className="row-grid">
               <Col lg="11">
                 <h6 className= "text-note" >
@@ -97,7 +113,7 @@ const OdapList = () => {
               <Col lg="1">
                 <label className="custom-toggle">
                 {/* onClick={bookmark} */}
-                  <input type="checkbox" />
+                  <input type="checkbox" onChange={save} value={odap.qId} defaultDisabled/>
                   <span className="custom-toggle-slider rounded-circle" />
                 </label>
               </Col>
