@@ -8,10 +8,12 @@ import DemoNavbar from './components/Navbars/DemoNavbar'
 import {ProfileCard} from "./container/profile"
 import {VocabList} from "./container/vocab"
 import {OdapList} from "./container/Odap"
+import {GenTest} from "./container/test"
 import {TestCard, DiagnosisCard,DiagnosisTestCard} from "./container/test"
 import {Main,Login,Register,NotePage,BookMark,AppReview,Board} from "./template/pages";
 import { createStore, applyMiddleware, combineReducers} from 'redux'
-import {testReducer,timeReducer,userInfoFromTestReducer,timerToggleReducer,diagnosisReducer,diagnosisTestReducer} from './store'
+import {testReducer,timeReducer,userInfoFromTestReducer,timerToggleReducer,
+  diagnosisReducer,diagnosisTestReducer,testgenReducer,loadingReducer} from './store'
 import ReduxThunk from 'redux-thunk'
 const rootReducer = combineReducers({
     testReducer,
@@ -19,7 +21,9 @@ const rootReducer = combineReducers({
     userInfoFromTestReducer,
     timerToggleReducer,
     diagnosisReducer,
-    diagnosisTestReducer
+    diagnosisTestReducer,
+    testgenReducer,
+    loadingReducer
 })
 
 
@@ -43,6 +47,7 @@ const App = () => {
         <Route path="/bookmark-page" component={BookMark}/>
         <Route path="/vocab-page" component={VocabList}/>
         <Route path="/diagnosis-test-page" component={DiagnosisTestCard}/>
+        <Route path="/generate-test-page" component={GenTest}/>
         </Provider>
       </Switch>
     </BrowserRouter>

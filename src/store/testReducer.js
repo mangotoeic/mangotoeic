@@ -14,6 +14,32 @@ export const addUserInfoAction = data => ({ type:"ADD_USER_INFO_FROM_TEST",
                                             priorQuestionElapseTime:data.priorQuestionElapseTime,
                                             userAnswer:data.userAnswer
 })
+export const activeLoadingAction=() => ({type:"ACTIVE_LOAD"})
+export const deactiveLoadingAction=()=>({type:"DEACTIVE_LOAD"}) 
+export const increaseNumAction =() => ({type:"INCREASE_NUM"})
+export const initNumAction=() =>({type:"INIT_NUM"})
+const loadingState = false
+export const loadingReducer=(state = loadingState , action)=>{
+    switch(action.type){
+        case "ACTIVE_LOAD":
+            return true
+        case "DEACTIVE_LOAD":
+            return false
+        default:
+            return state
+    }
+}
+const testgenState = 0
+export const testgenReducer=( state =testgenState , action)=>{
+    switch(action.type){
+        case "INCREASE_NUM":
+            return state+1
+        case "INIT_NUM":
+            return  0
+        default:
+            return state
+    }
+}
 
 export const timeReducer =(state = timeState, action)=>{
     switch(action.type){

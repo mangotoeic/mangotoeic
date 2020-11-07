@@ -3,7 +3,8 @@ import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction} from '../../store'
+import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction,addResultAction,
+  increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
 import {context as c} from '../../context.js'
@@ -11,81 +12,107 @@ const TestCard =()=> {
   const [data, setData] = useState([])
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
-    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
+    const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
+    const [id, setId] = useState(sessionStorage.getItem('sessionUser'))
     const states =useSelector(state=>state['testReducer'])
     const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
-    const [loading, setLoading] = useState(false);
+    let loading = useSelector(state=> state['loadingReducer'])
     const [error, setError] = useState(null);
-    const [testgen, setTestgen] = useState(0)
+    let testgen =useSelector(state => state['testgenReducer'])
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [correct ,setCorrect] =useState(true)
     const [isActive,setIsActve] =useState(true)
 
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
-
-    const save1 = useCallback(async () => {
+    const num_check =(testgen)=>{
+      console.log("testgen")
+      console.log(testgen)
+      if(testgen ===5){
+        dispatch(activeLoadingAction())
+        loading=true
+        dispatch(initNumAction())
+        testgen=0
+        
+        // loading =true
+        getMinitestSet(diagnosisTestInfo)
+      }
+      
+    }
+    const save1 = useCallback(async (userInfoFromTest) => {
       try {
           const req1 = {
               method: c.post,
               url: `${c.url}/api/testresults`,
-              data: {user_id: loggedIn , qId:userInfoFromTest.qId, timestamp:userInfoFromTest.timeStamp, 
+              data: {user_id: id , qId:userInfoFromTest.qId, timestamp:userInfoFromTest.timeStamp, 
                 prior_question_elapsed_time:userInfoFromTest.priorQuestionElapseTime, answered_correctly:userInfoFromTest.answeredCorrectly,
                 user_answer: userInfoFromTest.userAnswer}
           }
           const res1 = await axios(req1)
-          res1()
+      
           console.log(req1.data)
       } catch (error) {
           
       }
   }, [states])
 
-  const save2 = useCallback(async () => {
+  const save2 = useCallback(async (states) => {
     try {
         const req2 = {
             method: c.post,
             url: `${c.url}/api/odaps`,
-            data: {user_id: loggedIn  ,qId:states.qId}    
+            data: {user_id: id  ,qId:states.qId}    
         }
         const res2 = await axios(req2) 
-        res2()
-    } catch (error) {
         
+    } catch (error) {
+
     }
 }, [states])
+const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
+  try {
+    
+      const req = {
+          method: c.post,
+          url: `${c.url}/api/minitests`,
+          data: {user_id: id  ,qId:diagnosisTestInfo.qId, answer_correctly: diagnosisTestInfo.answeredCorrectly }    
+      }
+      const res = await axios(req) 
+      setTests(res.data)
+  } catch (error) {
+      
+  }
+  dispatch(deactiveLoadingAction())
 
+}, [diagnosisTestInfo])
   
     useEffect(() => {
       const fetchTests = async () => {
         try {
-          // 요청이 시작 할 때에는 error 와 tests 를 초기화하고
-          setError(null);
-          setTests(null);
-          // loading 상태를 true 로 바꿉니다.
-          setLoading(true);
-          const response = await axios.get(
-            'http://127.0.0.1:8080/api/legacies'
-          );
-          setTests(response.data);
-        } catch (e) {
-          setError(e);
+                const req2 = {
+                method: c.get,
+                url: `${c.url}/api/nextminiset/${id}`,
+                data: {user_id: id  ,qId:diagnosisTestInfo.qId, answer_correctly: diagnosisTestInfo.answeredCorrectly}    
+            }
+            const res2 = await axios(req2) 
+            setTests(res2.data)
+        } catch (error) {
+            
         }
-        setLoading(false);
-      };
-  
+    }
       fetchTests();
     }, []);
-    if (loading) return <div>로딩중..</div>;
-    if (error) return <div>에러가 발생했습니다</div>;
-    if (!tests) return null;
-    
+   
+  
+
+   
   
       const handleClick = () => {
-          setTestgen(testgen=>testgen + 1)
-          setTestnum(testnum=>testnum + 1) 
+          dispatch(increaseNumAction())
+          setTestnum(testnum=>testnum + 1)
+          
     }
     
   const addUserInfo = (qId,answeredCorrectly,timeStamp,priorQuestionElapseTime,userAnswer)=>({
@@ -109,7 +136,10 @@ const TestCard =()=> {
         
         toggle()
       }
-      
+      const addToMinitest =(qId ,answeredCorrectly) =>({
+        qId,
+        answeredCorrectly
+      })
       let myAnswer = ''
       let userAnswer = 0
       {document.getElementById("customRadio1").checked && (tests[testgen].ansA===tests[testgen].answer ? myAnswer = tests[testgen].answer: userAnswer=0)}
@@ -120,6 +150,7 @@ const TestCard =()=> {
       
       priorQuestionElapseTime=subtracTimeFromPrior(priorQuestionTime,time.timeStamp)
       {'' !== myAnswer ? dispatch(addUserInfoAction(addUserInfo(tests[testgen].qId,1,time.timeStamp,priorQuestionElapseTime,userAnswer))):dispatch(addUserInfoAction(addUserInfo( tests[testgen].qId,0,time.timeStamp,priorQuestionElapseTime,userAnswer)))}
+      {'' !== myAnswer ? dispatch(addResultAction(addToMinitest(tests[testgen].qId,1))): dispatch(addResultAction(addToMinitest(tests[testgen].qId,0)))}
       {'' !== myAnswer ? handleClick(): addTodoList(tests[testgen])}
       
       
@@ -133,11 +164,17 @@ const TestCard =()=> {
       toggle()
     }
     const saveEveryThing =() =>{  
-      save1()
-      save2()
+      save1(userInfoFromTest)
+      save2(states)
       dispatch(initOdapQidAction()) }
-
-    return<>
+      num_check(testgen)
+      if (loading) return <div>로딩중..</div>;
+      if (error) return <div>에러가 발생했습니다</div>;
+      if (!tests) return null;
+    
+   
+      return<>
+     
     <TestStart>
     <Container>
               <Card className="card-profile shadow mt--300">
@@ -154,7 +191,7 @@ const TestCard =()=> {
                     </div>
                     <div className="h6 mt-4">
                       <i className="ni business_briefcase-24 mr-2" />
-                        {tests[testgen].question}
+                        {typeof tests[testgen] == "undefined" ? 0  :tests[testgen].question}
                     </div>
                   </div>
                   <div className="mt-5 py-5 text-center">
@@ -174,7 +211,7 @@ const TestCard =()=> {
                 
               />
               <label className="custom-control-label" htmlFor="customRadio1">
-                <span>{tests[testgen].ansA}</span>
+                <span>{typeof tests[testgen]=="undefined"  ? 0  :tests[testgen].ansA}</span>
               </label>
             </div>
             <div className="custom-control custom-radio mb-3">
@@ -187,7 +224,7 @@ const TestCard =()=> {
                 
               />
               <label className="custom-control-label" htmlFor="customRadio2">
-                <span>{tests[testgen].ansB}</span>
+                <span>{typeof tests[testgen]=="undefined"  ? 0  :tests[testgen].ansB}</span>
               </label>
             </div>
             </Row>
@@ -202,7 +239,7 @@ const TestCard =()=> {
                 
               />
               <label className="custom-control-label" htmlFor="customRadio3">
-                <span>{tests[testgen].ansC}</span>
+                <span>{typeof tests[testgen]=="undefined"  ? 0  :tests[testgen].ansC}</span>
               </label>
             </div>
             <div className="custom-control custom-radio mb-3">
@@ -215,7 +252,7 @@ const TestCard =()=> {
                 
               />
               <label className="custom-control-label" htmlFor="customRadio4">
-                <span>{tests[testgen].ansD}</span>
+                <span>{typeof tests[testgen]=="undefined"  ? 0  :tests[testgen].ansD}</span>
               </label>
             </div>
             </Row>
@@ -232,6 +269,6 @@ const TestCard =()=> {
               
             </Container>
             </TestStart>
-            </>
+           </> 
 }
 export default TestCard
