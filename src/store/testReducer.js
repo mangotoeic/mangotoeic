@@ -14,13 +14,21 @@ export const addUserInfoAction = data => ({ type:"ADD_USER_INFO_FROM_TEST",
                                             priorQuestionElapseTime:data.priorQuestionElapseTime,
                                             userAnswer:data.userAnswer
 })
-
+export const changeText =text=> ({type:"TEXT_CHANGE", data: text})
 export const activeLoadingAction=() => ({type:"ACTIVE_LOAD"})
 export const deactiveLoadingAction=()=>({type:"DEACTIVE_LOAD"}) 
 export const increaseNumAction =() => ({type:"INCREASE_NUM"})
 export const initNumAction=() =>({type:"INIT_NUM"})
 const loadingState = false
-
+const textState =''
+export const textReducer = (state= textState , action) =>{
+    switch(action.type){
+        case "TEXT_CHANGE":
+            return action.data
+        default:
+            return state
+    }
+}
 export const loadingReducer=(state = loadingState , action)=>{
     switch(action.type){
         case "ACTIVE_LOAD":

@@ -1,12 +1,12 @@
 import React,{useCallback,useState} from 'react'
 import {useSelector, useDispatch} from "react-redux";
 import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction,addResultAction,
-    increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction} from '../../store'
+    increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction,changeText} from '../../store'
 import {Profile} from '../../template/pages'
 import {context as c } from '../../context'
 import axios from "axios"
 import {Stopwatch} from "../../components/Timers"
-
+import { useHistory } from 'react-router-dom';
 import {
     Badge,
     Button,
@@ -29,7 +29,7 @@ const GenTest =()=>{
     const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
     const states =useSelector(state=>state['testReducer'])
     const [update, setUpdate] = useState(false);
-    const [tests, setTests] = useState(null);
+    const [tests, setTests] = useState('null');
     const [testnum, setTestnum] = useState(1)
     let loading = useSelector(state=> state['loadingReducer'])
     const [error, setError] = useState(null);
@@ -37,15 +37,17 @@ const GenTest =()=>{
     const [correct ,setCorrect] =useState(true)
     const [isActive,setIsActve] =useState(true)
     const [id, setId] = useState(sessionStorage.getItem('sessionUser'))
-    const [text,setText] = useState('')
+    const text = useSelector(state => state['textReducer'])
     let testgen =useSelector(state => state['testgenReducer'])
+    const history = useHistory();
     const dispatch = useDispatch()
-    const submitPost = useCallback( async  e => { 
+    const submitPost = async  () => { 
+      
         try{
             const req={
                 method: c.post,
                 url: `${c.url}/api/newqs`,
-                data: {id, text}
+                data: {text}
             }
             const res = await axios(req)
             setTests(res.data)
@@ -54,11 +56,15 @@ const GenTest =()=>{
 
         }
         
-      },[])
+      }
       
       const handleClick = () => {
         dispatch(increaseNumAction())
         setTestnum(testnum=>testnum + 1)
+        if(typeof tests[testgen+1]== "undefined")
+ {
+  history.push('/')
+ } 
         
   }
  
@@ -109,11 +115,11 @@ const num_check =(testgen)=>{
       const saveEveryThing =() =>{  }
         num_check(testgen)
         
-        
+        if(typeof tests[testgen]=="undefined") return <div>끝</div> 
       
     return<>
     <Profile>
- {tests === null ? <Container>
+ {tests === 'null' ? <Container>
   <Row className="justify-content-center mt--300">
     <Col lg="8">
       <Card className="bg-gradient-secondary shadow">
@@ -131,7 +137,7 @@ const num_check =(testgen)=>{
               placeholder="여기에 영어 문장을 작성해보세요~"
               rows="5"
               type="textarea"
-              onChange = {e => setText(e.target.value)}
+              onChange = {e => dispatch(changeText(e.target.value))}
             />
           </FormGroup>
           <div>
@@ -142,7 +148,7 @@ const num_check =(testgen)=>{
               size="lg"
               type="button"
               onClick = {submitPost}
-              method='POST'>
+              >
               제출
             </Button>
           </div>
