@@ -6,7 +6,7 @@ import axios from 'axios'
 import ReactDOM from 'react-dom';
 import {context as c} from '../../context.js'
 import {fetchBookmark} from '../../store'
-
+import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import {
     Badge,
     Button,
@@ -60,6 +60,54 @@ const MarkedList = () => {
   <BookMark>
     <Container>
       {bookmarks.map((odap, index) =>(
+        <Flippy
+        flipOnHover={false} // default false
+        flipOnClick={true} // default false
+        flipDirection="horizontal" // horizontal or vertical
+         // to use toggle method like this.flippy.toggle()
+        // if you pass isFlipped prop component will be controlled component.
+        // and other props, which will go to div
+        style={{ width: '1000px', height: '200px', margin :"200px" }} /// these are optional style, it is not necessary
+      >
+        <FrontSide
+          style={{
+            backgroundColor: '#e6f7f6',
+          }}
+        >
+          <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
+            <CardBody className="py-5">
+             <h6 className= "text-note" >
+                {odap.question} 
+             </h6>           
+              <Row className="row-grid">
+                 <Col lg="6">
+                  <p className="description mt-3">
+                    A. {odap.ansA}
+                  </p>
+                  <p className="description mt-3">
+                     B. {odap.ansB}
+                   </p>
+                 </Col>
+                 <Col lg="6">
+                   <p className="description mt-3">
+                     C. {odap.ansC}
+                   </p>
+                   <p className="description mt-3">
+                     D. {odap.ansD}
+                   </p>
+                 </Col>
+               </Row>
+               {/* <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}>정답 보기</button></span> */}
+             </CardBody>
+           </Card>
+        </FrontSide>
+        <BackSide
+          style={{ backgroundColor: '#e6f7f6'}}>
+         <h10 style={{textAlign: 'center'}}>
+                 {odap.answer}
+               </h10>
+        </BackSide>
+      </Flippy>
         // <CardWrapper>
         // <Card style={{datatoggleclass:"flipped"}}>
         //   <CardFront>
@@ -97,32 +145,32 @@ const MarkedList = () => {
         //   </CardBack>
         // </Card>
       // </CardWrapper>
-          <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
-            <CardBody className="py-5">
-              <h6 className= "text-note" >
-                {odap.question} 
-              </h6>           
-              <Row className="row-grid">
-                <Col lg="6">
-                  <p className="description mt-3">
-                    A. {odap.ansA}
-                  </p>
-                  <p className="description mt-3">
-                    B. {odap.ansB}
-                  </p>
-                </Col>
-                <Col lg="6">
-                  <p className="description mt-3">
-                    C. {odap.ansC}
-                  </p>
-                  <p className="description mt-3">
-                    D. {odap.ansD}
-                  </p>
-                </Col>
-              </Row>
-              <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}>정답 보기</button></span>
-            </CardBody>
-          </Card>
+          // <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
+          //   <CardBody className="py-5">
+          //     <h6 className= "text-note" >
+          //       {odap.question} 
+          //     </h6>           
+          //     <Row className="row-grid">
+          //       <Col lg="6">
+          //         <p className="description mt-3">
+          //           A. {odap.ansA}
+          //         </p>
+          //         <p className="description mt-3">
+          //           B. {odap.ansB}
+          //         </p>
+          //       </Col>
+          //       <Col lg="6">
+          //         <p className="description mt-3">
+          //           C. {odap.ansC}
+          //         </p>
+          //         <p className="description mt-3">
+          //           D. {odap.ansD}
+          //         </p>
+          //       </Col>
+          //     </Row>
+          //     <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}>정답 보기</button></span>
+          //   </CardBody>
+          // </Card>
           // <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
           //   <CardBody className="py-5">
           //     <h10 style={{textAlign: 'center'}}>
