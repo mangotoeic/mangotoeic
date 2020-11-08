@@ -5,6 +5,8 @@ import { debounce } from 'throttle-debounce'
 import axios from 'axios'
 import ReactDOM from 'react-dom';
 import {context as c} from '../../context.js'
+import {fetchBookmark} from '../../store'
+
 import {
     Badge,
     Button,
@@ -16,127 +18,111 @@ import {
     InputGroupText,
     InputGroup,
     Container,
+    Card,
     Row,
     Col,
   } from 'reactstrap';
 import ReactCardFlip from 'react-card-flip';
 
 const MarkedList = () => {
-    const [odaps, setOdaps] = useState(null)
+  let bookmarks = useSelector(state=> state['bookmarkReducer'])
+  const dispatch =useDispatch();
     const [checked, setChecked] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
+    const [id, setId] = useState(sessionStorage.getItem('sessionUser'))
     const [isFlipped,setFlip]= useState(false)
     const handleClick = (e)=> {
       e.preventDefault();
       setFlip(!isFlipped);
     }
     useEffect(() => {
-      const bookmark = async () => {
-        await axios.post(
-          'http://127.0.0.1:8080/api/bookmark',
-          {user_id: loggedIn}
-
-        ).
-        then((res)=>{setOdaps(res.data)})
-        .catch(()=>{})
-      }
-      const fetchOdaps = async () => {
-        try {
-          // 요청이 시작 할 때에는 error 와 tests 를 초기화하고
-          setError(null);
-          setOdaps(null);
-          // loading 상태를 true 로 바꿉니다.
-          setLoading(true);
-          const response = await axios.get(
-            'http://127.0.0.1:8080/api/odaps'
-          );
-          setOdaps(response.data);
-          console.log('-----------------------1-----------------')
-          console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
-        } catch (e) {
-          setError(e);
+      const giveBookmarks = async () => {
+        try{  
+          const req = {
+                  method: c.get,
+                  url: `${c.url}/api/bookmarks/${id}`
+                
+          }
+          const res = await axios(req)
+           console.log(res.data)
+          //  bookmarks= res.data
+          dispatch(fetchBookmark(res.data))
+        }catch(err){  
         }
-        setLoading(false);
-      };
-      giveOdaps();
-      // fetchOdaps();
-      console.log(odaps);
+      
+        }
+        giveBookmarks();
+      
     }, []);
 
-    if (loading) return <div>로딩중..</div>;
-    if (error) return <div>에러가 발생했습니다</div>;
-    if (!odaps) return null;
-    const bookmark=e=>{e.preventDefault()
-      console.log('된다')
-    };
-  return <BookMark>
+  return<> 
+  <BookMark>
     <Container>
-      {odaps.map((odap, index) =>(
-        <CardWrapper>
-        <Card style={{datatoggleclass:"flipped"}}>
-          <CardFront>
-            <Layer>
-              <h1>Lubos</h1>
-              <Corner></Corner>
-              <Corner></Corner>
-              <Corner></Corner>
-              <Corner></Corner>
-            </Layer>
-          </CardFront>
-          <CardBack>
-            <Layer>
-              <Top>
-                <h2>Chief Idea Officer</h2>
-              </Top>
-              <Bottom>
-                <h3>
-                {odap.question}
-                </h3>
-                <h3>
-                  Email:
-                  <a href='mailto:lmenus@lmen.us'>lmenus@lmen.us</a>
-                </h3>
-                <h3>
-                  Twitter:
-                  <a href='https://www.twitter.com/lmenus' target='_blank'>lmenus</a>
-                </h3>
-                <h3>
-                  Web:
-                  <a href='https://www.lmen.us' target='_blank'>lmen.us</a>
-                </h3>
-              </Bottom>
-            </Layer>
-          </CardBack>
-        </Card>
-      </CardWrapper>
-          // <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
-          //   <CardBody className="py-5">
-          //     <h6 className= "text-note" >
-          //       {odap.question} 
-          //     </h6>           
-          //     <Row className="row-grid">
-          //       <Col lg="6">
-          //         <p className="description mt-3">
-          //           A. {odap.ansA}
-          //         </p>
-          //         <p className="description mt-3">
-          //           B. {odap.ansB}
-          //         </p>
-          //       </Col>
-          //       <Col lg="6">
-          //         <p className="description mt-3">
-          //           C. {odap.ansC}
-          //         </p>
-          //         <p className="description mt-3">
-          //           D. {odap.ansD}
-          //         </p>
-          //       </Col>
-          //     </Row>
-          //     <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}>정답 보기</button></span>
-          //   </CardBody>
-          // </Card>
+      {bookmarks.map((odap, index) =>(
+        // <CardWrapper>
+        // <Card style={{datatoggleclass:"flipped"}}>
+        //   <CardFront>
+        //     <Layer>
+        //       <h1>Lubos</h1>
+        //       <Corner></Corner>
+        //       <Corner></Corner>
+        //       <Corner></Corner>
+        //       <Corner></Corner>
+        //     </Layer>
+        //   </CardFront>
+        //   <CardBack>
+        //     <Layer>
+        //       <Top>
+        //         <h2>Chief Idea Officer</h2>
+        //       </Top>
+        //       <Bottom>
+        //         <h3>
+        //         {odap.question}
+        //         </h3>
+        //         <h3>
+        //           Email:
+        //           <a href='mailto:lmenus@lmen.us'>lmenus@lmen.us</a>
+        //         </h3>
+        //         <h3>
+        //           Twitter:
+        //           <a href='https://www.twitter.com/lmenus' target='_blank'>lmenus</a>
+        //         </h3>
+        //         <h3>
+        //           Web:
+        //           <a href='https://www.lmen.us' target='_blank'>lmen.us</a>
+        //         </h3>
+        //       </Bottom>
+        //     </Layer>
+        //   </CardBack>
+        // </Card>
+      // </CardWrapper>
+          <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
+            <CardBody className="py-5">
+              <h6 className= "text-note" >
+                {odap.question} 
+              </h6>           
+              <Row className="row-grid">
+                <Col lg="6">
+                  <p className="description mt-3">
+                    A. {odap.ansA}
+                  </p>
+                  <p className="description mt-3">
+                    B. {odap.ansB}
+                  </p>
+                </Col>
+                <Col lg="6">
+                  <p className="description mt-3">
+                    C. {odap.ansC}
+                  </p>
+                  <p className="description mt-3">
+                    D. {odap.ansD}
+                  </p>
+                </Col>
+              </Row>
+              <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}>정답 보기</button></span>
+            </CardBody>
+          </Card>
           // <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
           //   <CardBody className="py-5">
           //     <h10 style={{textAlign: 'center'}}>
@@ -145,7 +131,7 @@ const MarkedList = () => {
             
         ))}
       </Container> 
-    </BookMark>
+    </BookMark></>
 }
 
 export default MarkedList

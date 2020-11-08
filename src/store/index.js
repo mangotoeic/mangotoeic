@@ -6,7 +6,8 @@ export {addOdapQidAction,addUserInfoAction, timeReducer ,returnCurrentTime,userI
      isActiveAction, timerToggleReducer, initOdapQidAction,addResultAction,diagnosisTestReducer,increaseNumAction,
      initNumAction, testgenReducer,activeLoadingAction,deactiveLoadingAction,loadingReducer} from './testReducer'
 export {diagnosisReducer, addUserDiagnosisAction} from './diagnosisReducer'
-
+export {changeBookmarkState,changeBookmarkReducer,renderBookmarkState,
+     fetchBookmark, bookmarkReducer,setOdapsReducer,setOdaps} from './bookmarkReducer'
 
 
 const reviewstore = createStore(reviewReducer)

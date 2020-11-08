@@ -27,7 +27,7 @@ const VocabList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchVocabs = async id => {
+    const fetchVocabs = async () => {
       try {
         // 요청이 시작 할 때에는 error 와 tests 를 초기화하고
         setError(null);
