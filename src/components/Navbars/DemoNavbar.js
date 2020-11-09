@@ -79,6 +79,7 @@ const DemoNavbar = props => {
                   </Col>
                 </Row>
               </div>
+            {props.isAuth !== null?
               <Nav className="navbar-nav-hover align-items-lg-center" navbar>
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav>
@@ -95,9 +96,7 @@ const DemoNavbar = props => {
                     <DropdownItem to="/profile-page" tag={Link}>
                       프로필
                     </DropdownItem>
-                    {/* <DropdownItem to="/register-page" tag={Link}>
-                      Register
-                    </DropdownItem> */}
+                    
                   </DropdownMenu>
                 </UncontrolledDropdown>
                   <UncontrolledDropdown nav>
@@ -129,12 +128,7 @@ const DemoNavbar = props => {
                     <DropdownItem to="/generate-test-page" tag={Link}>
                       문제 생성하기
                     </DropdownItem>
-                    {/* <DropdownItem to="/login-page" tag={Link}>
-                      예측점수 확인
-                    </DropdownItem> */}
-                    {/* <DropdownItem to="/register-page" tag={Link}>
-                      Register
-                    </DropdownItem> */}
+               
                   </DropdownMenu>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown nav>
@@ -149,15 +143,10 @@ const DemoNavbar = props => {
                     <DropdownItem to="/board-page" tag={Link}>
                       자유게시판
                     </DropdownItem>
-                    {/* <DropdownItem to="/login-page" tag={Link}>
-                      Login
-                    </DropdownItem>
-                    <DropdownItem to="/register-page" tag={Link}>
-                      Register
-                    </DropdownItem> */}
+                   
                   </DropdownMenu>
                 </UncontrolledDropdown>
-              </Nav>
+              </Nav> : <></> }
               <Nav className="align-items-lg-center ml-lg-auto" navbar>
                 { props.isAuth === null ?
                 <>
@@ -189,7 +178,7 @@ const DemoNavbar = props => {
                   <span className="nav-link-inner--text ml-1"> 로그아웃 </span>
                 </Button>
                 </>
-                }
+               }
               </Nav>
             </UncontrolledCollapse>
           </Container>
