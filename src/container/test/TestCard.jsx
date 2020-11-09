@@ -3,12 +3,14 @@ import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
+import {useHistory} from "react-router-dom"
 import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction,addResultAction,
   increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
 import {context as c} from '../../context.js'
 const TestCard =()=> {
+  const history = useHistory()
   const [data, setData] = useState([])
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
@@ -166,6 +168,7 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
     const saveEveryThing =() =>{  
       save1(userInfoFromTest)
       save2(states)
+      history.push('/profile-page')
       dispatch(initOdapQidAction()) }
       num_check(testgen)
       if (loading) return <div>로딩중..</div>;
@@ -178,11 +181,10 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
     <TestStart>
     <Container>
               <Card className="card-profile shadow mt--300">
-                <Button onClick={saveEveryThing}>그만 풀기</Button>
                 <div className="px-4">
                 {/* <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'} /> */}
                 <Stopwatch/>
-                  <div className="text-center mt-5">
+                  <div className="text-center mt-4">
                     <h3>
                       {testnum}번 문제{' '}
                     </h3>
@@ -195,7 +197,7 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
                     </div>
                   </div>
                   <div className="mt-5 py-5 text-center">
-                    <Row className="justify-content-center">
+                    <Row className="justify-content-center ml-0 mr-0">
                       <Col lg="9">
                         <div className="mb-3">
               {/* <small className="text-uppercase font-weight-bold">정답</small> */}
@@ -265,8 +267,8 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
                     </Row>
                   </div>
                 </div>
+              <Button className='bg-light' onClick={saveEveryThing}>그만 풀기</Button>
               </Card>
-              
             </Container>
             </TestStart>
            </> 

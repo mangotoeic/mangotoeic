@@ -22,6 +22,7 @@ import {
     Row,
     Col,
   } from 'reactstrap';
+  
 // import './item.css'
 // export default function Icon({boom}) {
 //   return boom ? <ZapIcon /> : <BeakerIcon />

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
-
+import {context as c } from '../../context'
 // reactstrap components
 import {
   Button,
@@ -25,27 +25,48 @@ import SimpleFooter from "components/Footers/SimpleFooter.js";
 const Login = () => { 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
   const history = useHistory();
-  const onClickHandler = e => {
+  const onClickHandler =async e => {
     e.preventDefault()
-    axios.post(`http://localhost:8080/api/access`, {email, password})
-        .then(res => {
-            alert(`${res.data["user_name"]}님 환영합니다! `)
-            sessionStorage.setItem("sessionUser", res.data['user_id']);
-            sessionStorage.setItem("sessionEmail", res.data['email']);
-            sessionStorage.setItem("sessionName", res.data['user_name']);
-            console.log(res.data['user_name']);
-            history.push("/");
-            window.location.reload()
-        })
-        .catch(error => {
-            alert('메일주소와 비밀번호가 일치하지 않습니다.');
+    try{
+    const req={
+      method:c.post,
+      url:`${c.url}/api/access`,
+      data:{email, password}
+    }
+    const req2={
+      method:c.post,
+      url:`${c.url}/api/count`,
+      data:{email}
+    }
+    const res=await axios(req)
+    const res2= await axios(req2)
+    sessionStorage.setItem("sessionUser", res.data['user_id']);
+    sessionStorage.setItem("sessionEmail", res.data['email']);
+    sessionStorage.setItem("sessionName", res.data['user_name']);
+     if(res2.data===1){
+      loginLoop()
+    }else{
+      initLoginLoop()
+    }
+      
+  }catch(err){
+    alert('메일주소와 비밀번호가 일치하지 않습니다.');
             window.location.reload();
-        })
+  }
+          
+        
+        
     
   }
-    
+  const initLoginLoop=()=>{
+    history.push("/diagnosis-page");
+    window.location.reload()
+  }
+    const loginLoop=()=>{      
+            history.push("/");
+            window.location.reload()
+    }
 
     return <>
         

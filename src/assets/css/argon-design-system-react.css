@@ -6760,6 +6760,10 @@ a.close.disabled {
   vertical-align: middle !important;
 }
 
+.align-super {
+  vertical-align: super !important;
+}
+
 .align-bottom {
   vertical-align: bottom !important;
 }

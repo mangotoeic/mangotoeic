@@ -120,8 +120,8 @@ const num_check =(testgen)=>{
     return<>
     <Profile>
  {tests === 'null' ? <Container>
-  <Row className="justify-content-center mt--300">
-    <Col lg="8">
+  <Row className="justify-content-center mt--300" lg='10'>
+    <Col lg="10">
       <Card className="bg-gradient-secondary shadow">
         <CardBody className="p-lg-5">
           <h4 className="mb-1">문장을 통해 문제를 생성하세요</h4>
@@ -160,7 +160,6 @@ const num_check =(testgen)=>{
 :
 <><Container>
               <Card className="card-profile shadow mt--300">
-                <Button onClick={saveEveryThing}>그만 풀기</Button>
                 <div className="px-4">
                 {/* <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'} /> */}
                 <Stopwatch/>
@@ -247,6 +246,7 @@ const num_check =(testgen)=>{
                     </Row>
                   </div>
                 </div>
+              <Button className='bg-light' onClick={saveEveryThing}>그만 풀기</Button>
               </Card>
               
             </Container></>

@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux'
 import Typist from 'react-typist';
 import axios from 'axios'
+import {useHistory} from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -26,14 +27,16 @@ const ReviewWrite = () => {
   
     const [review, setReview] = useState('') 
     const [email, setEmail] = useState(sessionStorage.getItem('sessionEmail')) 
-    
+    const history = useHistory()
     const submitPost = e => { 
       e.preventDefault()
       alert(`${email}님이 리뷰 작성. 리뷰 내용 : ${review}`)
 
       axios.post(`http://localhost:8080/api/review2`, {email,review}) //여기서 post대신 get도 가능
         .then( res => {
-          alert(`예측 별점은 ${res.data["prob"]}%의 확률로 ${res.data["star"]} 입니다!!`)
+          localStorage.setItem('reviewprob', `${res.data["prob"]}`)
+          localStorage.setItem('reviewstar', `${res.data["star"]}`) 
+          history.push('/app-review-page') 
         })
         .catch(
           e => {
