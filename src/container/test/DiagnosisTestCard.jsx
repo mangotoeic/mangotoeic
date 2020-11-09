@@ -11,7 +11,6 @@ import {context as c} from '../../context.js'
 import { useHistory } from 'react-router-dom'
 const DiagnosisTestCard =()=> {
     const history = useHistory();
-    const [data, setData] = useState([])
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
     const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
@@ -19,14 +18,11 @@ const DiagnosisTestCard =()=> {
     const states =useSelector(state=>state['testReducer'])
     let testgen =useSelector(state => state['testgenReducer'])
     console.log(testgen)
-    const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     let [tests, setTests] = useState(null);
     let loading = useSelector(state=> state['loadingReducer'])
     const [error, setError] = useState(null);
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
-    const [isActive,setIsActve] =useState(true)
-    const [changeMode,setChangeMode] =useState(false)
 
     const num_check2 =()=>{
         if(testnum===11  && testgen ===5){

@@ -2,7 +2,6 @@ import {TestStart} from '../../template/pages'
 import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
-import { debounce } from 'throttle-debounce'
 import {useHistory} from "react-router-dom"
 import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction,addResultAction,
   increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction} from '../../store'
@@ -11,13 +10,11 @@ import {Stopwatch} from "../../components/Timers"
 import {context as c} from '../../context.js'
 const TestCard =()=> {
   const history = useHistory()
-  const [data, setData] = useState([])
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
     const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
     const [id, setId] = useState(sessionStorage.getItem('sessionUser'))
     const states =useSelector(state=>state['testReducer'])
-    const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     let loading = useSelector(state=> state['loadingReducer'])
@@ -25,7 +22,6 @@ const TestCard =()=> {
     let testgen =useSelector(state => state['testgenReducer'])
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [correct ,setCorrect] =useState(true)
-    const [isActive,setIsActve] =useState(true)
 
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()

@@ -1,23 +1,17 @@
 import React,{useCallback,useState} from 'react'
 import {useSelector, useDispatch} from "react-redux";
-import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction,addResultAction,
-    increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction,changeText} from '../../store'
+import { isActiveAction, increaseNumAction,initNumAction,activeLoadingAction,changeText} from '../../store'
 import {Profile} from '../../template/pages'
 import {context as c } from '../../context'
 import axios from "axios"
 import {Stopwatch} from "../../components/Timers"
 import { useHistory } from 'react-router-dom';
 import {
-    Badge,
     Button,
     Card,
     CardBody,
-    CardImg,
     FormGroup,
     Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
     Container,
     Row,
     Col,
