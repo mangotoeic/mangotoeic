@@ -154,11 +154,11 @@ const DemoNavbar = props => {
                     <span className="nav-link-inner--text">게시판</span>
                   </DropdownToggle>
                   <DropdownMenu>
+                    <DropdownItem to="/board-page" tag={Link}>
+                      리뷰작성
+                    </DropdownItem>
                     <DropdownItem to="/app-review-page" tag={Link}>
                       앱리뷰게시판
-                    </DropdownItem>
-                    <DropdownItem to="/board-page" tag={Link}>
-                      자유게시판
                     </DropdownItem>
                     {/* <DropdownItem to="/login-page" tag={Link}>
                       Login

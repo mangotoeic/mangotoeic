@@ -1,27 +1,93 @@
-/*!
+import React, {useState, useCallback, useEffect} from 'react';
+import {useHistory} from 'react-router-dom'
+import {context as c} from '../../context' 
+import {
+  Card, CardBody, CardTitle, Container, Row, 
+  CardHeader,
+  CardFooter,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
+  DropdownToggle,
+  Media,
+  Pagination,
+  PaginationItem,
+  Col,
+  Button,
+  PaginationLink,
+  Progress,
+  Input,
+  Table,
+  Form
+} from "reactstrap";
 
-=========================================================
-* Argon Dashboard React - v1.1.0
-=========================================================
+import '../../assets/css/argon-design-system-react.css';
+ 
+import axios from 'axios' 
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
-
+import '../../assets/css/argon-design-system-react.css';  
 // reactstrap components
-import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 
-class Header extends React.Component {
-  render() {
+
+
+
+
+const Header = () =>  {
+  const [avg,setAvg] = useState(495)
+  const [avgdiff, setAvgdiff] = useState(1)
+  const [review_avg, setReview_avg] = useState(3.0)
+  const [review_avgdiff, setReview_avgdiff] = useState(1)
+  const [user, setUser] = useState(16)
+  const [userdiff, setUserdiff] = useState(0)
+
+  const usercount = useCallback(async() => {
+    try {
+      const req = {
+        method:c.get,
+        url:`${c.url}/api/user`
+       }
+      const res = await axios(req)
+      setUser(res.data - 16)
+      setUserdiff(Math.round((res.data - 16)/16 *100))
+      } catch(error){
+      alert(`failed to receive avg data info`)
+      throw(error)
+      }
+      },[])
+
+
+  const score_avg = useCallback(async() => {
+  try {
+    const req = {
+      method:c.get,
+      url:`${c.url}/api/testresults`
+     }
+    const res = await axios(req)
+    setAvgdiff(Math.round(((res.data - avg)/avg) * 100))
+    setAvg(res.data)
+    } catch(error){
+    alert(`failed to receive avg data info`)
+    throw(error)
+    }
+    },[])
+
+  const reviewavg = useCallback(async() => {
+      try {
+        const req = {
+          method:c.get,
+          url:`${c.url}/api/review2`
+        }
+        const res = await axios(req)
+        setReview_avgdiff(Math.round((parseFloat(res.data) - review_avg)/review_avg * 100))
+        setReview_avg(parseFloat(res.data))
+      } catch(error){
+        alert(`failed to recieve review avg info`)
+        throw(error)
+      }
+    },[])
+
+  useEffect(() => {score_avg(); reviewavg(); usercount()},[]) 
+  {
     return (
       <>
         <div className="header bg-gradient-pink pb-8 pt-5 pt-md-8">
@@ -71,7 +137,7 @@ class Header extends React.Component {
                             New users
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            158
+                            {user}
                           </span>
                         </div>
                         <Col className="col-auto">
@@ -81,8 +147,8 @@ class Header extends React.Component {
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-danger mr-2">
-                          <i className="fas fa-arrow-down" /> 3.48%
+                        <span className="text-success mr-2">
+                        <i className="fas fa-arrow-up" /> {userdiff} %
                         </span>{" "}
                         <span className="text-nowrap">Since last week</span>
                       </p>
@@ -100,7 +166,7 @@ class Header extends React.Component {
                           >
                             Score avg
                           </CardTitle>
-                          <span className="h2 font-weight-bold mb-0">623.52</span>
+                          <span className="h2 font-weight-bold mb-0">{avg}</span>
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-success text-white rounded-circle shadow">
@@ -109,8 +175,8 @@ class Header extends React.Component {
                         </Col>
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-warning mr-2">
-                          <i className="fas fa-arrow-down" /> 1.10%
+                        <span className="text-success mr-2">
+                        <i className="fas fa-arrow-up" />{avgdiff}%
                         </span>{" "}
                         <span className="text-nowrap">Since yesterday</span>
                       </p>
@@ -129,7 +195,7 @@ class Header extends React.Component {
                             App review avg
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            3.5
+                            {review_avg}
                           </span>
                         </div>
                         <Col className="col-auto">
@@ -140,7 +206,7 @@ class Header extends React.Component {
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
                         <span className="text-success mr-2">
-                          <i className="fas fa-arrow-up" /> 12%
+                          <i className="fas fa-arrow-up" /> {review_avgdiff}%
                         </span>{" "}
                         <span className="text-nowrap">Since last month</span>
                       </p>
