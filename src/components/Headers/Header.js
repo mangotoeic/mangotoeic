@@ -39,6 +39,8 @@ const Header = () =>  {
   const [review_avgdiff, setReview_avgdiff] = useState(1)
   const [user, setUser] = useState(16)
   const [userdiff, setUserdiff] = useState(0)
+  const reviewprob = localStorage.getItem('reviewprob')
+  const reviewstar = localStorage.getItem('reviewstar')
 
   const usercount = useCallback(async() => {
     try {
@@ -104,10 +106,10 @@ const Header = () =>  {
                             tag="h5"
                             className="text-uppercase text-muted mb-0"
                           >
-                            Traffic
+                            New Review Prediction
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            350,897
+                            최근 리뷰 별점 : {reviewstar}점
                           </span>
                         </div>
                         <Col className="col-auto">
@@ -118,9 +120,9 @@ const Header = () =>  {
                       </Row>
                       <p className="mt-3 mb-0 text-muted text-sm">
                         <span className="text-success mr-2">
-                          <i className="fa fa-arrow-up" /> 3.48%
+                          {reviewprob} %
                         </span>{" "}
-                        <span className="text-nowrap">Since last month</span>
+                        <span className="text-nowrap">의 확률</span>
                       </p>
                     </CardBody>
                   </Card>
