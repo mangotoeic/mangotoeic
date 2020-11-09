@@ -3,12 +3,14 @@ import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
+import {useHistory} from "react-router-dom"
 import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction,addResultAction,
   increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
 import {context as c} from '../../context.js'
 const TestCard =()=> {
+  const history = useHistory()
   const [data, setData] = useState([])
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
@@ -166,6 +168,7 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
     const saveEveryThing =() =>{  
       save1(userInfoFromTest)
       save2(states)
+      history.push('/profile-page')
       dispatch(initOdapQidAction()) }
       num_check(testgen)
       if (loading) return <div>로딩중..</div>;
