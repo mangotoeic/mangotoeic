@@ -126,8 +126,7 @@ const AppReview = () => {
           <Row>
             <div className="col">
               <Card className="shadow">
-                <CardHeader className="border-0">
-                <i class="ni ni-circle-08 fa-2x"></i> 
+                <CardHeader className="border-0"> 
                   <h3 className="mb-0">리뷰 게시판</h3>
 
                     <Form>

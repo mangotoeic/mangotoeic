@@ -69,13 +69,9 @@ const MarkedList = () => {
         // and other props, which will go to div
         style={{ width: '1000px', height: '200px', margin :"200px" }} /// these are optional style, it is not necessary
       >
-        <FrontSide
-          style={{
-            backgroundColor: '#e6f7f6',
-          }}
-        >
-          <Card className="card-lift--hover shadow border-0" style={{margin :"20px"}}>
-            <CardBody className="py-5">
+        <FrontSide className='card-back'>
+          {/* <Card className="card-lift--hover notecard" style={{margin :"20px"}}>
+            <CardBody className="card-front"> */}
              <h6 className= "text-note" >
                 {odap.question} 
              </h6>           
@@ -98,14 +94,13 @@ const MarkedList = () => {
                  </Col>
                </Row>
                {/* <span><button color="secondary" href="#pablo" size="small" onClick={handleClick}>정답 보기</button></span> */}
-             </CardBody>
-           </Card>
+             {/* </CardBody>
+           </Card> */}
         </FrontSide>
-        <BackSide
-          style={{ backgroundColor: '#e6f7f6'}}>
-         <h10 style={{textAlign: 'center'}}>
-                 {odap.answer}
-               </h10>
+        <BackSide className='card-front layer'>
+          <h10 class='centerh'>
+            {odap.answer}
+          </h10>
         </BackSide>
       </Flippy>
         // <CardWrapper>
