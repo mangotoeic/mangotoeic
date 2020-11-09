@@ -1,12 +1,19 @@
+.section-ls {
+  padding-top: 1rem;
+  padding-bottom: 6rem;
+}
+.centerh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
 @font-face {
   font-family: 'GmarketSansMedium';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-}
-
-.text-note {
-  color: #000000;
 }
 .row {
   display: flex;
@@ -84,8 +91,8 @@ notea:hover {
   text-decoration: underline;
 }
 
-Card {
-  color: #d4cd96;
+.notecard {
+  color: #000000;
   font-family: 'Fira Sans', sans-serif;
   height: 100%;
   left: 0;
@@ -107,8 +114,8 @@ Card {
           transform: translateX(-100%) rotateY(-180deg);
 }
 
-.card-back,
-.card-front {
+.card-front,
+.card-back {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   background: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.3), transparent 1px, rgba(0, 0, 0, 0.3) 2px);
@@ -125,11 +132,11 @@ Card {
   width: 100%;
 }
 
-.card-front {
+.card-back {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
 }
-.card-front .layer {
+.card-back .layer {
   background: repeating-linear-gradient(135deg, rgba(76, 71, 31, 0.3), transparent 1px, rgba(76, 71, 31, 0.3) 2px);
   background-size: 3px 3px;
   background-color: #d4cd96;
@@ -138,7 +145,7 @@ Card {
   position: relative;
   width: 100%;
 }
-.card-front .layer:after {
+.card-back .layer:after {
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), transparent);
   content: '';
   display: block;
@@ -148,36 +155,36 @@ Card {
   top: 0;
   width: 100%;
 }
-.card-front .layer .top,
-.card-front .layer .bottom {
+.card-back .layer .top,
+.card-back .layer .bottom {
   left: 8%;
   position: absolute;
   z-index: 1;
 }
-.card-front .layer .top {
+.card-back .layer .top {
   top: 12%;
 }
-.card-front .layer .bottom {
+.card-back .layer .bottom {
   bottom: 12%;
 }
-.card-front .layer h2, .card-front .layer h3, .card-front .layer h4 {
+.card-back .layer h2, .card-back .layer h3, .card-back .layer h4 {
   font-weight: 400;
   margin: 2px 0;
 }
-.card-front .layer h2 {
+.card-back .layer h2 {
   font-size: 18px;
   font-weight: 500;
   text-transform: uppercase;
 }
-.card-front .layer h3 {
+.card-back .layer h3 {
   font-size: 16px;
 }
-.card-front .layer h4 {
+.card-back .layer h4 {
   font-size: 16px;
   font-style: italic;
 }
 
-.card-back .layer {
+.card-front .layer {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   display: -webkit-box;
@@ -191,7 +198,7 @@ Card {
   position: relative;
   width: 100%;
 }
-.card-back .layer h1 {
+.card-front .layer h1 {
   font-size: 32px;
   font-weight: 400;
   letter-spacing: -2px;
@@ -199,7 +206,7 @@ Card {
   padding: 6px 18px 4px;
   text-align: center;
 }
-.card-back .layer .corner {
+.card-front .layer .corner {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   border-right: 2px solid #d4cd96;
@@ -208,23 +215,23 @@ Card {
   position: absolute;
   width: 12px;
 }
-.card-back .layer .corner:nth-of-type(1) {
+.card-front .layer .corner:nth-of-type(1) {
   right: 0;
   top: 0;
 }
-.card-back .layer .corner:nth-of-type(2) {
+.card-front .layer .corner:nth-of-type(2) {
   left: 0;
   top: 0;
   -webkit-transform: rotateZ(-90deg);
           transform: rotateZ(-90deg);
 }
-.card-back .layer .corner:nth-of-type(3) {
+.card-front .layer .corner:nth-of-type(3) {
   bottom: 0;
   left: 0;
   -webkit-transform: rotateZ(180deg);
           transform: rotateZ(180deg);
 }
-.card-back .layer .corner:nth-of-type(4) {
+.card-front .layer .corner:nth-of-type(4) {
   bottom: 0;
   right: 0;
   -webkit-transform: rotateZ(90deg);

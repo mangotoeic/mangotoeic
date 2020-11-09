@@ -22,7 +22,6 @@ import {
     Row,
     Col,
   } from 'reactstrap';
-import { BookmarkSharp, TodayOutlined } from "@material-ui/icons";
 // import './item.css'
 // export default function Icon({boom}) {
 //   return boom ? <ZapIcon /> : <BeakerIcon />
