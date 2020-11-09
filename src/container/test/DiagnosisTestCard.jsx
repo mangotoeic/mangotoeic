@@ -3,7 +3,8 @@ import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
-import {addOdapQidAction,addUserInfoAction, initOdapQidAction,addResultAction} from '../../store'
+import {addOdapQidAction,addUserInfoAction, initOdapQidAction,
+  addResultAction,increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
 import {context as c} from '../../context.js'
@@ -14,58 +15,58 @@ const DiagnosisTestCard =()=> {
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
     const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
-    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
+    const [id, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
     const states =useSelector(state=>state['testReducer'])
+    let testgen =useSelector(state => state['testgenReducer'])
+    console.log(testgen)
     const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
-    const [tests, setTests] = useState(null);
-    const [loading, setLoading] = useState(false);
+    let [tests, setTests] = useState(null);
+    let loading = useSelector(state=> state['loadingReducer'])
     const [error, setError] = useState(null);
-    const [testgen, setTestgen] = useState(0)
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [isActive,setIsActve] =useState(true)
     const [changeMode,setChangeMode] =useState(false)
 
-    const num_check2 =num=>{
-        if(num===10){
-          num=0
-          
-          save1()
-          save2()
-          save3()
-          dispatch(initOdapQidAction()) 
+    const num_check2 =()=>{
+        if(testnum===11  && testgen ===5){
+          dispatch(initNumAction())
+          testgen=0
+          console.log(userInfoFromTest)
+          save1(userInfoFromTest)
+          save2(states)
+          dispatch(initOdapQidAction())
+          getMinitestSet(diagnosisTestInfo)
           let endtest = window.confirm('테스트가 종료되었습니다. 진단 테스트로 바로 갈까요?');
           if (endtest === true) {
-            history.push("/diagnosis-test-page")
+            history.push("/test-start-page")
           }
           else {
             history.push("/")
           }
         }
-        return num
+        return testnum
       }
-      const num_check =num=>{
-        if(num===5){
-          num=0
-          save1()
-          save2()
-          save3()
-          dispatch(initOdapQidAction())
-          getMinitestSet()
+      const num_check =()=>{
+        if(testnum===6 && testgen ===5){
+          dispatch(activeLoadingAction())
+          dispatch(initNumAction())
+          testgen=0
           
-        
+          // loading =true
+          getMinitestSet(diagnosisTestInfo)
         }
-
+        
       }
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
 
-    const save1 = useCallback(async () => {
+    const save1 = useCallback(async (userInfoFromTest) => {
       try {
           const req1 = {
               method: c.post,
               url: `${c.url}/api/testresults`,
-              data: {user_id: loggedIn , qId:userInfoFromTest.qId, timestamp:userInfoFromTest.timeStamp, 
+              data: {user_id: id , qId:userInfoFromTest.qId, timestamp:userInfoFromTest.timeStamp, 
                 prior_question_elapsed_time:userInfoFromTest.priorQuestionElapseTime, answered_correctly:userInfoFromTest.answeredCorrectly,
                 user_answer: userInfoFromTest.userAnswer}
           }
@@ -77,46 +78,39 @@ const DiagnosisTestCard =()=> {
       }
   }, [states])
 
-  const save2 = useCallback(async () => {
+  const save2 = useCallback(async (states) => {
     try {
         const req2 = {
             method: c.post,
             url: `${c.url}/api/odaps`,
-            data: {user_id: loggedIn  ,qId:states.qId}    
+            data: {user_id: id  ,qId:states.qId}    
         }
         const res2 = await axios(req2) 
         res2()
     } catch (error) {
-        
-    }
-}, [states])
-const save3 = useCallback(async () => {
-    try {
-        const req2 = {
-            method: c.post,
-            url: `${c.url}/api/selectedqs`,
-            data: {user_id: loggedIn  ,qId:diagnosisTestInfo.qId, answered_correctly: diagnosisTestInfo.answeredCorrectly }    
-        }
-        const res2 = await axios(req2) 
-        res2()
-    } catch (error) {
-        
+      
+
     }
 }, [states])
 
-const getMinitestSet = useCallback(async () => {
+const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
     try {
+      
         const req = {
             method: c.post,
-            url: `${c.url}/api/minitest`,
-            data: {data}    
+            url: `${c.url}/api/minitests`,
+            data: {user_id: id  ,qId:diagnosisTestInfo.qId, answer_correctly: diagnosisTestInfo.answeredCorrectly }    
         }
         const res = await axios(req) 
-        tests= res.data
+        setTests(res.data)
     } catch (error) {
         
     }
-}, [states])
+    dispatch(deactiveLoadingAction())
+
+}, [loading])
+
+
 
 
     useEffect(() => {
@@ -126,7 +120,7 @@ const getMinitestSet = useCallback(async () => {
           setError(null);
           setTests(null);
           // loading 상태를 true 로 바꿉니다.
-          setLoading(true);
+          
           const req = {
             method: c.get,
             url: `${c.url}/api/selectedqs`            
@@ -137,20 +131,19 @@ const getMinitestSet = useCallback(async () => {
         } catch (e) {
           setError(e);
         }
-        setLoading(false);
+        
       };
-  
+      
       fetchTests();
     }, []);
-
-    if (loading) return <div>로딩중..</div>;
-    if (error) return <div>에러가 발생했습니다</div>;
-    if (!tests) return null;
+    
+    
 
   
       const handleClick = () => {
-          setTestgen(testgen=>testgen + 1)
-          setTestnum(testnum=>testnum + 1) 
+          dispatch(increaseNumAction())
+          setTestnum(testnum=>testnum + 1)
+          
     }
     
   const addUserInfo = (qId,answeredCorrectly,timeStamp,priorQuestionElapseTime,userAnswer)=>({
@@ -184,11 +177,14 @@ const getMinitestSet = useCallback(async () => {
       {'' !== myAnswer ? console.log("next"): dispatch(addOdapQidAction(tests[testgen]))}
       handleClick()
       setPriorQuestionTime(time.timeStamp)
-      num_check()
+      
     }
     const subtracTimeFromPrior=(priorQuestionTime,currentQuestionTime)=> (currentQuestionTime-priorQuestionTime)
-  
-   
+    num_check()
+    num_check2()
+    if (loading) return <div>로딩중..</div>;
+    if (error) return <div>에러가 발생했습니다</div>;
+    if (!tests) return null;
 
     return<>
     <TestStart>

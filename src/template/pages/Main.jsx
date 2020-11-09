@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-// nodejs library that concatenates classes
-import classnames from 'classnames';
-import { useSelector, useDispatch } from 'react-redux'
 import Typist from 'react-typist';
 import {ItemChatBot} from '../../container/chatbot'
 
@@ -11,12 +8,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardImg,
-  FormGroup,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Container,
   Row,
   Col,
@@ -24,21 +15,10 @@ import {
 
 // core components
 import SimpleFooter from 'components/Footers/SimpleFooter.js';
-
-// index page sections
-import Download from '../IndexSections/Download.js';
-
 import '../../assets/css/argon-design-system-react.css';
 
 const Main = () => {
-
-    const nameFocused = useSelector(state => state.nameFocused)
-    const emailFocused = useSelector(state => state.emailFocused)
-    const [nameFocus , setnameFocus] = useState('') 
-    const [emailFocus , setemailFocus] = useState('') 
-    const dispatch = useDispatch()
     return<>
-        
         <main >
           <div className="position-relative">
             {/* shape Hero */}
@@ -66,7 +46,7 @@ const Main = () => {
                         <Button
                           className="btn-white btn-icon mb-3 mb-sm-0 ml-1"
                           color="default"
-                          href="./register-page"
+                          href="./login-page"
                         >
                           <span className="btn-inner--icon mr-1">
                             <i className="fa fa-play" />

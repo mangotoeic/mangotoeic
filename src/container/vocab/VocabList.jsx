@@ -27,7 +27,7 @@ const VocabList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchVocabs = async id => {
+    const fetchVocabs = async () => {
       try {
         // 요청이 시작 할 때에는 error 와 tests 를 초기화하고
         setError(null);
@@ -56,7 +56,7 @@ return<>
 <Container>
 {vocabs.map((vocab, index) =>(
 <Row className="show-grid" key={index}>
-<Col lg="2">
+<Col lg="2 border-right">
     <p className="vocab mt-3">
       {Object.keys(vocab)}
     </p>

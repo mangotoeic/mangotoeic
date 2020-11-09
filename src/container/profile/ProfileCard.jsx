@@ -11,35 +11,37 @@ const ProfileCard =() => {
     const [error, setError] = useState(null);
     const userName = sessionStorage.getItem('sessionName')
     const userEmail = sessionStorage.getItem('sessionEmail')
-
-    // useEffect(() => {
-    //   const fetchTestResult = async (id) => {
-    //     try {
-    //       // 요청이 시작 할 때에는 error 와 tests 를 초기화하고
-    //       setError(null);
-    //       setTestResult(null);
-    //       // loading 상태를 true 로 바꿉니다.
-    //       setLoading(true);  
-    //         const req = {
-    //             method: c.get,
-    //             url: `${c.url}/api/testresult/${id}`,
-    //             // data: {data}
-    //         }
-    //         const response = await axios(req)
-            
-    //         setTestResult(response.data)
-    //         console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
-    //     } catch (e) {
-    //       setError(e);
-    //     }
-    //     setLoading(false);
-    //   };
+    const id = sessionStorage.getItem('sessionUser')
+    
+    useEffect(() => {
+      const fetchTestResult = async () => {
+        try {
+          // 요청이 시작 할 때에는 error 와 tests 를 초기화하고
+          setError(null);
+          setTestResult(null);
+          // loading 상태를 true 로 바꿉니다.
+          setLoading(true);  
+            const req = {
+                method: c.get,
+                url: `${c.url}/api/testresult/${id}`,
+              
+            }
+            const response = await axios(req)
+                     
+            setTestResult(response.data)
+            console.log(response.data)
+            // console.log(response.user_pred_score) // 데이터는 response.data 안에 들어있습니다.
+        } catch (e) {
+          setError(e);
+        }
+        setLoading(false);
+      };
   
-    //   fetchTestResult();
-    // }, []);
-    // if (loading) return <div>로딩중..</div>;
-    // if (error) return <div>에러가 발생했습니다</div>;
-    // if (!testResult) return null;
+      fetchTestResult();
+    }, []);
+    if (loading) return <div>로딩중..</div>;
+    if (error) return <div>에러가 발생했습니다</div>;
+    if (!testResult) return null;
 
     return<>
     <Profile>
@@ -84,11 +86,11 @@ const ProfileCard =() => {
           <Col className="order-lg-1" lg="4">
             <div className="card-profile-stats d-flex justify-content-center">
               <div>
-                <span className="heading text-danger">22%</span>
+                <span className="heading text-danger">{100 - Math.round(testResult[0] * 100)}%</span>
                 <span className="description text-dark">오답률</span>
               </div>
               <div>
-                <span className="heading text-info">10%</span>
+                <span className="heading text-info">{Math.round(testResult[0] * 100)}%</span>
                 <span className="description text-dark">정답률</span>
               </div>
               <div>
@@ -108,9 +110,9 @@ const ProfileCard =() => {
           <Row className="justify-content-center mr-0 ml-0">
             <Col lg="9">
               <h3>
-                당신의 실력은
+                당신의 예상 점수는
               </h3>
-              <h1 className='text-danger big-font'>A</h1>
+              <h1 className='text-danger big-font'>{Math.round(testResult[1] * 990)}</h1>
             </Col>
           </Row>
         </div>

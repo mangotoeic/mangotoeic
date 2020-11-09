@@ -4,8 +4,8 @@ import {useSelector, useDispatch} from "react-redux";
 import { debounce } from 'throttle-debounce'
 import axios from 'axios'
 import ReactDOM from 'react-dom';
-import { ToggleButton } from '@material-ui/lab';
-import { selected, setSelected, CheckIcon } from '@material-ui/icons'
+import {context as c} from '../../context.js'
+import {changeBookmarkState,renderBookmarkState,setOdaps} from '../../store'
 // import {BookmarkIcon} from '@primer/octicons-react'
 import {
     Badge,
@@ -22,72 +22,112 @@ import {
     Row,
     Col,
   } from 'reactstrap';
+import { BookmarkSharp, TodayOutlined } from "@material-ui/icons";
 // import './item.css'
 // export default function Icon({boom}) {
 //   return boom ? <ZapIcon /> : <BeakerIcon />
 // }
 
 const OdapList = () => {
-    const [odaps, setOdaps] = useState(null)
+  let bookmarks = useSelector(state=> state['changeBookmarkReducer'])
+  let odaps = useSelector(state => state['setOdapsReducer'])
+   const dispatch =useDispatch();
+    console.log(bookmarks)
+    // const [odaps, setOdaps] = useState(null)
+    const [checked, setChecked] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
-    console.log(typeof odaps)
-    useEffect(() => {
-      const giveOdaps = async () => {
-        await axios.post(
-          'http://127.0.0.1:8080/api/odap',
-          {user_id: loggedIn}
-        ).
-        then((res)=>{setOdaps(res.data)})
-        .catch(()=>{})
+    const [id, setid] = useState(sessionStorage.getItem('sessionUser'))
+  
+
+    const save = useCallback(async (e) => {
+      try {
+        console.log(e.target.value)
+       
+          const req2 = {
+              method: c.post,
+              url: `${c.url}/api/bookmark`,
+              data: {user_id: id, qId:e.target.value}    
+          }
+          const res2 = await axios(req2)
+          console.log(res2.data)
+         dispatch(changeBookmarkState(res2.data))
+      } catch (error) {
+          
       }
-      const fetchOdaps = async () => {
-        try {
-          // 요청이 시작 할 때에는 error 와 tests 를 초기화하고
-          setError(null);
-          setOdaps(null);
-          // loading 상태를 true 로 바꿉니다.
-          setLoading(true);
-          const response = await axios.get(
-            'http://127.0.0.1:8080/api/odaps'
-          );
-          setOdaps(response.data);
-          console.log('-----------------------1-----------------')
-          console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
-        } catch (e) {
-          setError(e);
+  }, [])
+  const checkQid = useCallback((e)=>{
+    console.log(e.targe.value)
+    if(bookmarks.includes(e.target.value)){
+      return true
+    }else
+    { 
+      return false
+    }
+
+  },[])
+    useEffect(() => {
+      const giveBookmarks = async () => {
+        try{  
+          const req = {
+                  method: c.get,
+                  url: `${c.url}/api/bookmarks-to-odap/${id}`
+                
+          }
+          const res = await axios(req)
+           dispatch(changeBookmarkState(res.data))
+          //  bookmarks= res.data
+        }catch(err){  
         }
-        setLoading(false);
-      };
+      
+        }
+  
+      const giveOdaps = async () => {
+        try{
+        const req2 = {
+          method:c.post,
+          url: `${c.url}/api/odap`,
+          data:{user_id: id}
+        }
+        const res2 =await axios(req2)
+         dispatch(setOdaps(res2.data))
+       return res2.data
+    }catch(err){
+
+    }
+  }
+      
+      giveBookmarks();
       giveOdaps();
-      // fetchOdaps();
-      console.log(odaps);
+     
+    
     }, []);
+
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>에러가 발생했습니다</div>;
     if (!odaps) return null;
-    const bookmark=e=>{e.preventDefault()
-      console.log('된다')
-    }
+  
+
   return <NotePage>
     <Container>
       {odaps.map((odap, index) =>(
       <Col lg="12" key={index}>
         <Card className="card-lift--hover shadow border-0" style={{margin :"15px"}}>
-          <CardBody className="py-5">
-            <h6  style = {{color :"black !important;"}} className= "text-note" >
-              {odap.question}<ToggleButton
-  value="check"
-  selected={selected}
-  onChange={() => {
-    setSelected(!selected);
-  }}
->
-  <CheckIcon />
-</ToggleButton>
-            </h6>
-            
+          <CardBody className="pt-5 pb-3">
+            <Row className="row-grid">
+              <Col lg="11">
+                <h6 className= "text-note" >
+                  {odap.question} 
+                </h6>
+              </Col>
+              <Col lg="1">
+                <label className="custom-toggle">
+                {/* onClick={bookmark} */}
+                  <input type="checkbox" onChange={save} value={odap.qId} defaultChecked={bookmarks.includes(odap.qId)} checked={ bookmarks.includes(odap.qId)} />
+                  <span className="custom-toggle-slider rounded-circle" />
+                </label>
+              </Col>
+            </Row>            
             <Row className="row-grid">
               <Col lg="6">
                 <p className="description mt-3">
@@ -106,7 +146,9 @@ const OdapList = () => {
                 </p>
               </Col>
             </Row>
-            <p className = "text-right text-bold" style={{margin :"30px"}}>Answer: {odap.answer}</p>
+            <p className = "text-right text-bold" style={{margin :"30px"}}>
+              Answer: {odap.answer}
+            </p>
           </CardBody>
         </Card>
       </Col>

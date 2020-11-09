@@ -6,7 +6,7 @@ import {returnCurrentTime} from '../../store'
 
 const Stopwatch = () => {
   const isActive= useSelector(state => state['timerToggleReducer'].isActive)
-  
+  // console.log(isActive)
   const dispatch = useDispatch()
 
   const [seconds, setSeconds] = useState(0);
