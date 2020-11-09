@@ -40,7 +40,7 @@ const Header = () =>  {
   const [user, setUser] = useState(16)
   const [userdiff, setUserdiff] = useState(0)
   const reviewprob = localStorage.getItem('reviewprob')
-  const reviewstar = localStorage.getItem('reviewstar')
+  const reviewstar = parseInt(localStorage.getItem('reviewstar')) + 1
 
   const usercount = useCallback(async() => {
     try {
