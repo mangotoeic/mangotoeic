@@ -35,7 +35,7 @@ const VocabList = () => {
         // loading 상태를 true 로 바꿉니다.
         setLoading(true);
         const response = await axios.get(
-          `http://127.0.0.1:8080/api/vocab/${id}`
+          `http://127.0.0.1:8080/api/vocabrcds/${id}`
         );
         setVocabs(response.data);
         // console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
