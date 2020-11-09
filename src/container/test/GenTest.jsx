@@ -114,10 +114,10 @@ const num_check =(testgen)=>{
     return<>
     <Profile>
  {tests === 'null' ? <Container>
-  <Row className="justify-content-center mt--300" lg='10'>
-    <Col lg="10">
+  <Row className="justify-content-center mt--300">
+    <Col lg="11">
       <Card className="bg-gradient-secondary shadow">
-        <CardBody className="p-lg-5">
+        <CardBody className="p-lg-6">
           <h4 className="mb-1">문장을 통해 문제를 생성하세요</h4>
           <p className="mt-0">
               GPT-2를 통해 문제를 생성합니다. 제출하시고 잠시만 기다리시면 해당 하는 문제를 바로 푸실수 있습니다.
@@ -129,7 +129,7 @@ const num_check =(testgen)=>{
               cols="80"
               name="name"
               placeholder="여기에 영어 문장을 작성해보세요~"
-              rows="5"
+              rows="8"
               type="textarea"
               onChange = {e => dispatch(changeText(e.target.value))}
             />

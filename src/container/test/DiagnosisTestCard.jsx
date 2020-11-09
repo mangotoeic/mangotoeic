@@ -33,7 +33,7 @@ const DiagnosisTestCard =()=> {
           save2(states)
           dispatch(initOdapQidAction())
           getMinitestSet(diagnosisTestInfo)
-          let endtest = window.confirm('테스트가 종료되었습니다. 진단 테스트로 바로 갈까요?');
+          let endtest = window.confirm('테스트가 종료되었습니다. 문제 풀기로 바로 갈까요?');
           if (endtest === true) {
             history.push("/test-start-page")
           }
