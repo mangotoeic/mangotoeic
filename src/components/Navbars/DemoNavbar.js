@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { Link , useHistory} from 'react-router-dom';
-// JavaScript plugin that hides or shows a component based on your scroll
-// reactstrap components
-// import loggedIn from '../../App'
 import {
   Button,
   UncontrolledCollapse,
@@ -10,21 +7,16 @@ import {
   DropdownItem,
   DropdownToggle,
   UncontrolledDropdown,
-  Media,
   NavbarBrand,
   Navbar,
-  NavItem,
-  NavLink,
   Nav,
   Container,
   Row,
   Col,
-  UncontrolledTooltip,
 } from 'reactstrap';
 const DemoNavbar = props => {
   const userName = sessionStorage.getItem('sessionName')
   const [collapseClasses, setCollapseClasses] = useState('');
-  const [collapseOpen, setCollapseOpen] = useState(false);
   const onExiting = () => {
     setCollapseClasses('collapsing-out');
   };
@@ -95,8 +87,7 @@ const DemoNavbar = props => {
                     </DropdownItem>
                     <DropdownItem to="/profile-page" tag={Link}>
                       프로필
-                    </DropdownItem>
-                    
+                    </DropdownItem>   
                   </DropdownMenu>
                 </UncontrolledDropdown>
                   <UncontrolledDropdown nav>
@@ -119,16 +110,15 @@ const DemoNavbar = props => {
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-1" />
-                    <span className="nav-link-inner--text">문제</span>
+                    <span className="nav-link-inner--text">문제풀기</span>
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem to="/test-start-page" tag={Link}>
-                      문제 풀기
+                      추천 문제 풀기
                     </DropdownItem>
                     <DropdownItem to="/generate-test-page" tag={Link}>
                       문제 생성하기
                     </DropdownItem>
-               
                   </DropdownMenu>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown nav>
@@ -143,11 +133,10 @@ const DemoNavbar = props => {
                     <DropdownItem to="/board-page" tag={Link}>
                       자유게시판
                     </DropdownItem>
-                   
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Nav> : <></> }
-              <Nav className="align-items-lg-center ml-lg-auto" navbar>
+              <Nav className="align-items-lg-center ml-lg-auto mr-6" navbar>
                 { props.isAuth === null ?
                 <>
                   <Button
