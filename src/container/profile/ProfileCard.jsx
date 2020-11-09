@@ -12,7 +12,8 @@ const ProfileCard =() => {
     const userName = sessionStorage.getItem('sessionName')
     const userEmail = sessionStorage.getItem('sessionEmail')
     const id = sessionStorage.getItem('sessionUser')
-    
+    const [level, setLevel] = useState(null)
+
     useEffect(() => {
       const fetchTestResult = async () => {
         try {
@@ -29,7 +30,7 @@ const ProfileCard =() => {
             const response = await axios(req)
                      
             setTestResult(response.data)
-            console.log(response.data)
+            // console.log(response.data)
             // console.log(response.user_pred_score) // 데이터는 response.data 안에 들어있습니다.
         } catch (e) {
           setError(e);
@@ -42,6 +43,22 @@ const ProfileCard =() => {
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>에러가 발생했습니다</div>;
     if (!testResult) return null;
+
+    let score = Math.round(testResult[1] * 990);
+    // console.log(score)
+    function checkLevel(score) {
+      switch(score) {
+        case score < 300:
+          setLevel('D')
+        case 301 < score < 500:
+          setLevel('C')
+        case 501 < score < 750:
+          setLevel('B')
+        case 751 < score < 990:
+          setLevel('A')
+      }
+    }
+    
 
     return<>
     <Profile>
@@ -94,7 +111,7 @@ const ProfileCard =() => {
                 <span className="description text-dark">정답률</span>
               </div>
               <div>
-                <span className="heading text-success">A</span>
+                <span className="heading text-success">{score < 300 ? 'D' : 301 < score < 500 ? 'C' : 501 < score < 750 ? 'B' : 'A'}</span>
                 <span className="description text-dark">레벨</span>
               </div>
             </div>
@@ -112,7 +129,9 @@ const ProfileCard =() => {
               <h3>
                 당신의 예상 점수는
               </h3>
-              <h1 className='text-danger big-font'>{Math.round(testResult[1] * 990)}</h1>
+              <h1 className='text-danger big-font'>{score}
+              <span className='text-blue' style={{fontWeight:'normal', fontSize:'4rem', fontFamily:'Gong Gothic Medium'}}>/990</span>
+              </h1>
             </Col>
           </Row>
         </div>
