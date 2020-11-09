@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link , useHistory} from 'react-router-dom';
 // JavaScript plugin that hides or shows a component based on your scroll
-import Headroom from 'headroom.js';
 // reactstrap components
 // import loggedIn from '../../App'
 import {
@@ -22,32 +21,24 @@ import {
   Col,
   UncontrolledTooltip,
 } from 'reactstrap';
-
 const DemoNavbar = props => {
-  // const componentDidMount = () => {
-  //   let headroom = new Headroom(document.getElementById('navbar-main'));
-  //   // initialise
-  //   headroom.init();
-  // };
+  const userName = sessionStorage.getItem('sessionName')
   const [collapseClasses, setCollapseClasses] = useState('');
   const [collapseOpen, setCollapseOpen] = useState(false);
-
   const onExiting = () => {
     setCollapseClasses('collapsing-out');
   };
-
   const onExited = () => {
     setCollapseClasses('');
   };
   const history  = useHistory()
   const logout = e => {
-        alert('logout')
+        alert('로그아웃 되었습니다.')
         e.preventDefault();
         sessionStorage.removeItem("sessionUser")
         history.push('/')
         window.location.reload()
     }
-
   return (
     <>
       <header className="header-global">
@@ -109,7 +100,6 @@ const DemoNavbar = props => {
                     </DropdownItem> */}
                   </DropdownMenu>
                 </UncontrolledDropdown>
-               
                   <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-2" />
@@ -147,7 +137,6 @@ const DemoNavbar = props => {
                     </DropdownItem> */}
                   </DropdownMenu>
                 </UncontrolledDropdown>
-
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav>
                     <i className="ni ni-collection d-lg-none mr-3" />
@@ -168,74 +157,8 @@ const DemoNavbar = props => {
                     </DropdownItem> */}
                   </DropdownMenu>
                 </UncontrolledDropdown>
-
               </Nav>
               <Nav className="align-items-lg-center ml-lg-auto" navbar>
-                <NavItem>
-                  <NavLink
-                    className="nav-link-icon"
-                    href="https://www.facebook.com/creativetim"
-                    id="tooltip333589074"
-                    target="_blank"
-                  >
-                    <i className="fa fa-facebook-square" />
-                    <span className="nav-link-inner--text d-lg-none ml-2">
-                      Facebook
-                    </span>
-                  </NavLink>
-                  <UncontrolledTooltip delay={0} target="tooltip333589074">
-                    Like us on Facebook
-                  </UncontrolledTooltip>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className="nav-link-icon"
-                    href="https://www.instagram.com/creativetimofficial"
-                    id="tooltip356693867"
-                    target="_blank"
-                  >
-                    <i className="fa fa-instagram" />
-                    <span className="nav-link-inner--text d-lg-none ml-2">
-                      Instagram
-                    </span>
-                  </NavLink>
-                  <UncontrolledTooltip delay={0} target="tooltip356693867">
-                    Follow us on Instagram
-                  </UncontrolledTooltip>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className="nav-link-icon"
-                    href="https://twitter.com/creativetim"
-                    id="tooltip184698705"
-                    target="_blank"
-                  >
-                    <i className="fa fa-twitter-square" />
-                    <span className="nav-link-inner--text d-lg-none ml-2">
-                      Twitter
-                    </span>
-                  </NavLink>
-                  <UncontrolledTooltip delay={0} target="tooltip184698705">
-                    Follow us on Twitter
-                  </UncontrolledTooltip>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className="nav-link-icon"
-                    href="https://github.com/creativetimofficial/argon-design-system-react"
-                    id="tooltip112445449"
-                    target="_blank"
-                  >
-                    <i className="fa fa-github" />
-                    <span className="nav-link-inner--text d-lg-none ml-2">
-                      Github
-                    </span>
-                  </NavLink>
-                  <UncontrolledTooltip delay={0} target="tooltip112445449">
-                    Star us on Github
-                  </UncontrolledTooltip>
-                </NavItem>
-                <NavItem className="d-none d-lg-block ml-lg-4">
                 { props.isAuth === null ?
                 <>
                   <Button
@@ -251,6 +174,10 @@ const DemoNavbar = props => {
                   </>
                   :
                   <>
+                  <div>
+                    <i class="ni ni-circle-08 fa-2x text-info"></i>
+                      <span className='text-white ml-1 mr-3 align-super'>{userName}님</span>
+                  </div>
                   <Button
                   className="btn-neutral btn-icon"
                   color="default"
@@ -263,7 +190,6 @@ const DemoNavbar = props => {
                 </Button>
                 </>
                 }
-                </NavItem>
               </Nav>
             </UncontrolledCollapse>
           </Container>
@@ -272,5 +198,4 @@ const DemoNavbar = props => {
     </>
   );
 };
-
 export default DemoNavbar;

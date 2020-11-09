@@ -29,7 +29,8 @@ const ProfileCard =() => {
             const response = await axios(req)
                      
             setTestResult(response.data)
-            console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
+            console.log(response.data)
+            // console.log(response.user_pred_score) // 데이터는 response.data 안에 들어있습니다.
         } catch (e) {
           setError(e);
         }
@@ -85,11 +86,11 @@ const ProfileCard =() => {
           <Col className="order-lg-1" lg="4">
             <div className="card-profile-stats d-flex justify-content-center">
               <div>
-                <span className="heading text-danger">{1-testResult}%</span>
+                <span className="heading text-danger">{100 - Math.round(testResult[0] * 100)}%</span>
                 <span className="description text-dark">오답률</span>
               </div>
               <div>
-                <span className="heading text-info">{testResult}%</span>
+                <span className="heading text-info">{Math.round(testResult[0] * 100)}%</span>
                 <span className="description text-dark">정답률</span>
               </div>
               <div>
@@ -109,9 +110,9 @@ const ProfileCard =() => {
           <Row className="justify-content-center mr-0 ml-0">
             <Col lg="9">
               <h3>
-                당신의 실력은
+                당신의 예상 점수는
               </h3>
-              <h1 className='text-danger big-font'>A</h1>
+              <h1 className='text-danger big-font'>{Math.round(testResult[1] * 990)}</h1>
             </Col>
           </Row>
         </div>
