@@ -41,7 +41,7 @@ const DemoNavbar = props => {
   };
   const history  = useHistory()
   const logout = e => {
-        alert('logout')
+        alert('로그아웃 되었습니다.')
         e.preventDefault();
         sessionStorage.removeItem("sessionUser")
         history.push('/')
