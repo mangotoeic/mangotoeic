@@ -18,6 +18,7 @@ import SimpleFooter from 'components/Footers/SimpleFooter.js';
 import '../../assets/css/argon-design-system-react.css';
 
 const Main = () => {
+  const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('sessionUser'))
     return<>
         <main >
           <div className="position-relative">
@@ -40,22 +41,6 @@ const Main = () => {
                         AI 튜터가 지정해주는 체계적인 학습 알고리즘으로 최대한
                         빠르게 목표에 도달해보세요.
                       </h5></Typist>
-                      <div
-                        className="btn-wrapper text-center"
-                      >
-                        <Button
-                          className="btn-white btn-icon mb-3 mb-sm-0 ml-1"
-                          color="default"
-                          href="./login-page"
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <i className="fa fa-play" />
-                          </span>
-                          <span className="btn-inner--text">
-                            지금 바로 시작하기
-                          </span>
-                        </Button>
-                      </div>
                     </Col>
                   </Row>
                 </div>
@@ -107,14 +92,23 @@ const Main = () => {
                               #엄선된문제
                             </Badge>
                           </div>
+                          { loggedIn === null ? 
+                          <Button
+                          className="mt-4"
+                          color="primary"
+                          onClick={(e) => {alert('먼저 로그인 해주세요.')}}
+                        >
+                          미니테스트 시작하기
+                        </Button>
+                          :
                           <Button
                             className="mt-4"
                             color="primary"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            href="./diagnosis-test-page"
                           >
                             미니테스트 시작하기
                           </Button>
+                          }
                         </CardBody>
                       </Card>
                     </Col>
@@ -139,14 +133,23 @@ const Main = () => {
                               #AI가추천하는단어집
                             </Badge>
                           </div>
+                          { loggedIn === null ? 
                           <Button
-                            className="mt-4"
-                            color="success"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                          className="mt-4"
+                          color="success"
+                          onClick={(e) => {alert('먼저 로그인 해주세요.')}}
                           >
                             지금 공부하러 가기
                           </Button>
+                          :
+                          <Button
+                            className="mt-4"
+                            color="success"
+                            href="./note-page"
+                          >
+                            지금 공부하러 가기
+                          </Button>
+                          }
                         </CardBody>
                       </Card>
                     </Col>
@@ -173,14 +176,23 @@ const Main = () => {
                               #경품이와르르
                             </Badge>
                           </div>
+                          { loggedIn === null ? 
+                          <Button
+                          className="mt-4"
+                          color="warning"
+                          onClick={(e) => {alert('먼저 로그인 해주세요.')}}
+                          >
+                            게시판 바로 가기
+                          </Button>
+                          :
                           <Button
                             className="mt-4"
                             color="warning"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            href="./board-page"
                           >
-                            게시판 바로가기
+                            게시판 바로 가기
                           </Button>
+                          }
                         </CardBody>
                       </Card>
                     </Col>
@@ -368,7 +380,7 @@ const Main = () => {
                     <div className="pt-4 text-center">
                       <h5 className="title">
                         <span className="d-block mb-1">윤여원</span>
-                        <small className="h6 text-muted">SBA 에이스</small>
+                        <small className="h6 text-muted">윤여원</small>
                       </h5>
                       <div className="mt-3">
                         <Button
@@ -411,7 +423,7 @@ const Main = () => {
                       <h5 className="title">
                         <span className="d-block mb-1">박은솔</span>
                         <small className="h6 text-muted">
-                          강사님 1픽
+                          아프지 말자
                         </small>
                       </h5>
                       <div className="mt-3">
@@ -454,7 +466,7 @@ const Main = () => {
                     <div className="pt-4 text-center">
                       <h5 className="title">
                         <span className="d-block mb-1">박근홍</span>
-                        <small className="h6 text-muted">OOP 제발 그만좀</small>
+                        <small className="h6 text-muted">풀스택을 꿈꾸는 자</small>
                       </h5>
                       <div className="mt-3">
                         <Button
@@ -492,7 +504,7 @@ const Main = () => {
                     <img
                       alt="..."
                       className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
-                      src={require('assets/img/theme/team-4-800x800.jpg')}
+                      src={require('assets/img/theme/hyuna.jpeg')}
                       style={{ width: '200px' }}
                     />
                     <div className="pt-4 text-center">
@@ -534,7 +546,7 @@ const Main = () => {
                     <img
                       alt="..."
                       className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
-                      src={require('assets/img/theme/team-1-800x800.jpg')}
+                      src={require('assets/img/theme/jongmok.jpg')}
                       style={{ width: '200px' }}
                     />
                     <div className="pt-4 text-center">
@@ -577,7 +589,7 @@ const Main = () => {
           <section className="section section-lg pt-0">
           </section>
           <section className="section section-lg bg-gradient-default">
-            <Container className="pt-lg pb-300">
+            <Container className="pt-lg pb-200">
               <Row className="text-center justify-content-center">
                 <Col lg="10">
                   <h2 className="display-3 text-white">세상에 없던, 나를 위한 문제 생성 시스템</h2>
@@ -586,35 +598,32 @@ const Main = () => {
                   </p>
                 </Col>
               </Row>
-              <Row className="row-grid mt-5">
+              <Row className="row-grid mt-7">
                 <Col lg="4">
                   <div className="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
                     <i className="ni ni-settings text-primary" />
                   </div>
-                  <h5 className="text-white mt-3">Building tools</h5>
-                  <p className="text-white mt-3">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  <h5 className="text-white mt-3">STEP 1</h5>
+                  <p className="text-white mt-3 mr-3">
+                    상단 메뉴 바에서<br /> 문제풀기 - 문제 생성하기로 이동
                   </p>
                 </Col>
                 <Col lg="4">
                   <div className="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
                     <i className="ni ni-ruler-pencil text-primary" />
                   </div>
-                  <h5 className="text-white mt-3">Grow your market</h5>
-                  <p className="text-white mt-3">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  <h5 className="text-white mt-3">STEP 2</h5>
+                  <p className="text-white mt-3 mr-3">
+                    생성하고 싶은 단어, 문장 등을 입력해 주세요. 시간이 좀 걸리더라도 조금만 기다리시면 문제 생성이 됩니다!
                   </p>
                 </Col>
                 <Col lg="4">
                   <div className="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
                     <i className="ni ni-atom text-primary" />
                   </div>
-                  <h5 className="text-white mt-3">Launch time</h5>
+                  <h5 className="text-white mt-3">STEP 3</h5>
                   <p className="text-white mt-3">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    GPT-2를 통해 생성된 문제를 풀고, 실력을 향상시키세요! 
                   </p>
                 </Col>
               </Row>

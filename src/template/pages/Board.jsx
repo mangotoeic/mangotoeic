@@ -36,7 +36,7 @@ const Board=()=> {
             {/* Circles background */}
             <div className="shape shape-style-1 bg-gradient-dark">
             </div>
-            {/* SVG separator */}
+
             <div className="separator separator-bottom separator-skew">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -55,15 +55,11 @@ const Board=()=> {
             
           </section>
           
-          <section className="mt-8-version2"> 
+          <section className="section">
             <Container >
-                          <br/><br/><br/><br/><br/><br/> 
-                          <br/><br/><br/><br/><br/><br/> 
-              <h1 style={{margin : "30px", color:"#F0FFFF"}} > </h1>
-                          <br/><br/><br/><br/><br/><br/>  
+             {/* <h1 style={{margin : "30px", color:"#F0FFFF"}} > </h1> */}
               <ReviewWrite/>               
             </Container>
-                          <br/><br/><br/><br/><br/><br/> 
           </section>
         </main>
         

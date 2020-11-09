@@ -34,7 +34,7 @@ const DiagnosisCard = () => {
           num=0
           diagnosis.data.push(userAnswer) 
           save()
-          let endtest = window.confirm('테스트가 종료되었습니다. 진단 테스트로 바로 갈까요?');
+          let endtest = window.confirm('사전 정보 입력이 종료되었습니다. 진단 테스트로 바로 갈까요?');
           if (endtest === true) {
             history.push("/diagnosis-test-page")
           }
@@ -49,7 +49,6 @@ const DiagnosisCard = () => {
       } 
       else {
         save()
-        alert('테스트가 종료되었습니다.')
       } 
   }
 
