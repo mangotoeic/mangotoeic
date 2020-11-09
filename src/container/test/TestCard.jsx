@@ -178,11 +178,10 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
     <TestStart>
     <Container>
               <Card className="card-profile shadow mt--300">
-                <Button onClick={saveEveryThing}>그만 풀기</Button>
                 <div className="px-4">
                 {/* <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'} /> */}
                 <Stopwatch/>
-                  <div className="text-center mt-5">
+                  <div className="text-center mt-4">
                     <h3>
                       {testnum}번 문제{' '}
                     </h3>
@@ -195,7 +194,7 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
                     </div>
                   </div>
                   <div className="mt-5 py-5 text-center">
-                    <Row className="justify-content-center">
+                    <Row className="justify-content-center ml-0 mr-0">
                       <Col lg="9">
                         <div className="mb-3">
               {/* <small className="text-uppercase font-weight-bold">정답</small> */}
@@ -265,8 +264,8 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
                     </Row>
                   </div>
                 </div>
+              <Button className='bg-light' onClick={saveEveryThing}>그만 풀기</Button>
               </Card>
-              
             </Container>
             </TestStart>
            </> 
