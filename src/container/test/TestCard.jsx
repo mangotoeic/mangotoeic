@@ -3,6 +3,7 @@ import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom"
+import { BallBeat } from 'react-pure-loaders';
 import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction,addResultAction,
   increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
@@ -92,10 +93,11 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
                 const req2 = {
                 method: c.get,
                 url: `${c.url}/api/nextminiset/${id}`,
-                data: {user_id: id  ,qId:diagnosisTestInfo.qId, answer_correctly: diagnosisTestInfo.answeredCorrectly}    
             }
             const res2 = await axios(req2) 
             setTests(res2.data)
+            console.log(res2.data)
+            
         } catch (error) {
             
         }
@@ -167,7 +169,11 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
       history.push('/profile-page')
       dispatch(initOdapQidAction()) }
       num_check(testgen)
-      if (loading) return <div>로딩중..</div>;
+      if (loading) return<Container className="text-center" style={{marginTop: '30rem'}}>
+    <BallBeat
+      color={'#123abc'}
+      loading={loading}
+    /> </Container>;
       if (error) return <div>에러가 발생했습니다</div>;
       if (!tests) return null;
     

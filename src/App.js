@@ -15,7 +15,7 @@ import {Main,Login,Register,NotePage,BookMark,AppReview,Board} from "./template/
 import { createStore, applyMiddleware, combineReducers} from 'redux'
 import {testReducer,timeReducer,userInfoFromTestReducer,timerToggleReducer,
   diagnosisReducer,diagnosisTestReducer,testgenReducer,loadingReducer,
-  bookmarkReducer ,changeBookmarkReducer,setOdapsReducer,textReducer} from './store'
+  bookmarkReducer ,changeBookmarkReducer,nextMinisetReducer,setOdapsReducer,textReducer} from './store'
 import ReduxThunk from 'redux-thunk'
 const rootReducer = combineReducers({
     testReducer,
@@ -29,7 +29,8 @@ const rootReducer = combineReducers({
     changeBookmarkReducer,
     setOdapsReducer,
     bookmarkReducer,
-    textReducer
+    textReducer,
+    nextMinisetReducer
 })
 
 

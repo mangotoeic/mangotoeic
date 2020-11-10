@@ -1,6 +1,6 @@
-import React,{useCallback,useState} from 'react'
+import React,{useState} from 'react'
 import {useSelector, useDispatch} from "react-redux";
-import { isActiveAction, increaseNumAction,initNumAction,activeLoadingAction,changeText} from '../../store'
+import { isActiveAction, increaseNumAction,initNumAction,deactiveLoadingAction,activeLoadingAction,changeText} from '../../store'
 import {Profile} from '../../template/pages'
 import {context as c } from '../../context'
 import axios from "axios"
@@ -17,20 +17,10 @@ import {
     Col,
   } from 'reactstrap';
 const GenTest =()=>{
-    const [data, setData] = useState([])
-    const time = useSelector(state=>state['timeReducer'])
-    const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
-    const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
-    const states =useSelector(state=>state['testReducer'])
-    const [update, setUpdate] = useState(false);
     const [tests, setTests] = useState('null');
     const [testnum, setTestnum] = useState(1)
     let loading = useSelector(state=> state['loadingReducer'])
-    const [error, setError] = useState(null);
-    const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [correct ,setCorrect] =useState(true)
-    const [isActive,setIsActve] =useState(true)
-    const [id, setId] = useState(sessionStorage.getItem('sessionUser'))
     const text = useSelector(state => state['textReducer'])
     let testgen =useSelector(state => state['testgenReducer'])
     const history = useHistory();
@@ -38,6 +28,7 @@ const GenTest =()=>{
     const submitPost = async  () => { 
       
         try{
+
             const req={
                 method: c.post,
                 url: `${c.url}/api/newqs`,
@@ -45,7 +36,7 @@ const GenTest =()=>{
             }
             const res = await axios(req)
             setTests(res.data)
-
+            
         }catch(error){
 
         }
