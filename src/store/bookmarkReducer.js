@@ -33,7 +33,6 @@ export const setOdapsReducer =(state =odapsState, action)=>{
     }
 }
 export const changeBookmarkReducer =(state =bookmarkState,action) => {
-    console.log(action.type)
     switch(action.type){
         case "CHANGE_BOOKMARK":
             return action.data

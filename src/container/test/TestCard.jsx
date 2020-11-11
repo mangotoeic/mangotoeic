@@ -2,20 +2,20 @@ import {TestStart} from '../../template/pages'
 import React, { useState, useEffect,useCallback} from 'react';
 import axios from 'axios'
 import {useSelector, useDispatch} from "react-redux";
-import { debounce } from 'throttle-debounce'
+import {useHistory} from "react-router-dom"
+import { BallBeat } from 'react-pure-loaders';
 import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction,addResultAction,
   increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
 import {context as c} from '../../context.js'
 const TestCard =()=> {
-    const [data, setData] = useState([])
+  const history = useHistory()
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
     const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
     const [id, setId] = useState(sessionStorage.getItem('sessionUser'))
     const states =useSelector(state=>state['testReducer'])
-    const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     const [tests, setTests] = useState(null);
     let loading = useSelector(state=> state['loadingReducer'])
@@ -23,8 +23,20 @@ const TestCard =()=> {
     let testgen =useSelector(state => state['testgenReducer'])
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [correct ,setCorrect] =useState(true)
-    const [isActive,setIsActve] =useState(true)
-
+    const num_check2 =(testgen)=>{
+      console.log("testgen")
+      console.log(testgen)
+      if(typeof testgen =="undefined"){
+        dispatch(activeLoadingAction())
+        loading=true
+        dispatch(initNumAction())
+        testgen=0
+        setTests(null)
+        // loading =true
+      }
+      
+    }
+    num_check2(testgen)
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
     const num_check =(testgen)=>{
@@ -94,10 +106,11 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
                 const req2 = {
                 method: c.get,
                 url: `${c.url}/api/nextminiset/${id}`,
-                data: {user_id: id  ,qId:diagnosisTestInfo.qId, answer_correctly: diagnosisTestInfo.answeredCorrectly}    
             }
             const res2 = await axios(req2) 
             setTests(res2.data)
+            console.log(res2.data)
+            
         } catch (error) {
             
         }
@@ -166,9 +179,14 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
     const saveEveryThing =() =>{  
       save1(userInfoFromTest)
       save2(states)
+      history.push('/profile-page')
       dispatch(initOdapQidAction()) }
       num_check(testgen)
-      if (loading) return <div>로딩중..</div>;
+      if (loading) return<Container className="text-center" style={{marginTop: '30rem'}}>
+    <BallBeat
+      color={'#123abc'}
+      loading={loading}
+    /> </Container>;
       if (error) return <div>에러가 발생했습니다</div>;
       if (!tests) return null;
     
@@ -256,7 +274,7 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
             </div>
             </Row>
             </div>
-            {!correct && <div>땡! 정답은 <span>{tests[testgen].answer}</span></div>}
+            {!correct && <div className='text-warning'>땡! 정답은 <span className='text-dark'>{tests[testgen].answer}</span></div>}
             {!correct 
             ? <button className="float-center btn btn-default btn-lg mt-3" onClick={nextQuestion}>다음 문제</button> 
             :<button className="float-center btn btn-default btn-lg mt-3" onClick={confirm}>정답 제출</button>}

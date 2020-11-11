@@ -22,7 +22,7 @@ import {
     Row,
     Col,
   } from 'reactstrap';
-import { BookmarkSharp, TodayOutlined } from "@material-ui/icons";
+  
 // import './item.css'
 // export default function Icon({boom}) {
 //   return boom ? <ZapIcon /> : <BeakerIcon />
@@ -133,21 +133,21 @@ const OdapList = () => {
                 <p className="description mt-3">
                   A. {odap.ansA}
                 </p>
-                <p className="description mt-3">
+                <p className="description mb-0">
                   B. {odap.ansB}
                 </p>
               </Col>
-              <Col lg="6">
+              <Col className='mt-0' lg="6">
                 <p className="description mt-3">
                   C. {odap.ansC}
                 </p>
-                <p className="description mt-3">
+                <p className="description mb-0">
                   D. {odap.ansD}
                 </p>
               </Col>
             </Row>
             <p className = "text-right text-bold" style={{margin :"30px"}}>
-              Answer: {odap.answer}
+              Answer: <span className='text-red font-weight-bold'>{odap.answer}</span>
             </p>
           </CardBody>
         </Card>

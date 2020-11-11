@@ -19,6 +19,16 @@ export const activeLoadingAction=() => ({type:"ACTIVE_LOAD"})
 export const deactiveLoadingAction=()=>({type:"DEACTIVE_LOAD"}) 
 export const increaseNumAction =() => ({type:"INCREASE_NUM"})
 export const initNumAction=() =>({type:"INIT_NUM"})
+export const countTest=data=>({type:"COUNT_TEST",data:data})
+const nextMiniSetState=[] 
+export const nextMinisetReducer=(state=nextMiniSetState, action)=>{
+    switch(action.type){
+        case "COUNT_TEST":
+            return action.data
+        default:
+            return state
+    }
+}
 const loadingState = false
 const textState =''
 export const textReducer = (state= textState , action) =>{

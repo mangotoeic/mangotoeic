@@ -7,11 +7,12 @@ import {addOdapQidAction,addUserInfoAction, initOdapQidAction,
   addResultAction,increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction} from '../../store'
 import { Button, Card, Container, Row, Col } from 'reactstrap';
 import {Stopwatch} from "../../components/Timers"
+import { BallBeat } from 'react-pure-loaders';
+
 import {context as c} from '../../context.js'
 import { useHistory } from 'react-router-dom'
 const DiagnosisTestCard =()=> {
     const history = useHistory();
-    const [data, setData] = useState([])
     const time = useSelector(state=>state['timeReducer'])
     const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
     const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
@@ -19,14 +20,11 @@ const DiagnosisTestCard =()=> {
     const states =useSelector(state=>state['testReducer'])
     let testgen =useSelector(state => state['testgenReducer'])
     console.log(testgen)
-    const [update, setUpdate] = useState(false);
     const [testnum, setTestnum] = useState(1)
     let [tests, setTests] = useState(null);
     let loading = useSelector(state=> state['loadingReducer'])
     const [error, setError] = useState(null);
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
-    const [isActive,setIsActve] =useState(true)
-    const [changeMode,setChangeMode] =useState(false)
 
     const num_check2 =()=>{
         if(testnum===11  && testgen ===5){
@@ -182,7 +180,12 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
     const subtracTimeFromPrior=(priorQuestionTime,currentQuestionTime)=> (currentQuestionTime-priorQuestionTime)
     num_check()
     num_check2()
-    if (loading) return <div>로딩중..</div>;
+    if (loading) return<Container className="text-center" style={{marginTop: '30rem'}}>
+    <BallBeat
+      color={'#123abc'}
+      loading={loading}
+    />
+ </Container>;
     if (error) return <div>에러가 발생했습니다</div>;
     if (!tests) return null;
 

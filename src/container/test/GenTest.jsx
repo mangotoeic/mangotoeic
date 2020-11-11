@@ -1,57 +1,50 @@
-import React,{useCallback,useState} from 'react'
+import React,{useState} from 'react'
 import {useSelector, useDispatch} from "react-redux";
-import {addOdapQidAction,addUserInfoAction, isActiveAction, initOdapQidAction,addResultAction,
-    increaseNumAction,initNumAction,activeLoadingAction,deactiveLoadingAction,changeText} from '../../store'
+import { isActiveAction, increaseNumAction,initNumAction,deactiveLoadingAction,activeLoadingAction,changeText} from '../../store'
 import {Profile} from '../../template/pages'
 import {context as c } from '../../context'
 import axios from "axios"
 import {Stopwatch} from "../../components/Timers"
+import { BallBeat } from 'react-pure-loaders';
+import {TestStart} from '../../template/pages'
 import { useHistory } from 'react-router-dom';
 import {
-    Badge,
     Button,
     Card,
     CardBody,
-    CardImg,
     FormGroup,
     Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
     Container,
     Row,
     Col,
   } from 'reactstrap';
 const GenTest =()=>{
-    const [data, setData] = useState([])
-    const time = useSelector(state=>state['timeReducer'])
-    const userInfoFromTest = useSelector(state=>state['userInfoFromTestReducer'])
-    const diagnosisTestInfo =useSelector(state=>state['diagnosisTestReducer'])
-    const states =useSelector(state=>state['testReducer'])
-    const [update, setUpdate] = useState(false);
     const [tests, setTests] = useState('null');
     const [testnum, setTestnum] = useState(1)
     let loading = useSelector(state=> state['loadingReducer'])
-    const [error, setError] = useState(null);
-    const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [correct ,setCorrect] =useState(true)
-    const [isActive,setIsActve] =useState(true)
-    const [id, setId] = useState(sessionStorage.getItem('sessionUser'))
     const text = useSelector(state => state['textReducer'])
     let testgen =useSelector(state => state['testgenReducer'])
     const history = useHistory();
     const dispatch = useDispatch()
-    const submitPost = async  () => { 
+
+    const modifyloading =()=>{
+      
+      dispatch(activeLoadingAction())
+      submitPost()
+    }
+    const submitPost = async () => { 
       
         try{
+
             const req={
                 method: c.post,
                 url: `${c.url}/api/newqs`,
                 data: {text}
             }
-            const res = await axios(req)
+            const res = await  axios(req)
             setTests(res.data)
-
+            dispatch(deactiveLoadingAction())
         }catch(error){
 
         }
@@ -67,8 +60,13 @@ const GenTest =()=>{
  } 
         
   }
- 
 
+if(loading) return<Container className="text-center" style={{marginTop: '30rem'}}>
+<BallBeat
+  color={'#123abc'}
+  loading={loading}
+/>
+</Container>;
 const num_check =(testgen)=>{
     console.log("testgen")
     console.log(testgen)
@@ -115,8 +113,6 @@ const num_check =(testgen)=>{
       const saveEveryThing =() =>{  }
         num_check(testgen)
         
-        if(typeof tests[testgen]=="undefined") return <div>끝</div> 
-      
     return<>
     <Profile>
  {tests === 'null' ? <Container>
@@ -147,7 +143,8 @@ const num_check =(testgen)=>{
               color="default"
               size="lg"
               type="button"
-              onClick = {submitPost}
+              onClick = {modifyloading}
+              id='submit'
               >
               제출
             </Button>
