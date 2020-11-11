@@ -274,7 +274,7 @@ const getMinitestSet = useCallback(async (diagnosisTestInfo) => {
             </div>
             </Row>
             </div>
-            {!correct && <div>땡! 정답은 <span>{tests[testgen].answer}</span></div>}
+            {!correct && <div className='text-warning'>땡! 정답은 <span className='text-dark'>{tests[testgen].answer}</span></div>}
             {!correct 
             ? <button className="float-center btn btn-default btn-lg mt-3" onClick={nextQuestion}>다음 문제</button> 
             :<button className="float-center btn btn-default btn-lg mt-3" onClick={confirm}>정답 제출</button>}

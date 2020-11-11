@@ -12,10 +12,8 @@ const BookMark = ({children}) => {
     return <>    
         <main>
           <div className="position-relative">
-            <section className="section section-ls section-shaped pb-10">
-            </section>
           </div>
-          <section className="section section-lg pt-lg-0 mt--200" >
+          <section className="section pt-4" >
             {children}
           </section>
         </main>

@@ -1,10 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
-// reactstrap components
-import { Button, Card, Container, Row, Col } from 'reactstrap';
-
-// core components
-import DemoNavbar from 'components/Navbars/DemoNavbar.js';
+import React from 'react';
 import SimpleFooter from 'components/Footers/SimpleFooter.js';
 
 const Diagnosis = ({children}) => {
