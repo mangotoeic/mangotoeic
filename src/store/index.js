@@ -10,7 +10,3 @@ export {diagnosisReducer, addUserDiagnosisAction} from './diagnosisReducer'
 export {changeBookmarkState,changeBookmarkReducer,renderBookmarkState,
      fetchBookmark, bookmarkReducer,setOdapsReducer,setOdaps} from './bookmarkReducer'
 
-
-const reviewstore = createStore(reviewReducer)
-
-export default reviewstore
