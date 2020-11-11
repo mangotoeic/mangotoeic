@@ -380,32 +380,16 @@ const Main = () => {
                     <div className="pt-4 text-center">
                       <h5 className="title">
                         <span className="d-block mb-1">윤여원</span>
-                        <small className="h6 text-muted">윤여원</small>
+                        <small className="h6 text-muted">로봇전문가</small>
                       </h5>
                       <div className="mt-3">
                         <Button
-                          className="btn-icon-only rounded-circle"
-                          color="warning"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-twitter" />
-                        </Button>
-                        <Button
                           className="btn-icon-only rounded-circle ml-1"
                           color="warning"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          target='_blank'
+                          href="https://github.com/dudnjsckrgo"
                         >
-                          <i className="fa fa-facebook" />
-                        </Button>
-                        <Button
-                          className="btn-icon-only rounded-circle ml-1"
-                          color="warning"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-dribbble" />
+                          <i className="fa fa-github" />
                         </Button>
                       </div>
                     </div>
@@ -428,28 +412,12 @@ const Main = () => {
                       </h5>
                       <div className="mt-3">
                         <Button
-                          className="btn-icon-only rounded-circle"
-                          color="primary"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-twitter" />
-                        </Button>
-                        <Button
                           className="btn-icon-only rounded-circle ml-1"
                           color="primary"
                           href="#pablo"
                           onClick={(e) => e.preventDefault()}
                         >
-                          <i className="fa fa-facebook" />
-                        </Button>
-                        <Button
-                          className="btn-icon-only rounded-circle ml-1"
-                          color="primary"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-dribbble" />
+                          <i className="fa fa-github" />
                         </Button>
                       </div>
                     </div>
@@ -470,28 +438,12 @@ const Main = () => {
                       </h5>
                       <div className="mt-3">
                         <Button
-                          className="btn-icon-only rounded-circle"
-                          color="info"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-twitter" />
-                        </Button>
-                        <Button
                           className="btn-icon-only rounded-circle ml-1"
                           color="info"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          target='_blank'
+                          href="https://github.com/super1947"
                         >
-                          <i className="fa fa-facebook" />
-                        </Button>
-                        <Button
-                          className="btn-icon-only rounded-circle ml-1"
-                          color="info"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-dribbble" />
+                          <i className="fa fa-github" />
                         </Button>
                       </div>
                     </div>
@@ -510,32 +462,16 @@ const Main = () => {
                     <div className="pt-4 text-center">
                       <h5 className="title">
                         <span className="d-block mb-1">권현아</span>
-                        <small className="h6 text-muted">맥북 오류 유발자</small>
+                        <small className="h6 text-muted">권현아</small>
                       </h5>
                       <div className="mt-3">
                         <Button
-                          className="btn-icon-only rounded-circle"
-                          color="success"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-twitter" />
-                        </Button>
-                        <Button
                           className="btn-icon-only rounded-circle ml-1"
                           color="success"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          target='_blank'
+                          href="https://github.com/hyunahk"
                         >
-                          <i className="fa fa-facebook" />
-                        </Button>
-                        <Button
-                          className="btn-icon-only rounded-circle ml-1"
-                          color="success"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-dribbble" />
+                          <i className="fa fa-github" />
                         </Button>
                       </div>
                     </div>
@@ -552,32 +488,16 @@ const Main = () => {
                     <div className="pt-4 text-center">
                       <h5 className="title">
                         <span className="d-block mb-1">정종목</span>
-                        <small className="h6 text-muted">말 못놓는 사람</small>
+                        <small className="h6 text-muted">남자, 26세</small>
                       </h5>
                       <div className="mt-3">
                         <Button
-                          className="btn-icon-only rounded-circle"
-                          color="danger"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-twitter" />
-                        </Button>
-                        <Button
                           className="btn-icon-only rounded-circle ml-1"
                           color="danger"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          target='_blank'
+                          href="https://github.com/jongmok1031"
                         >
-                          <i className="fa fa-facebook" />
-                        </Button>
-                        <Button
-                          className="btn-icon-only rounded-circle ml-1"
-                          color="danger"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-dribbble" />
+                          <i className="fa fa-github" />
                         </Button>
                       </div>
                     </div>

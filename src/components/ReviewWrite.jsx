@@ -22,7 +22,7 @@ const ReviewWrite = () => {
     const history = useHistory()
     const submitPost = e => { 
       e.preventDefault()
-      alert(`${email}님이 리뷰 작성. 리뷰 내용 : ${review}`)
+      alert('리뷰 작성이 완료되었습니다. 게시판으로 가서 확인해 보세요.')
 
       axios.post(`http://localhost:8080/api/review2`, {email,review}) //여기서 post대신 get도 가능
         .then( res => {
@@ -46,7 +46,7 @@ const ReviewWrite = () => {
         <CardBody className="p-lg-6">
           <h4 className="mb-1">앱에 대한 리뷰를 남겨주세요</h4>
           <p className="mt-0">
-              당신의 소중한 리뷰~ 우리에게 도움이 되요~
+              당신의 소중한 리뷰~ 우리에게 도움이 돼요~
           </p>
           <FormGroup className="mb-4">
             

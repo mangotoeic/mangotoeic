@@ -133,12 +133,6 @@ const DemoNavbar = props => {
                     <DropdownItem to="/app-review-page" tag={Link}>
                       앱리뷰게시판
                     </DropdownItem>
-                    {/* <DropdownItem to="/login-page" tag={Link}>
-                      Login
-                    </DropdownItem>
-                    <DropdownItem to="/register-page" tag={Link}>
-                      Register
-                    </DropdownItem> */}
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </Nav> : <></> }
@@ -159,8 +153,10 @@ const DemoNavbar = props => {
                   :
                   <>
                   <div>
+                    <a href='./profile-page'>
                     <i class="ni ni-circle-08 fa-2x text-info"></i>
                       <span className='text-white ml-1 mr-3 align-super'>{userName}님</span>
+                    </a>
                   </div>
                   <Button
                   className="btn-neutral btn-icon"

@@ -110,7 +110,7 @@ const ProfileCard =() => {
               <h3>
                 당신의 예상 점수는
               </h3>
-              <h1 className='text-danger big-font'>{score}
+              <h1 className='text-danger big-font'>{score + 200}
               <span className='text-blue' style={{fontWeight:'normal', fontSize:'4rem', fontFamily:'Gong Gothic Medium'}}>/990</span>
               </h1>
             </Col>
