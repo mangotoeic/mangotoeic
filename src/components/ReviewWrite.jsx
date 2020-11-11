@@ -1,24 +1,15 @@
 import React, { useState } from 'react';
-// nodejs library that concatenates classes
-import classnames from 'classnames';
-import { useSelector, useDispatch } from 'react-redux'
-import Typist from 'react-typist';
 import axios from 'axios'
 import {useHistory} from 'react-router-dom';
 
 
 // reactstrap components
 import {
-  Badge,
   Button,
   Card,
   CardBody,
-  CardImg,
   FormGroup,
   Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Container,
   Row,
   Col,

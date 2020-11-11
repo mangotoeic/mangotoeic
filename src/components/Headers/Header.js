@@ -1,25 +1,13 @@
-import React, {useState, useCallback, useEffect} from 'react';
-import {useHistory} from 'react-router-dom'
+import React, {useState, useCallback, useEffect} from 'react'; 
 import {context as c} from '../../context' 
 import {
-  Card, CardBody, CardTitle, Container, Row, 
-  CardHeader,
-  CardFooter,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Media,
-  Pagination,
-  PaginationItem,
+  Card, 
+  CardBody, 
+  CardTitle, 
+  Container, 
+  Row, 
   Col,
-  Button,
-  PaginationLink,
-  Progress,
-  Input,
-  Table,
-  Form
-} from "reactstrap";
+  } from "reactstrap";
 
 import '../../assets/css/argon-design-system-react.css';
  
