@@ -369,7 +369,6 @@ const Main = () => {
                 </Col>
               </Row>
               <Row className="justify-content-center">
-                <Col className="mb-5 mb-lg-0" lg="3" md="6">
                   <div className="px-4">
                     <img
                       alt="..."
@@ -380,7 +379,7 @@ const Main = () => {
                     <div className="pt-4 text-center">
                       <h5 className="title">
                         <span className="d-block mb-1">윤여원</span>
-                        <small className="h6 text-muted">로봇전문가</small>
+                        <small className="h6 text-muted">문제 추천, 문제 생성</small>
                       </h5>
                       <div className="mt-3">
                         <Button
@@ -394,36 +393,6 @@ const Main = () => {
                       </div>
                     </div>
                   </div>
-                </Col>
-                <Col className="mb-5 mb-lg-0" lg="3" md="6">
-                  <div className="px-4">
-                    <img
-                      alt="..."
-                      className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
-                      src={require('assets/img/theme/team-2-800x800.jpg')}
-                      style={{ width: '200px' }}
-                    />
-                    <div className="pt-4 text-center">
-                      <h5 className="title">
-                        <span className="d-block mb-1">박은솔</span>
-                        <small className="h6 text-muted">
-                          아프지 말자
-                        </small>
-                      </h5>
-                      <div className="mt-3">
-                        <Button
-                          className="btn-icon-only rounded-circle ml-1"
-                          color="primary"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fa fa-github" />
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-                <Col className="mb-5 mb-lg-0" lg="3" md="6">
                   <div className="px-4">
                     <img
                       alt="..."
@@ -434,7 +403,7 @@ const Main = () => {
                     <div className="pt-4 text-center">
                       <h5 className="title">
                         <span className="d-block mb-1">박근홍</span>
-                        <small className="h6 text-muted">풀스택을 꿈꾸는 자</small>
+                        <small className="h6 text-muted">메인, 점수예측</small>
                       </h5>
                       <div className="mt-3">
                         <Button
@@ -448,10 +417,6 @@ const Main = () => {
                       </div>
                     </div>
                   </div>
-                </Col>
-                </Row>
-                <Row className="justify-content-center" style={{margin:"50px 0 0 0"}}>
-                <Col className="mb-5 mb-lg-0" lg="3" md="6">
                   <div className="px-4">
                     <img
                       alt="..."
@@ -462,7 +427,7 @@ const Main = () => {
                     <div className="pt-4 text-center">
                       <h5 className="title">
                         <span className="d-block mb-1">권현아</span>
-                        <small className="h6 text-muted">권현아</small>
+                        <small className="h6 text-muted">단어추천, 오답노트</small>
                       </h5>
                       <div className="mt-3">
                         <Button
@@ -476,8 +441,6 @@ const Main = () => {
                       </div>
                     </div>
                   </div>
-                </Col>
-                <Col className="mb-5 mb-lg-0" lg="3" md="6">
                   <div className="px-4">
                     <img
                       alt="..."
@@ -488,7 +451,7 @@ const Main = () => {
                     <div className="pt-4 text-center">
                       <h5 className="title">
                         <span className="d-block mb-1">정종목</span>
-                        <small className="h6 text-muted">남자, 26세</small>
+                        <small className="h6 text-muted">별점에측, 리뷰게시판</small>
                       </h5>
                       <div className="mt-3">
                         <Button
@@ -502,7 +465,6 @@ const Main = () => {
                       </div>
                     </div>
                   </div>
-                </Col>
               </Row>
             </Container>
           </section>
