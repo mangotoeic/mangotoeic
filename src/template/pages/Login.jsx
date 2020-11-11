@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
-import {context as c } from '../../context'
+import { context as c } from '../../context'
 // reactstrap components
 import {
   Button,
@@ -44,20 +44,17 @@ const Login = () => {
     sessionStorage.setItem("sessionUser", res.data['user_id']);
     sessionStorage.setItem("sessionEmail", res.data['email']);
     sessionStorage.setItem("sessionName", res.data['user_name']);
-     if(res2.data===1){
+     if(res2.data===1) {
       loginLoop()
-    }else{
+    } else {
       initLoginLoop()
     }
       
-  }catch(err){
+  } catch(err) {
     alert('메일주소와 비밀번호가 일치하지 않습니다.');
             window.location.reload();
-  }
+    }
           
-        
-        
-    
   }
   const initLoginLoop=()=>{
     history.push("/diagnosis-page");

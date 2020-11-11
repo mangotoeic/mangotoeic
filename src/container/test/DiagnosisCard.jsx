@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import {Diagnosis} from '../../template/pages'
-import {useSelector, useDispatch} from "react-redux"; 
+import { Diagnosis } from '../../template/pages'
+import { useSelector, useDispatch } from "react-redux"; 
 import axios from 'axios'
-import {addUserDiagnosisAction,initUserDiagnosisAction} from '../../store'
-import {context as c} from '../../context.js'
+import { addUserDiagnosisAction } from '../../store'
+import { context as c} from '../../context.js'
 import { useHistory } from 'react-router-dom'
 // reactstrap components
-import { Button, Card, Container, Row, Col } from 'reactstrap';
+import { Card, Container, Row, Col } from 'reactstrap';
 
 const DiagnosisCard = () => {
     const history = useHistory()  
@@ -77,9 +77,13 @@ const DiagnosisCard = () => {
           setAsks(null);
           // loading 상태를 true 로 바꿉니다.
           setLoading(true);
-          const response = await axios.get(
-            'http://127.0.0.1:8080/api/diagnosis'
-          );
+
+          const req = {
+            method: c.get,
+            url: `${c.url}/api/diagnosis`
+          }
+          const response = await axios(req)
+
           setAsks(response.data);
           console.log(response.data) // 데이터는 response.data 안에 들어있습니다.
         } catch (e) {
@@ -94,8 +98,6 @@ const DiagnosisCard = () => {
     if (error) return <div>에러가 발생했습니다</div>;
     if (!asks) return null;
 
-
-    
     return <>
         <Diagnosis>
         <Container>
@@ -174,8 +176,6 @@ const DiagnosisCard = () => {
                     </Row>
                   </div>
                 </div>
-                {/* <Button className='btn-darker'
-                        onClick={saveEveryThing}>사전 정보 입력 종료</Button> */}
               </Card>
             </Container>
             </Diagnosis>
