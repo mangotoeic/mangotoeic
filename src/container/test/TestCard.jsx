@@ -23,7 +23,20 @@ const TestCard =()=> {
     let testgen =useSelector(state => state['testgenReducer'])
     const [priorQuestionTime , setPriorQuestionTime] = useState(0)
     const [correct ,setCorrect] =useState(true)
-
+    const num_check2 =(testgen)=>{
+      console.log("testgen")
+      console.log(testgen)
+      if(typeof testgen =="undefined"){
+        dispatch(activeLoadingAction())
+        loading=true
+        dispatch(initNumAction())
+        testgen=0
+        setTests(null)
+        // loading =true
+      }
+      
+    }
+    num_check2(testgen)
     // const prevCount = usePrevious(priorQuestionTime);
     const dispatch = useDispatch()
     const num_check =(testgen)=>{

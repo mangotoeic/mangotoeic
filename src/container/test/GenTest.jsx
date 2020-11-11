@@ -61,7 +61,7 @@ const GenTest =()=>{
         
   }
 
-if(loading) return<Container className="text-center" style={{marginTop: '60rem'}}>
+if(loading) return<Container className="text-center" style={{marginTop: '30rem'}}>
 <BallBeat
   color={'#123abc'}
   loading={loading}
