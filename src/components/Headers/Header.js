@@ -94,10 +94,10 @@ const Header = () =>  {
                             tag="h5"
                             className="text-uppercase text-muted mb-0"
                           >
-                            New Review Prediction
+                            recent review predict
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            최근 리뷰 별점 : {reviewstar}점
+                            {reviewstar}점
                           </span>
                         </div>
                         <Col className="col-auto">
