@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import {VocabPage} from '../../template/pages'
 import {Vocab} from '../../components' 
+import { BallBeat } from 'react-pure-loaders';
 import vocabs from "./vocab.js"
 import {Container, Row, Col} from 'reactstrap';
 const VocabList = () => {
@@ -29,7 +30,12 @@ const VocabList = () => {
 
     fetchVocabs(id);
   }, []);
-  if (loading) return <div>로딩중..</div>;
+  if(loading) return <Container className="text-center" style={{marginTop: '30rem'}}>
+<BallBeat
+  color={'#123abc'}
+  loading={loading}
+/>
+</Container>;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!vocabs) return null;
 console.log(Object.values(vocabs))
